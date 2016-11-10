@@ -1,10 +1,10 @@
 # Built with Jekyll 3.2.0
 
 # Setup
-title:               Ed.
-tagline:             'A Jekyll theme for minimal editions'
-description:         'Ed is a Jekyll theme designed for textual editors based on minimal computing principles, and focused on legibility and flexibility.'
-url:                 'http://elotroalex.github.io'
+title:               TDD KATA
+tagline:             ''
+description:         'This is a place for practicing TDD.'
+url:                 'duykhoa12t.github.io'
 baseurl:             ''
 
 # About/contact
