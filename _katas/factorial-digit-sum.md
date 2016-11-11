@@ -73,9 +73,9 @@ The first test for this method is
 ```ruby
 # file_name: sum_digits.rb
 
-  def test_factorial
-    assert_equal(1, factorial(0))
-  end
+def test_factorial
+  assert_equal(1, factorial(0))
+end
 
 ```
 
@@ -89,9 +89,9 @@ NoMethodError: undefined method `factorial' for #<SumDigitsTest:0x007fc557195270
 To fix the error, I simply add the definition of this method like
 
 ```ruby
-  def factorial(n)
-    1
-  end
+def factorial(n)
+  1
+end
 ```
 
 It is passed. We just write enough logic to pass the test, if we want to write more code (actually the correct logic for factorial), we need to add more tests.
@@ -100,39 +100,39 @@ The next test won't be `assert_equal(1, factorial(1))`, because the tests are st
 I choose n=2 instead
 
 ```ruby
-    assert_equal(2, factorial(2))
+assert_equal(2, factorial(2))
 ```
 
 The test will be failed. How can I fix? Here is a way
 
 ```ruby
-  def factorial(n)
-    if n < 2
-      1
-    else
-      n
-    end
+def factorial(n)
+  if n < 2
+    1
+  else
+    n
   end
+end
 ```
 
 We move to the next test that make the code fail, I choose n=3
 
 ```
-    assert_equal(6, factorial(3))
+assert_equal(6, factorial(3))
 ```
 
 The test will be failed. To fix it, hmm, can be write like that???
 
 ```ruby
-    if n < 2
-      1
-    else
-      if n == 3
-        2 * n
-      else
-        2
-      end
-    end
+if n < 2
+  1
+else
+  if n == 3
+    2 * n
+  else
+    2
+  end
+end
 ```
 
 the logic is, for the case n >= 2, if n == 2, we just return 2, else we return `2 * n`. We see it's wrong because we know the formula already, but assume that we don't know that our method will execute for n == 4,5,6..., so this implementation is perfectly correct, right?
@@ -140,26 +140,26 @@ the logic is, for the case n >= 2, if n == 2, we just return 2, else we return `
 To prove this code is wrong, we simply add another test with n == 4
 
 ```
-    assert_equal(24, factorial(4))
+assert_equal(24, factorial(4))
 ```
 
 yay, the logic is wrong, so how to fix it? I can put some messy code to fix like that
 
 ```ruby
-  def factorial(n)
-    if n < 2
-      1
-    else
-      if n == 4
-        return 2 * 3 * n
-      end
-
-      if n == 3
-        2 * n
-      else
-        2
-      end
+def factorial(n)
+  if n < 2
+    1
+  else
+    if n == 4
+      return 2 * 3 * n
     end
+
+    if n == 3
+      2 * n
+    else
+      2
+    end
+  end
 ```
 
 Output:
@@ -265,21 +265,21 @@ Wow, at this point, the case 4 and 3 have exactly same code, we can merge them t
 Also I found `i` always end by by n, so the code will become
 
 ```ruby
-  def factorial(n)
-    if n < 2
-      1
-    else
-      i = 3
-      s = 2
+def factorial(n)
+  if n < 2
+    1
+  else
+    i = 3
+    s = 2
 
-      while i <= n
-        s = s * i
-        i += 1
-      end
-
-      return s
+    while i <= n
+      s = s * i
+      i += 1
     end
+
+    return s
   end
+end
 ```
 
 But i = 3 and s = 2 seem like a hard code, right? If I start with x = 1, mean s must be 1. I think it'll pass. Let's try
@@ -316,142 +316,142 @@ The next thing is `sum_digits` method, I suggest you to try it yourself before c
 
 1. Test
 
-  ```ruby
+```ruby
   assert_equal(1, sum_digits(1))
-  ```
+```
   
   Code
 
-  ```ruby
+```ruby
   def sum_digits(n)
     1
   end
-  ```
+```
 
 - Test
 
-  ```ruby
-  assert_equal(2, sum_digits(2))
-  ```
+```ruby
+assert_equal(2, sum_digits(2))
+```
   
   Code
 
-  ```ruby
-  def sum_digits(n)
-    n
-  end
-  ```
+```ruby
+def sum_digits(n)
+  n
+end
+```
 
 - Test
 
-  ```ruby
-  assert_equal(1, sum_digits(10))
-  ```
+```ruby
+assert_equal(1, sum_digits(10))
+```
   
   Code
 
-  ```ruby
-  def sum_digits(n)
-    n % 10
-  end
-  ```
+```ruby
+def sum_digits(n)
+  n % 10
+end
+```
 
 - Test
 
-  ```ruby
-  assert_equal(2, sum_digits(11))
-  ```
+```ruby
+assert_equal(2, sum_digits(11))
+```
   
   Code
 
-  ```ruby
-  def sum_digits(n)
-    n / 10 + n % 10
-  end
-  ```
+```ruby
+def sum_digits(n)
+  n / 10 + n % 10
+end
+```
 
 - Test
 
-  ```ruby
-  assert_equal(1, sum_digits(100))
-  ```
+```ruby
+assert_equal(1, sum_digits(100))
+```
   
   Code
 
-  ```ruby
-  def sum_digits(n)
-    s = 0
+```ruby
+def sum_digits(n)
+  s = 0
 
-    if n >= 100
-      n = n / 10
-    end
-
-    s = s + n / 10 + n % 10
-    s
+  if n >= 100
+    n = n / 10
   end
-  ```
+
+  s = s + n / 10 + n % 10
+  s
+end
+```
   
 - Test
 
-  ```ruby
-  assert_equal(1, sum_digits(1000))
-  ```
+```ruby
+assert_equal(1, sum_digits(1000))
+```
   
   Code
 
-  ```ruby
-  def sum_digits(n)
-    s = 0
+```ruby
+def sum_digits(n)
+  s = 0
 
-    if n >= 1000
-      s = s + n % 10
-      n = n / 10 # -> 100
+  if n >= 1000
+    s = s + n % 10
+    n = n / 10 # -> 100
 
-      s = s + n % 10
-      n = n / 10 #-> 10
-    end
-
-    if n >= 100
-      s = s + n % 10
-      n = n / 10
-    end
-
-    s = s + n / 10 + n % 10
-    s
+    s = s + n % 10
+    n = n / 10 #-> 10
   end
-  ```
+
+  if n >= 100
+    s = s + n % 10
+    n = n / 10
+  end
+
+  s = s + n / 10 + n % 10
+  s
+end
+```
   
   Refactor
   
-  ```
-  def sum_digits(n)
-    s = 0
+```
+def sum_digits(n)
+  s = 0
 
-    while n >= 100
-      s = s + n % 10
-      n = n / 10
-    end
-
-    s = s + n / 10 + n % 10
-    s
+  while n >= 100
+    s = s + n % 10
+    n = n / 10
   end
-  ```
+
+  s = s + n / 10 + n % 10
+  s
+end
+```
 
   More refactor
   
-  ```
-  def sum_digits(n)
-    s = 0
+```
+def sum_digits(n)
+  s = 0
 
-    while n > 0
-      s = s + n % 10
-      n = n / 10
-    end
-
-    s
+  while n > 0
+    s = s + n % 10
+    n = n / 10
   end
 
-  ```
+  s
+end
+
+```
   
 Done, yo. I hope you enjoy the kata like me. I know it may not make sense for you in some points, why don't I do write the code in a different way, or you wonder how I refactor the code to another form, is it any rule to do this. If you have this in mind, be patient, you are getting some ideas about TDD already. Please follow my next TDD Katas, I will explain more about these techniques I am using in this one and another katas.
 
