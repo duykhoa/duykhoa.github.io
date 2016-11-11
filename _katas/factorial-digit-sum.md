@@ -328,7 +328,7 @@ def sum_digits(n)
 end
 ```
 
-- Test
+2. Test
 
 ```ruby
 assert_equal(2, sum_digits(2))
@@ -342,7 +342,7 @@ def sum_digits(n)
 end
 ```
 
-- Test
+3. Test
 
 ```ruby
 assert_equal(1, sum_digits(10))
@@ -356,7 +356,7 @@ def sum_digits(n)
 end
 ```
 
-- Test
+4. Test
 
 ```ruby
 assert_equal(2, sum_digits(11))
@@ -370,7 +370,7 @@ def sum_digits(n)
 end
 ```
 
-- Test
+5. Test
 
 ```ruby
 assert_equal(1, sum_digits(100))
@@ -391,7 +391,7 @@ def sum_digits(n)
 end
 ```
   
-- Test
+6. Test
 
 ```ruby
 assert_equal(1, sum_digits(1000))
