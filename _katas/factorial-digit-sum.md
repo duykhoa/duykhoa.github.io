@@ -317,15 +317,15 @@ The next thing is `sum_digits` method, I suggest you to try it yourself before c
 1. Test
 
 ```ruby
-  assert_equal(1, sum_digits(1))
+assert_equal(1, sum_digits(1))
 ```
   
   Code
 
 ```ruby
-  def sum_digits(n)
-    1
-  end
+def sum_digits(n)
+  1
+end
 ```
 
 - Test
@@ -423,7 +423,7 @@ end
   
   Refactor
   
-```
+```ruby
 def sum_digits(n)
   s = 0
 
@@ -439,7 +439,7 @@ end
 
   More refactor
   
-```
+```ruby
 def sum_digits(n)
   s = 0
 
