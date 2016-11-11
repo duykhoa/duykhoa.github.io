@@ -3,17 +3,17 @@ layout: page
 title: About
 ---
 
-Inspired from Uncle Bob Kata, I am making this website like a show case of TDD.
+Inspired by Uncle Bob Kata, I am making this website like a show case of TDD.
 
 What I learned when developing software is developers love to write good code.
 But to write a good code isn't easy. And keep the code good all time is even harder.
 
 Sometimes we're in rush by the project manager, or to follow deadline, or by fixing a critical bug
-on production, we allow ourself to write non-good code. I do it all the time, and I promise to myself
-each time I will refactor it, I will rewrite it soon.
+on production, we allow ourself to write not good code. I do it all the time, and I always promise
+to myself I will refactor it, I will rewrite it soon.
 
 But you know it was and will never happen, not because I'm lazy. The number of tasks are just increased
-everyday, means the logic gets more complicated. We are so affraid to break the current code.
+everyday, it means the logic gets more complicated.  We are so affraid to break the current code.
 The code is working well, if we rewrite it, how do we make sure it'll work better???
 
 That's why we need the test. And write good test and write enough test is even harder.
