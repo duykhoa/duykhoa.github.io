@@ -262,7 +262,7 @@ end
 ```
 
 Wow, at this point, the case 4 and 3 have exactly same code, we can merge them together.
-Also I found `i` always end by by n - 1, so the code will become
+Also I found `i` always end by by n, so the code will become
 
 ```ruby
   def factorial(n)
@@ -400,7 +400,7 @@ The next thing is `sum_digits` method, I suggest you to try it yourself before c
   Code
 
   ```ruby
-    def sum_digits(n)
+  def sum_digits(n)
     s = 0
 
     if n >= 1000
