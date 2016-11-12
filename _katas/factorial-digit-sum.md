@@ -314,7 +314,7 @@ Whatever it is, with 4 testcases, we complete the factorial method. For each tes
 
 The next thing is `sum_digits` method, I suggest you to try it yourself before continue reading it. I just show brief explanations, so make sure you try or think about it.
 
-1. Test
+1) Test
 
 ```ruby
 assert_equal(1, sum_digits(1))
@@ -328,7 +328,7 @@ def sum_digits(n)
 end
 ```
 
-2. Test
+2) Test
 
 ```ruby
 assert_equal(2, sum_digits(2))
@@ -342,7 +342,7 @@ def sum_digits(n)
 end
 ```
 
-3. Test
+3) Test
 
 ```ruby
 assert_equal(1, sum_digits(10))
@@ -356,7 +356,7 @@ def sum_digits(n)
 end
 ```
 
-4. Test
+4) Test
 
 ```ruby
 assert_equal(2, sum_digits(11))
@@ -370,7 +370,7 @@ def sum_digits(n)
 end
 ```
 
-5. Test
+5) Test
 
 ```ruby
 assert_equal(1, sum_digits(100))
@@ -391,7 +391,7 @@ def sum_digits(n)
 end
 ```
   
-6. Test
+6) Test
 
 ```ruby
 assert_equal(1, sum_digits(1000))
@@ -499,6 +499,6 @@ end
 
 ```
   
-We're done, yo. I hope you enjoy this kata like me. I know you may wonder why don't I do write the code in a different way, or how I refactor the code to another form, is it any rule to do this? If you have this in mind, be patient, you are getting some ideas about TDD already. Please follow my next TDD Katas, I will explain more about these techniques I am using in this one and another katas.
+We're done, yo. I hope you enjoy this kata like me. I know you may wonder why don't I do write the code in a different way, or how I refactor the code to another form, is it any rule to do this? If you have this in mind, be patient, you are getting some ideas about TDD already. Please follow my next TDD Katas, I'll explain more about these techniques.
 
 Hope you enjoy it. Please drop me a feedback below. Thank so much and see you again next week.
