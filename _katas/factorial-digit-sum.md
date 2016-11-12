@@ -32,11 +32,11 @@ The calculate factorial will received a number, and return a factorial of this n
 The sum of digits operator will receive a number, and return a number is the sum of all digits (e.g. 13 -> 4, 21 -> 3)
 so we have a method call `sum_digits(n)`
 
-Oh, I will use Ruby for this kata. Because I'm quite a fan of [Minitest](https://github.com/seattlerb/minitest). If you aren't familar with Ruby neither Minitest, why don't give it a try, I bet you will love it :relaxed:
+Oh, I will use Ruby for this kata. Because I'm quite a fan of [Minitest](https://github.com/seattlerb/minitest). If you are neither familar with Ruby nor Minitest, why don't give it a try, I bet you will love it :relaxed:
 
 ---
 
-What is the first test I should write? Just follow the rule of TDD, we have the first one: `test_nothing`
+What is the first test I should write? Just follow the rule of TDD, we have `test_nothing`
 
 ```ruby
 
@@ -139,7 +139,7 @@ the logic is, for the case n >= 2, if n == 2, we just return 2, else we return `
 
 To prove this code is wrong, we simply add another test with n == 4
 
-```
+```ruby
 assert_equal(24, factorial(4))
 ```
 
@@ -177,7 +177,7 @@ Finished in 0.001329s, 752.4455 runs/s, 3009.7818 assertions/s.
 1 runs, 4 assertions, 0 failures, 0 errors, 0 skips
 ```
 
-Pass. but it's so ugly code, we should fix it before going to the next one.
+Pass. but it's so ugly, we should fix it before adding the next test.
 
 First, I will make fix this code first
 
@@ -310,9 +310,9 @@ else
 end
 ```
 
-Whatever haha, the point is, with 4 testcases, we finished the code for the factorial method. With each test case, the code gets more abstract and become more generic. And after 4 testcases, the code can cover all cases of input. I hope you will follow the progress of writing test, adding code and refactor to see how to generate the final code that works correctly and fully covered by the tests.
+Whatever it is, with 4 testcases, we complete the factorial method. For each test case, the code gets more abstract and become more generic. And after 4 testcases, the code can cover all cases of input. I hope you will follow the progress of writing test, adding code and refactor to see how to generate the final code that works correctly and fully covered by the tests.
 
-The next thing is `sum_digits` method, I suggest you to try it yourself before continue reading it. I just post the tests, and the final code with a brieft explanation, so make sure you try or think about it.
+The next thing is `sum_digits` method, I suggest you to try it yourself before continue reading it. I just show brief explanations, so make sure you try or think about it.
 
 1. Test
 
@@ -453,6 +453,52 @@ end
 
 ```
   
-Done, yo. I hope you enjoy the kata like me. I know it may not make sense for you in some points, why don't I do write the code in a different way, or you wonder how I refactor the code to another form, is it any rule to do this. If you have this in mind, be patient, you are getting some ideas about TDD already. Please follow my next TDD Katas, I will explain more about these techniques I am using in this one and another katas.
+  Here is the complete code for this problem
+  
+  
+```ruby
+require 'minitest/autorun'
+
+class SumDigitsTest < Minitest::Test
+  def factorial(n)
+    if n < 2
+      1
+    else
+      (1..n).inject(1) { |s,i| s * i }
+    end
+  end
+
+  def sum_digits(n)
+    s = 0
+
+    while n > 0
+      s = s + n % 10
+      n = n / 10
+    end
+
+    s
+  end
+
+  def test_factorial
+    assert_equal(1, factorial(0))
+    assert_equal(2, factorial(2))
+    assert_equal(6, factorial(3))
+    assert_equal(24, factorial(4))
+  end
+
+  def test_sum_digits
+    assert_equal(1, sum_digits(1))
+    assert_equal(1, sum_digits(10))
+
+    assert_equal(2, sum_digits(11))
+
+    assert_equal(1, sum_digits(100))
+    assert_equal(1, sum_digits(1000))
+  end
+end
+
+```
+  
+We're done, yo. I hope you enjoy this kata like me. I know you may wonder why don't I do write the code in a different way, or how I refactor the code to another form, is it any rule to do this? If you have this in mind, be patient, you are getting some ideas about TDD already. Please follow my next TDD Katas, I will explain more about these techniques I am using in this one and another katas.
 
 Hope you enjoy it. Please drop me a feedback below. Thank so much and see you again next week.
