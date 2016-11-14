@@ -5,13 +5,13 @@ title: Factorial digit sum
 
 Welcome to the first TDD kata.
 
-In every TDD kata I use TDD to solve a problem, the problem can be one of [Project Euler](https://projecteuler.net), or [Code Abbey](http://www.codeabbey.com/) problems, or some where else. So beside learning TDD, we can also learn math and algorithm.
+In every TDD kata I use TDD to solve a problem, the problem can be one of [Project Euler](https://projecteuler.net),
+or [Code Abbey](http://www.codeabbey.com/) problems, or some where else. So beside learning TDD, we can also learn math and algorithm.
 
 Okay, let's start.
 
-First, let me explain the requirement. This is the [problem 20th](https://projecteuler.net/problem=20) in [Project Euler].
-(https://projecteuler.net)
-
+First, let me explain the requirement. This is the [problem 20th](https://projecteuler.net/problem=20)
+in [Project Euler](https://projecteuler.net)
 
 ```md
   n! means n × (n − 1) × ... × 3 × 2 × 1
@@ -319,7 +319,7 @@ The next thing is `sum_digits` method, I suggest you to try it yourself before c
 ```ruby
 assert_equal(1, sum_digits(1))
 ```
-  
+
   Code
 
 ```ruby
@@ -333,7 +333,7 @@ end
 ```ruby
 assert_equal(2, sum_digits(2))
 ```
-  
+
   Code
 
 ```ruby
@@ -347,7 +347,7 @@ end
 ```ruby
 assert_equal(1, sum_digits(10))
 ```
-  
+
   Code
 
 ```ruby
@@ -361,7 +361,7 @@ end
 ```ruby
 assert_equal(2, sum_digits(11))
 ```
-  
+
   Code
 
 ```ruby
@@ -375,7 +375,7 @@ end
 ```ruby
 assert_equal(1, sum_digits(100))
 ```
-  
+
   Code
 
 ```ruby
@@ -390,13 +390,13 @@ def sum_digits(n)
   s
 end
 ```
-  
+
 6) Test
 
 ```ruby
 assert_equal(1, sum_digits(1000))
 ```
-  
+
   Code
 
 ```ruby
@@ -420,9 +420,9 @@ def sum_digits(n)
   s
 end
 ```
-  
+
   Refactor
-  
+
 ```ruby
 def sum_digits(n)
   s = 0
@@ -438,7 +438,7 @@ end
 ```
 
   More refactor
-  
+
 ```ruby
 def sum_digits(n)
   s = 0
@@ -452,10 +452,10 @@ def sum_digits(n)
 end
 
 ```
-  
+
   Here is the complete code for this problem
-  
-  
+
+
 ```ruby
 require 'minitest/autorun'
 
@@ -498,7 +498,7 @@ class SumDigitsTest < Minitest::Test
 end
 
 ```
-  
+
 We're done, yo. I hope you enjoy this kata like me. I know you may wonder why don't I do write the code in a different way, or how I refactor the code to another form, is it any rule to do this? If you have this in mind, be patient, you are getting some ideas about TDD already. Please follow my next TDD Katas, I'll explain more about these techniques.
 
 Hope you enjoy it. Please drop me a feedback below. Thank so much and see you again next week.
