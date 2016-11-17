@@ -143,6 +143,8 @@ The code will look like
     if arr[0][0] == 1 && live_count < 2
       arr[0][0] = 0
     end
+
+    arr
   end
 
 ```
@@ -229,7 +231,121 @@ i, j will sequentially increase from 0 to the arr.size - 1
     x += 1
   end
 
+  arr
 end
 ```
 
 Passed but so ugly right? Let's refactor it now. I can't wait for it anymore. Such a messy code :yummy:
+
+First, I know that the `live_count` should be in a different method, show I move this code out, we have
+
+```
+  def iterate(arr)
+    x = 0
+
+    while x < arr.size
+      y = 0
+
+      while y < arr.size
+        if arr[x][y] == 1 && live_neighbor_count(x,y,arr) < 2
+          arr[x][y] = 0
+        end
+
+        y += 1
+      end
+      x += 1
+    end
+
+    arr
+  end
+
+  def live_neighbor_count(x, y, arr)
+    i = x
+    live_count = 0
+
+    while i < arr.size
+      j = y
+
+      while j < arr.size
+        if arr[i][j] == 1 && !(i == x && j == y)
+          live_count += 1
+        end
+
+        j += 1
+      end
+
+      i += 1
+    end
+
+    live_count
+  end
+```
+
+Basically we just extract the code, nothing is changed much, but the `iterate` method is more readable now.
+Wait, this `live_neighbor_count` has no test, so do we need to add some tests for them.
+Of course we can, but I don't recommend to stop refactor progress and write more tests. The other reason is
+because the `iterate` tests already cover every possible case of `live_neighbor_count` method. So what you
+are trying to test right now is just redundant with the current testcases.
+
+What I learned is we should test only the public interface, which is the `iterate` method only.
+The `live_neighbor_count` method is not public, we don't want whoelse use it, this method is created to
+to be changed soon. We are created it because we want to make the `iterate` simpler. But the logic
+for `iterate` hasn't finished, so any methods that supported or to be called by `iterate` are in a
+high chance to be changed, destroyed, moved, renamed ...
+
+Okay, many talks, let's go back the refactor stage. I think the code is good enough for now, but the test
+isn't nice yet.
+
+```
+    arr = [[1]]
+    result = iterate(arr)
+    assert_equal(0, arr[0][0])
+
+    arr = [
+      [1, 1],
+      [1, 0],
+    ]
+
+    result = iterate(arr)
+    assert_equal(1, arr[0][0])
+
+    arr = [
+      [0, 0],
+      [1, 1],
+    ]
+
+    result = iterate(arr)
+    assert_equal(0, arr[1][1])
+```
+
+The `result = iterate(arr)` is repeated 3 times. Let's change it to
+
+```
+  def assert_live(x, y, input_arr)
+    assert_stage(1, x, y, input_arr)
+  end
+
+  def assert_die(x, y, input_arr)
+    assert_stage(0, x, y, input_arr)
+  end
+
+  def assert_stage(st, x, y, input_arr)
+    result = iterate(input_arr)
+    assert_equal(st, result[x][y])
+  end
+
+  def test_iterate
+    arr = [[1]]
+    assert_die(0, 0, arr)
+
+    arr = [
+      [1, 1],
+      [1, 0],
+    ]
+
+    assert_live(0, 0, arr)
+    # ...
+  end
+```
+
+Like that. Passed! Beautiful
