@@ -348,4 +348,20 @@ The `result = iterate(arr)` is repeated 3 times. Let's change it to
   end
 ```
 
-Like that. Passed! Beautiful
+Like that. **Passed**! Beautiful. We continue adding another test to make it failed.
+
+```
+  arr = [
+    [1, 0, 0],
+    [1, 0, 1],
+    [1, 1, 1],
+  ]
+
+  assert_die(0, 0, arr)
+```
+
+Failed! For this array, the element at 0, 0 only have 1 live neighbors, so it should die.
+But it still live, because the live_neighbor_count method is wrong, `i` and `j` should
+start from x - 1 to x + 1, or y - 1 to y + 1, but we also need to check if y is 0, so y - 1 = -1
+then the code will complain. But we can't do too much in 1 single test, I think it's time for adding
+a test for the `live_neighbor_count` method.
