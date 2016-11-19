@@ -698,5 +698,5 @@ class GameOfLifeTest < Minitest::Test
 end
 ```
 
-I know it's already long, so I will keep my lesson to the next one. Again, hope you enjoy this kata,
-and see you in the next kata very soon.
+I know it's already long, so I will keep my conclusion and some tips I used for the next one. I hope you enjoy this kata,
+and see you in the next one soon.
