@@ -361,7 +361,343 @@ Like that. **Passed**! Beautiful. We continue adding another test to make it fai
 ```
 
 Failed! For this array, the element at 0, 0 only have 1 live neighbors, so it should die.
-But it still live, because the live_neighbor_count method is wrong, `i` and `j` should
-start from x - 1 to x + 1, or y - 1 to y + 1, but we also need to check if y is 0, so y - 1 = -1
-then the code will complain. But we can't do too much in 1 single test, I think it's time for adding
-a test for the `live_neighbor_count` method.
+But the test is failed, because the `live_neighbor_count` method is wrong,
+the code was true when the array is 2x2, so i, j start from 0 to 1, but in 3x3 array,
+the element at 0, 0, i should be 0 -> 1, and j should be start from 0 -> 1, while for the element at
+2,2 i should be 1 -> 2, j should be 1 -> 2
+
+
+We can change the code to
+
+```
+  def live_neighbor_count(x, y, arr)
+    minx = x - 1
+    minx = 0 if minx < 0
+
+    miny = y - 1
+    miny = 0 if miny < 0
+
+    maxx = x + 1
+    maxx = arr.size - 1 if maxx >= arr.size
+
+    maxy = y + 1
+    maxy = arr.size - 1 if maxy >= arr.size
+
+    i = minx
+    live_count = 0
+
+    while i <= maxx
+      j = miny
+      while j <= maxy
+        if arr[i][j] == 1 && !(i == x && j == y)
+          live_count += 1
+        end
+
+        j += 1
+      end
+
+      i += 1
+    end
+
+    live_count
+  end
+```
+
+The tests are all passed. Yay. The code is a little bit ugly. Can I skip refactor it... no, shouldn't right?
+Here is the version after I do some refactor
+
+```
+  def iterate(arr)
+    (0...arr.size).each do |x|
+      (0...arr.size).each do |y|
+        if arr[x][y] == 1 && live_neighbor_count(x,y,arr) < 2
+          arr[x][y] = 0
+        end
+      end
+    end
+
+    arr
+  end
+
+  def live_neighbor_count(x, y, arr)
+    minx = max(x - 1, 0)
+    miny = max(y - 1, 0)
+
+    maxx = min(x + 1, arr.size - 1)
+    maxy = min(y + 1, arr.size - 1)
+
+    live_count = 0
+
+    (minx..maxx).each do |i|
+      (miny..maxy).each do |j|
+        if arr[i][j] == 1 && !(i == x && j == y)
+          live_count += 1
+        end
+      end
+    end
+
+    live_count
+  end
+
+  def min(a, b)
+    a < b ? a : b
+  end
+
+  def max(a, b)
+    a > b ? a : b
+  end
+```
+
+I think there is nothing to do anymore, we can go ahead and add more test to implement rule #2, #3 and #4.
+For rule #2, the live cell is still live, and the next rule actually cover it. Let me put the rule here again, so you
+don't need to scroll up again
+
+```
+1 Any live cell with fewer than two live neighbours dies, as if caused by under-population.
+2 Any live cell with two or three live neighbours lives on to the next generation.
+3 Any live cell with more than three live neighbours dies, as if by over-population.
+4 Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
+```
+
+For rule #3, we can easily add the test
+
+```
+  arr = [
+    [1, 0, 0],
+    [1, 1, 1],
+    [1, 1, 1],
+  ]
+
+  assert_die(1, 1, arr)
+```
+
+Simply add to the code
+
+```
+  def iterate(arr)
+    (0...arr.size).each do |x|
+      (0...arr.size).each do |y|
+        if arr[x][y] == 1 && live_neighbor_count(x,y,arr) < 2
+          arr[x][y] = 0
+        end
+
+        if arr[x][y] == 1 && live_neighbor_count(x,y,arr) > 3
+          arr[x][y] = 0
+        end
+      end
+    end
+
+    arr
+  end
+```
+
+Next is rule #4, sound like easy one right
+
+```
+  arr = [
+    [0, 0, 0],
+    [1, 0, 1],
+    [0, 1, 0],
+  ]
+
+  assert_live(1, 1, arr)
+```
+
+We just need to add this code
+
+```
+  if arr[x][y] == 0 && live_neighbor_count(x,y,arr) == 3
+    arr[x][y] = 1
+  end
+```
+
+You guess it's passed? It's failed.
+The reason is, when `iterate` method scan the element at [1, 0] (row 1, first column), it just has 1 live neighbor
+which is at [2, 1], so follow rule #1, it die, but then, for the element at [1, 1], at we see it has exactly 3
+neighbors, so it should be live again, but because the element at [1, 0] just die before the `iterate` scan,
+it can't change the value to 1. To fix it, we can duplicate the input array.
+
+```
+  def iterate(arr)
+    new_arr = arr.inject([]) do |r, row|
+      r << row.dup
+    end
+
+    (0...arr.size).each do |x|
+      (0...arr.size).each do |y|
+        if arr[x][y] == 1 && live_neighbor_count(x,y,arr) < 2
+          new_arr[x][y] = 0
+        end
+
+        if arr[x][y] == 1 && live_neighbor_count(x,y,arr) > 3
+          new_arr[x][y] = 0
+        end
+
+        if arr[x][y] == 0 && live_neighbor_count(x,y,arr) == 3
+          new_arr[x][y] = 1
+        end
+      end
+    end
+
+    new_arr
+  end
+```
+
+It's passed. Great. I think we can do some more refactor on it.
+I also test some of pattern on the wiki page
+
+This is the full code for the Game of Life TDD Kata
+
+```
+# base on https://en.wikipedia.org/wiki/Conway%27s_Game_of_Lif://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
+require 'minitest/autorun'
+
+class GameOfLifeTest < Minitest::Test
+  def iterate(arr)
+    new_arr = arr.inject([]) do |r, row|
+      r << row.dup
+    end
+
+    (0...arr.size).each do |x|
+      (0...arr.size).each do |y|
+        if arr[x][y] == 1 && live_neighbor_count(x,y,arr) < 2
+          new_arr[x][y] = 0
+        end
+
+        if arr[x][y] == 1 && live_neighbor_count(x,y,arr) > 3
+          new_arr[x][y] = 0
+        end
+
+        if arr[x][y] == 0 && live_neighbor_count(x,y,arr) == 3
+          new_arr[x][y] = 1
+        end
+      end
+    end
+
+    new_arr
+  end
+
+  def live_neighbor_count(x, y, arr)
+    minx = max(x - 1, 0)
+    miny = max(y - 1, 0)
+
+    maxx = min(x + 1, arr.size - 1)
+    maxy = min(y + 1, arr.size - 1)
+
+    live_count = 0
+
+    (minx..maxx).each do |i|
+      (miny..maxy).each do |j|
+        if arr[i][j] == 1 && !(i == x && j == y)
+          live_count += 1
+        end
+      end
+    end
+
+    live_count
+  end
+
+  def min(a, b)
+    a < b ? a : b
+  end
+
+  def max(a, b)
+    a > b ? a : b
+  end
+
+  def assert_live(x, y, input_arr)
+    assert_stage(1, x, y, input_arr)
+  end
+
+  def assert_die(x, y, input_arr)
+    assert_stage(0, x, y, input_arr)
+  end
+
+  def assert_stage(st, x, y, input_arr)
+    result = iterate(input_arr)
+    assert_equal(st, result[x][y])
+  end
+
+  def test_iterate
+    arr = [[1]]
+    assert_die(0, 0, arr)
+
+    arr = [
+      [1, 1],
+      [1, 0],
+    ]
+
+    assert_live(0, 0, arr)
+
+    arr = [
+      [0, 0],
+      [1, 1],
+    ]
+
+    assert_die(1, 1, arr)
+
+    arr = [
+      [1, 0, 0],
+      [1, 0, 1],
+      [1, 1, 1],
+    ]
+
+    assert_die(0, 0, arr)
+
+    arr = [
+      [1, 0, 0],
+      [1, 1, 1],
+      [1, 1, 1],
+    ]
+
+    assert_die(1, 1, arr)
+
+    arr = [
+      [0, 0, 0],
+      [1, 0, 1],
+      [0, 1, 0],
+    ]
+
+    assert_live(1, 1, arr)
+
+    input_arr = [
+      [0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0],
+      [0, 1, 1, 1, 0],
+      [0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0],
+    ]
+
+    output_arr = [
+      [0, 0, 0, 0, 0],
+      [0, 0, 1, 0, 0],
+      [0, 0, 1, 0, 0],
+      [0, 0, 1, 0, 0],
+      [0, 0, 0, 0, 0],
+    ]
+
+    assert_equal(output_arr, iterate(input_arr))
+
+    input_arr = [
+      [0, 0, 0, 0, 0],
+      [0, 1, 1, 0, 0],
+      [0, 1, 0, 0, 0],
+      [0, 0, 0, 0, 1],
+      [0, 0, 0, 1, 1],
+    ]
+
+    output_arr = [
+      [0, 0, 0, 0, 0],
+      [0, 1, 1, 0, 0],
+      [0, 1, 1, 0, 0],
+      [0, 0, 0, 1, 1],
+      [0, 0, 0, 1, 1],
+    ]
+
+    assert_equal(output_arr, iterate(input_arr))
+  end
+end
+```
+
+I know it's already long, so I will keep my lesson to the next one. Again, hope you enjoy this kata,
+and see you in the next kata very soon.
