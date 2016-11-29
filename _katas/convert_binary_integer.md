@@ -5,8 +5,7 @@ title: Convert Binary number into Integer
 
 Welcome back to TDD Kata blog.
 
-In this post, I will solve the [Problem #5](https://projecteuler.net/problem=5) of Project Euler.
-But before going for this problem, I am gonna share with you guys some thoughts about the previous problem: Game of life.
+Before going for this problem, I am gonna share with you guys some thoughts about the previous problem: Game of life.
 
 If you want to see the Game of Life Kata, here is the [link - check it out](https://duykhoa.github.io/katas/game-of-life/)
 So we did solve the game of life problem by TDD, and the code is worked. You may ask whether it is the best code.
@@ -39,13 +38,16 @@ comfortable. I am planning to make a kata to comparse if we write test and we do
 and make the code less bug, easy to maintain... but not this one, haha. Hope you guys let me know your thoughts, questions in the
 comments, so I can collect and make that kata to answer you.
 
-Okay, that's what I really want to discuss with you, please let me know if you agree or not. Thanks very much.
+Okay, that's what I really want to discuss with you, please let me know if you agree or not.
+
+---
+
 Let's talk about the TDD Kata today, it's about converting the binary back to integer.
 
-For example: `10` is 2 in base 10, `11` is 3 in base 10. Assume that we don't know the `to_i` method in Ruby. So we will
+For example: `10` is 2 in base 10, `11` is 3 in base 10. So we will
 implement the function from scratch. Let's start!
 
-As usuall, we start with a test_nothing.
+As usual, we start with a `test_nothing`.
 
 
 ```ruby
