@@ -138,7 +138,7 @@ end
 
 It is passed. I think it's time to wear the **Refactoring** hat.
 
-Let me pass the full method here, so we can see some smells
+Let me paste the full code here, so we can see some smells
 
 ```ruby
 def convert(arr)
@@ -169,8 +169,7 @@ if arr.size == 3
 end
 ```
 
-**Passed**. With the initial value of i (2), it is the `arr.size - 1` right? Also the `2 - i` And I guess with the loop statement, we can apply
-to 2 elements array also.
+**Passed**. The initial value of i (2), it is the `arr.size - 1` right? Also the `2 - i` And I guess with the loop statement, we can apply it to 2 elements array also.
 
 ```ruby
 def convert(arr)
