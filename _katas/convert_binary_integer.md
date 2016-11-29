@@ -44,8 +44,7 @@ Okay, that's what I really want to discuss with you, please let me know if you a
 
 Let's talk about the TDD Kata today, it's about converting the binary back to integer.
 
-For example: `10` is 2 in base 10, `11` is 3 in base 10. So we will
-implement the function from scratch. Let's start!
+For example: `10` is 2 in decimal, `11` is 3 in decimal. Let's start to implement this function.
 
 As usual, we start with a `test_nothing`.
 
