@@ -75,21 +75,135 @@ Basically when working with an OOP application, I will draft a simple design on 
 Here is my first test
 
 ```ruby
-require 'minitest/autorun'
+def test_rss
+  parser = FakeRedditRssParser.new
+  downloader = FakeRedditRssDownloader.new
 
-class RedditTest < Minitest::Test
-  class RedditRss
-    def rss
+  reddit_rss = RedditRss.new(downloader: downloader, parser: parser)
+  feed = reddit_rss.rss
+  assert_equal(1, feed.entries_size)
+end
+```
+
+I initalize a `parser` object, which have 2 dependencies: downloader and parser base on the class diagram we drew.
+We expect the output is an object that respond to the method `#entries_size`. Let me add the FakeRedditRssDownloader code
+
+```ruby
+class FakeRedditRssDownloader
+  def download(_)
+    <<-XML
+      <?xml version="1.0" encoding="UTF-8"?>
+      <feed xmlns="http://www.w3.org/2005/Atom">
+        <category term=" reddit.com" label="/r/ reddit.com"/>
+        <updated>2016-12-10T10:03:39+00:00</updated>
+        <id>/.rss</id>
+        <link rel="self" href="https://www.reddit.com/.rss" type="application/atom+xml" />
+        <link rel="alternate" href="https://www.reddit.com/" type="text/html" />
+        <title>reddit: the front page of the internet</title>
+        <entry>
+          <author>
+            <name>/u/iBleeedorange</name>
+            <uri>https://www.reddit.com/user/iBleeedorange</uri>
+          </author>
+          <category term="movies" label="/r/movies"/>
+          <content type="html">&lt;table&gt; &lt;tr&gt;&lt;td&gt; &lt;a href=&quot;https://www.reddit.com/r/movies/comments/5hij2r/arnold_schwarzenegger_and_jackie_chan_are_making/&quot;&gt; &lt;img src=&quot;https://a.thumbs.redditmedia.com/gh5mwonP0nFkUfkl4lFmuLGuEYguyAxRnrWMHx4Q1U4.jpg&quot; alt=&quot;Arnold Schwarzenegger and Jackie Chan are making a movie together: Journey to China: The Mystery of Iron Mask&quot; title=&quot;Arnold Schwarzenegger and Jackie Chan are making a movie together: Journey to China: The Mystery of Iron Mask&quot; /&gt; &lt;/a&gt; &lt;/td&gt;&lt;td&gt; &amp;#32; submitted by &amp;#32; &lt;a href=&quot;https://www.reddit.com/user/iBleeedorange&quot;&gt; /u/iBleeedorange &lt;/a&gt; &amp;#32; to &amp;#32; &lt;a href=&quot;https://www.reddit.com/r/movies/&quot;&gt; /r/movies &lt;/a&gt; &lt;br/&gt; &lt;span&gt;&lt;a href=&quot;http://i.imgur.com/DCP06ud.jpg&quot;&gt;[link]&lt;/a&gt;&lt;/span&gt; &amp;#32; &lt;span&gt;&lt;a href=&quot;https://www.reddit.com/r/movies/comments/5hij2r/arnold_schwarzenegger_and_jackie_chan_are_making/&quot;&gt;[comments]&lt;/a&gt;&lt;/span&gt; &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</content>
+          <id>t3_5hij2r</id>
+          <link href="https://www.reddit.com/r/movies/comments/5hij2r/arnold_schwarzenegger_and_jackie_chan_are_making/" />
+          <updated>2016-12-10T04:56:44+00:00</updated>
+          <title>Arnold Schwarzenegger and Jackie Chan are making a movie together: Journey to China: The Mystery of Iron Mask</title>
+        </entry>
+      </feed>
+    XML
+  end
+end
+
+class FakeRedditRssParser
+  class RedditRssDocument
+    def initialize(feed_xml)
+    end
+
+    def entries_size
+      1
     end
   end
 
-  def test_parse_reddit
-    downloader = FakeRssDownloader.new
-    reddit_rss = RedditRss.new(downloader: downloader)
-    reddit_rss.rss
-
-    assert_equal(true, downloader.called?)
+  def parse(feed_xml)
+    RedditRssDocument.new(feed_xml)
   end
 end
 ```
 
+The setup is a little bit complicated. I will explain the reason I do that later. Right now, we need to pass the code
+
+```ruby
+class RedditRss
+  def initialize(options = {})
+    @downloader = options[:downloader]
+    @parser = options[:parser]
+  end
+
+  def rss
+    url = "http://www.reddit.com/.rss"
+    feed_xml = @downloader.download(url)
+    @parser.parse(feed_xml)
+  end
+end
+```
+
+So simple code, right? Next, we want the parse will do something actually, not just create an object.
+I add a test for it.
+
+```ruby
+def test_feed_title
+  parser = FakeRedditRssParser.new
+  downloader = FakeRedditRssDownloader.new
+
+  reddit_rss = RedditRss.new(downloader: downloader, parser: parser)
+  feed = reddit_rss.rss
+  title = "Arnold Schwarzenegger and Jackie Chan are making a movie together: Journey to China: The Mystery of Iron Mask"
+  assert_equal(title, feed[0].title)
+end
+```
+
+**Failed** Of course.
+Well, to fix, we need to make the FakeRedditRssParser dirty a bit.
+I will add LibXML gem and parse the feed_xml. Don't be shock when look at the code
+
+```ruby
+class FakeRedditRssParser
+  class RedditRssDocument
+    class Entry
+      def initialize(entry_xml)
+        @entry_xml = entry_xml
+      end
+
+      def title
+        node = @entry_xml.find_first('x:title')
+        node.content if node
+      end
+    end
+
+    def initialize(feed_xml)
+      @feed_xml = feed_xml
+      @feed_xml.root.namespaces.default_prefix = "x"
+    end
+
+    def entries
+      @entries ||= @feed_xml.find("/x:feed/x:entry")
+    end
+
+    def entries_size
+      entries.size
+    end
+
+    def [](index)
+      Entry.new entries[index]
+    end
+  end
+
+  def parse(feed_xml)
+    xml_document = XML::Parser.string(feed_xml).parse
+    RedditRssDocument.new(xml_document)
+  end
+end
+```
