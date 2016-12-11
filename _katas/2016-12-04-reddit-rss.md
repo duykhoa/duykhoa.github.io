@@ -12,12 +12,13 @@ I wrote, like a contract to another method that I will implement next.
 
 **TLDR;**
 
-One of my TDD addictor, he asked my why don't do a real kata, for example interact with an api or connect to database.
+One of my TDD addictor, he asked me why don't I do a real problem in kata, for example interact with an api or connect to database.
 I have considered about it many times, there are my 2 concerns:
 
-- The real problem one is usually aren't like any of katas. The problem is bigger. And with bigger problem, we need more code.
+- The real problem one is usually aren't like any of katas. It's always bigger. With bigger problem, we need more code.
 Last time I tried with the `game of life`, it is a problem related to math and computer science only, but still quite long
 already. I don't know if we do a real problem, I wonder if my readers - **you** can diggest it?
+
 - For a real problem, I would love to use OOP (object oriented programming), which is class and object. Then we have some more
 things to discuss, like dependency inversion, single responsibility and design pattern. There aren't just 3 things, but more
 than that. And with my limited knowledge, I am not really sure that I can send the message to you. Also when talk about these
@@ -74,9 +75,9 @@ Basically when working with an OOP application, I will draft a simple design on 
 
 Here is my first test
 
-```ruby
+```
 def test_rss
-  parser = FakeRedditRssParser.new
+  parser = RedditRssParser.new
   downloader = FakeRedditRssDownloader.new
 
   reddit_rss = RedditRss.new(downloader: downloader, parser: parser)
@@ -117,7 +118,7 @@ class FakeRedditRssDownloader
   end
 end
 
-class FakeRedditRssParser
+class RedditRssParser
   class RedditRssDocument
     def initialize(feed_xml)
     end
@@ -155,7 +156,7 @@ I add a test for it.
 
 ```ruby
 def test_feed_title
-  parser = FakeRedditRssParser.new
+  parser = RedditRssParser.new
   downloader = FakeRedditRssDownloader.new
 
   reddit_rss = RedditRss.new(downloader: downloader, parser: parser)
@@ -166,11 +167,11 @@ end
 ```
 
 **Failed** Of course.
-Well, to fix, we need to make the FakeRedditRssParser dirty a bit.
+Well, to fix, we need to make the RedditRssParser class dirty a bit.
 I will add LibXML gem and parse the feed_xml. Don't be shock when look at the code
 
 ```ruby
-class FakeRedditRssParser
+class RedditRssParser
   class RedditRssDocument
     class Entry
       def initialize(entry_xml)
@@ -203,6 +204,130 @@ class FakeRedditRssParser
 
   def parse(feed_xml)
     xml_document = XML::Parser.string(feed_xml).parse
+    RedditRssDocument.new(xml_document)
+  end
+end
+```
+
+How to say? If you aren't familar with LibXML, you may get lost. Also what we did in previous katas, the changing code should be small, but in this kata,
+it's huge. Is it still TDD?
+
+With experiences, I knew that I missed a case when `entries` are empty or nil. The `entry.title` will complain that no method title for nil.
+But the test that produces a big change in code, is it a good test and did we do TDD? That's where Design Pattern term come.
+
+Like the definition of "Algorithm": `the word is used by programmers when they don't want to explain about what they did`. Design pattern may be a good excuse
+to **not** writing test. Here we use a pattern call `Iteration Pattern`, and other thing is just LibXML usages.
+
+I did some refactors on test.
+
+```ruby
+def setup
+  @parser = RedditRssParser.new
+  @downloader = FakeRedditRssDownloader.new
+
+  @reddit_rss = RedditRss.new(downloader: @downloader, parser: @parser)
+  @feed = @reddit_rss.rss
+end
+
+def test_rss
+  assert_equal(1, @feed.entries_size)
+end
+
+def test_feed_title
+  title = "Arnold Schwarzenegger and Jackie Chan are making a movie together: Journey to China: The Mystery of Iron Mask"
+  assert_equal(title, @feed[0].title)
+end
+```
+
+Actually we can add more method like author, category... But right now we don't use it in other class, so we don't implement them yet.
+
+Do we miss any more test for the parser? Well, if the feed are empty, or we get an error, how do we handle that?
+To return an empty feed, we simply add a new downloader class that returns empty feed
+
+```ruby
+class FakeRedditRssNoFeedDownloader
+  def download(_)
+    <<-XML
+<?xml version="1.0" encoding="UTF-8"?>
+      <feed xmlns="http://www.w3.org/2005/Atom">
+      </feed>
+    XML
+  end
+end
+```
+
+and the test is
+
+```ruby
+def test_empty_feed
+  downloader = FakeRedditRssNoFeedDownloader.new
+  reddit_rss = RedditRss.new(downloader: downloader, parser: @parser)
+  feed = reddit_rss.rss
+  assert_equal(0, feed.entries_size)
+  assert_equal(nil, feed[0].title)
+end
+```
+
+The first is passed, but the next test with title is failed
+
+```
+  NoMethodError: undefined method `find_first' for nil:NilClass`
+```
+
+Here is my tiny fix
+
+```ruby
+def title
+  return nil unless @entry_xml
+  node = @entry_xml.find_first('x:title')
+  node.content if node
+end
+```
+
+You may think I am gonna use NullObject pattern or some fancy technique, but with the current requirement, this is the perfect solution.
+
+Next, we will test what's happened with empty response. We do the same thing: create a new downloader, return empty response
+
+```ruby
+class FakeRedditRssEmptyResponseDownloader
+  def download(_)
+    " "
+  end
+end
+
+def test_empty_respone
+  downloader = FakeRedditRssEmptyResponseDownloader.new
+  reddit_rss = RedditRss.new(downloader: downloader, parser: @parser)
+  feed = reddit_rss.rss
+  assert_equal(0, feed.entries_size)
+  assert_equal(nil, feed[0].title)
+end
+```
+
+What error message do you guess? Here is it
+
+```
+LibXML::XML::Error: Fatal error: Start tag expected, '<' not found at :1.
+```
+
+The code is failed in the the LibXML level. What we can do is rescue the LibXML::XML::Error
+
+```ruby
+class RedditRssParser
+  def parse(feed_xml)
+    XML::Error.set_handler do |error|
+      nil
+    end
+
+    begin
+      xml_document = XML::Parser.string(feed_xml).parse
+    rescue XML::Error => e
+      default_xml_string = <<-XML
+<?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom"></feed>
+      XML
+      xml_document = XML::Parser.string(default_xml_string).parse
+    end
+
     RedditRssDocument.new(xml_document)
   end
 end
