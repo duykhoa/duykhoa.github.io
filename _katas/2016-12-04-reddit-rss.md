@@ -239,7 +239,7 @@ def test_feed_title
 end
 ```
 
-Actually we can add more method like author, category... But right now we don't use it in other class, so we don't implement them yet.
+Actually we can add more method like author, category... But right now we don't use them, so we don't need to implement them yet.
 
 Do we miss any more test for the parser? Well, if the feed are empty, or we get an error, how do we handle that?
 To return an empty feed, we simply add a new downloader class that returns empty feed
@@ -284,7 +284,7 @@ def title
 end
 ```
 
-You may think I am gonna use NullObject pattern or some fancy technique, but with the current requirement, this is the perfect solution.
+I can use NullObject pattern or some fancy technique, but this is the perfect solution.
 
 Next, we will test what's happened with empty response. We do the same thing: create a new downloader, return empty response
 
@@ -332,3 +332,229 @@ class RedditRssParser
   end
 end
 ```
+
+I think it's every thing we need for this class, we can move on to the downloader logic.
+Well we have 3 Fake downloader class already. Just need to create a real one.
+
+```ruby
+class RedditRssDownloader
+  def download(url)
+    Net::HTTP.get(URI(url))
+  end
+end
+
+class RedditRssDownloaderTest < Minitest::Test
+  def test_download_rss
+    downloader = RedditRssDownloader.new
+    url = "https://www.reddit.com/.rss"
+    assert_equal(String, downloader.download(url).class)
+  end
+end
+```
+
+Hell yeah, the test takes very long to finish
+
+```
+Run options: --seed 48989
+
+# Running:
+
+.....
+
+Finished in 12.089110s, 0.4136 runs/s, 0.4963 assertions/s.
+```
+
+Because the test depends on the network connection and Reddit Server. Sometimes because we run the test many times, Reddit
+can block the IP, so the test is failed. So this test isn't stable and reliable.
+
+If you look at the code, you will see the behavior of #download method is calling `Net::HTTP.Get(url)`, so it just call another
+class to do the job, it doesn't do the job itself. And if the method doesn't dothing but calling another method, we don't need
+to write test for it (Practical Object Oriented Design, Sandi Metz). Although we do TDD, which means we need to have a test first
+then write code later. But sometimes, for example this case, the method doesn't do anything, so writing a good test is harder
+than no test.
+
+In case you really want to write a test, you can inject Net::HTTP as a dependency.
+For example
+
+```ruby
+class RedditRssDownloader
+  def download(url, http_klass = Net::HTTP)
+    http_klass.get(URI(url))
+  end
+end
+
+class RedditRssDownloaderTest < Minitest::Test
+  class FakeHTTPClient
+    def self.get(_)
+      "string"
+    end
+  end
+
+  def test_download_rss
+    downloader = RedditRssDownloader.new
+    url = "https://www.reddit.com/.rss"
+    assert_equal("string", downloader.download(url, FakeHTTPClient))
+  end
+end
+```
+
+Like that. Depends on your rule also. For me, I am quite lazy, so I stop. I post the full code here for your reference
+
+```ruby
+require 'minitest/autorun'
+require 'xml'
+require 'net/http'
+
+class RedditTest < Minitest::Test
+  class RedditRssParser
+    class RedditRssDocument
+      class Entry
+        def initialize(entry_xml)
+          @entry_xml = entry_xml
+        end
+
+        def title
+          return nil unless @entry_xml
+          node = @entry_xml.find_first('x:title')
+          node.content if node
+        end
+      end
+
+      def initialize(feed_xml)
+        @feed_xml = feed_xml
+        @feed_xml.root.namespaces.default_prefix = "x"
+      end
+
+      def entries
+        @entries ||= @feed_xml.find("/x:feed/x:entry")
+      end
+
+      def entries_size
+        entries.size
+      end
+
+      def [](index)
+        Entry.new entries[index]
+      end
+    end
+
+    def parse(feed_xml)
+      XML::Error.set_handler do |error|
+        nil
+      end
+
+      begin
+        xml_document = XML::Parser.string(feed_xml).parse
+      rescue XML::Error => e
+        default_xml_string = <<-XML
+<?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom"></feed>
+        XML
+        xml_document = XML::Parser.string(default_xml_string).parse
+      end
+
+      RedditRssDocument.new(xml_document)
+    end
+  end
+
+  class RedditRss
+    def initialize(options = {})
+      @downloader = options[:downloader]
+      @parser = options[:parser]
+    end
+
+    def rss
+      url = "http://www.reddit.com/.rss"
+      feed_xml = @downloader.download(url)
+      @parser.parse(feed_xml)
+    end
+  end
+
+  class RedditRssDownloader
+    def download(url)
+      Net::HTTP.get(URI(url))
+    end
+  end
+
+  class RedditRssDownloaderTest < Minitest::Test
+    def test_download_rss
+      downloader = RedditRssDownloader.new
+      url = "https://www.reddit.com/.rss"
+      assert_equal(String, downloader.download(url).class)
+    end
+  end
+
+  class FakeRedditRssDownloader
+    def download(_)
+      <<-XML
+<?xml version="1.0" encoding="UTF-8"?>
+        <feed xmlns="http://www.w3.org/2005/Atom">
+          <entry>
+            <author>
+              <name>/u/iBleeedorange</name>
+              <uri>https://www.reddit.com/user/iBleeedorange</uri>
+            </author>
+            <category term="movies" label="/r/movies"/>
+            <content type="html">&lt;table&gt; &lt;tr&gt;&lt;td&gt; &lt;a href=&quot;https://www.reddit.com/r/movies/comments/5hij2r/arnold_schwarzenegger_and_jackie_chan_are_making/&quot;&gt; &lt;img src=&quot;https://a.thumbs.redditmedia.com/gh5mwonP0nFkUfkl4lFmuLGuEYguyAxRnrWMHx4Q1U4.jpg&quot; alt=&quot;Arnold Schwarzenegger and Jackie Chan are making a movie together: Journey to China: The Mystery of Iron Mask&quot; title=&quot;Arnold Schwarzenegger and Jackie Chan are making a movie together: Journey to China: The Mystery of Iron Mask&quot; /&gt; &lt;/a&gt; &lt;/td&gt;&lt;td&gt; &amp;#32; submitted by &amp;#32; &lt;a href=&quot;https://www.reddit.com/user/iBleeedorange&quot;&gt; /u/iBleeedorange &lt;/a&gt; &amp;#32; to &amp;#32; &lt;a href=&quot;https://www.reddit.com/r/movies/&quot;&gt; /r/movies &lt;/a&gt; &lt;br/&gt; &lt;span&gt;&lt;a href=&quot;http://i.imgur.com/DCP06ud.jpg&quot;&gt;[link]&lt;/a&gt;&lt;/span&gt; &amp;#32; &lt;span&gt;&lt;a href=&quot;https://www.reddit.com/r/movies/comments/5hij2r/arnold_schwarzenegger_and_jackie_chan_are_making/&quot;&gt;[comments]&lt;/a&gt;&lt;/span&gt; &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</content>
+            <id>t3_5hij2r</id>
+            <link href="https://www.reddit.com/r/movies/comments/5hij2r/arnold_schwarzenegger_and_jackie_chan_are_making/" />
+            <updated>2016-12-10T04:56:44+00:00</updated>
+            <title>Arnold Schwarzenegger and Jackie Chan are making a movie together: Journey to China: The Mystery of Iron Mask</title>
+          </entry>
+        </feed>
+      XML
+    end
+  end
+
+  class FakeRedditRssNoFeedDownloader
+    def download(_)
+      <<-XML
+<?xml version="1.0" encoding="UTF-8"?>
+        <feed xmlns="http://www.w3.org/2005/Atom">
+        </feed>
+      XML
+    end
+  end
+
+  class FakeRedditRssEmptyResponseDownloader
+    def download(_)
+      " "
+    end
+  end
+
+  def setup
+    @parser = RedditRssParser.new
+    @downloader = FakeRedditRssDownloader.new
+
+    @reddit_rss = RedditRss.new(downloader: @downloader, parser: @parser)
+    @feed = @reddit_rss.rss
+  end
+
+  def test_rss
+    assert_equal(1, @feed.entries_size)
+  end
+
+  def test_feed_title
+    title = "Arnold Schwarzenegger and Jackie Chan are making a movie together: Journey to China: The Mystery of Iron Mask"
+    assert_equal(title, @feed[0].title)
+  end
+
+  def test_empty_feed
+    downloader = FakeRedditRssNoFeedDownloader.new
+    reddit_rss = RedditRss.new(downloader: downloader, parser: @parser)
+    feed = reddit_rss.rss
+    assert_equal(nil, feed[0].title)
+  end
+
+  def test_empty_respone
+    downloader = FakeRedditRssEmptyResponseDownloader.new
+    reddit_rss = RedditRss.new(downloader: downloader, parser: @parser)
+    feed = reddit_rss.rss
+    assert_equal(0, feed.entries_size)
+    assert_equal(nil, feed[0].title)
+  end
+end
+```
+
+Okay, that's it for today. I hope you enjoy the very first OOP TDD Kata. I looking forward to seeing you in the next TDD Kata. It
+is a next part of this one, and we will talk more about the Iteration Pattern that we used to store the feed data. Any feedback,
+please let me know under the comments. Bye.
