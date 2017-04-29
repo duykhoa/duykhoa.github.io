@@ -6,4 +6,10 @@ permalink: /posts/:slug-:year-:month-:day
 exclude:
   - Gemfile
   - Gemfile.lock
+paginate_path: /posts/:num/
+paginate: 5
+gems:
+  - jekyll-feed
+  - jekyll-paginate
+  - jekyll-sitemap
 timezone: Asia/Singapore
