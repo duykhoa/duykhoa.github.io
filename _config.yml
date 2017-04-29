@@ -1,5 +1,9 @@
-title: Hacker theme
-description: Hacker is a theme for GitHub Pages.
+title: Kevin Tran
+description: Just A developer
 show_downloads: true
 google_analytics:
-theme: 
+permalink: /posts/:slug-:year-:month-:day
+exclude:
+  - Gemfile
+  - Gemfile.lock
+timezone: Asia/Singapore
