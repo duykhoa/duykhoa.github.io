@@ -3,6 +3,9 @@ description: Just A developer
 show_downloads: true
 google_analytics:
 permalink: /posts/:slug-:year-:month-:day
+github:
+  username: duykhoa
+  page: https://github.com/duykhoa
 exclude:
   - Gemfile
   - Gemfile.lock
