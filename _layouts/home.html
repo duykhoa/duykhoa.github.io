@@ -14,14 +14,12 @@ layout: default
           <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}{% if post.external-url %} &rarr;{% endif %}</a>
         </h1>
 
-        <p class="post-meta">{{ post.date | date: "%b %-d, %Y" }}{% if post.categories != empty %} • }{% endif %}</p>
-
         <div class="post-content">
           {{ post.excerpt }}
         </div>
 
         <p class="post-continue">
-        <a href="{{ post.url | relative_url }}">Read on &rarr;</a>
+          <a href="{{ post.url | relative_url }}">Read on &rarr;</a>
         </p>
       </div>
     </div>
