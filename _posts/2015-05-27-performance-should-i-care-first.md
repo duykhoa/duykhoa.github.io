@@ -1,6 +1,6 @@
 ---
 layout: post
-title: I am not the best developer
+title: Performance, should I care first? 
 ---
 
 In this post, I will tell you my thought about performance when I start to developing.
