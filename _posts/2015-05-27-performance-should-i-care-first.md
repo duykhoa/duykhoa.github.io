@@ -13,12 +13,25 @@ After many times doing this, I realize it's too early to care about performance.
 
 At the beginning, all we need is something really works. Several weeks later, the boss will come to you and ask you remove some of them, or rewrite the whole things because the logic doesn't work.
 
-You may ask me, "Hey Kevin, so if I write my code, and my code works. So later on, I'll move on the next features, and how can I come back and improve the code I write today?"
-It's a tough question. But you know what, you always can comeback and improve your code later. You have the tests, so you can change something and run the test again. If it passes, we just move on to next thing. You also may concern about the boss, does he give you time to improve the code that have worked already, if you change, may be.. something wrong and the website is down.
+You may concern after finishing a feature, you'll be moved on the next feature, and next feature. It never ends, when we have time to improve the code we wrote.
 
-If your boss can understand tech, it's good. You can tell him directly, explain why you need to improve the code base and ask him to expand the time. 
-If your boss can't understand tech, ok, you may choose: tell or don't tell. If you choose to tell him, draw a picture of what you make and what he get after changing. I don't mean that you draw a pink one, but at least show him why you need to change the code, and how better the product will be. It may not easy for a developer, I know. OK, so you can't just do thing you need to do. Think about your job like a business, your boss is your client, and the website you're doing is your business product. You sell the product to your client because of their demands, but it doesn't mean that you must tell them how you do it. You understand your product better than your client, and understand better how you create it than your client, right? May be he won't be happy at the first time, but after a while, he sees something that works perfectly, he'll appreciated more than complain you.
+It's time to talk about automation tests. If we write tests, we can change some modules with confident.
 
-Another thing. Did you hear something like: we'll have 7 million users, and you must experience working with performance optimization, so the website can handle 1 million requests at the same time blah blah. Make sense? Yup, but how far to get 7 million users, can we get these users in the 1st day or even the 1st year. No way, right? And even if you get this point, if I was your boss, I am happy to pay a lot of money to improve the website better, either put 10 more instances in AWS, upgrade any cloud services to help my site better, or hire more developers and pay you guys more to help me make the website better.
+Another concern is our boss, does he give us time to improve the code that already worked well; and if you change, something  can go wrong and the whole system is down.
 
-So, what should you care in the beginning state. No complex logic, no scaleable thought, and no performance need! You should only care about how to make thing works, that's all. I found myself thinking too much about how to make thing scaleable, easily to add a feature/override method. But it's too much, I can think about a very sophisticated solution to solve the problem, but I don't think about how much time and effort to do. So better way, just make it works. Do you agree with me? Drop me  a line below
+If your boss know about software development, you can tell him directly. You have to explain why you need to improve some code and ask him for some time. 
+
+In case your boss doesn't understand, you need draw a picture of how better the product will be after changing. It isn't easy for a developer.
+
+Thinking our job like a business, the boss client, the software we're working is business product.
+We sell the product to your client because of their demands, it doesn't mean that you must tell them how you do it.
+What they need is a software that fulfils all of their requirements.
+
+We understand your product better than client. We know exactly what isn't good, what need to change. The client is unhappy when we tell them nothing is released in next few weeks. However, when he sees a product that works well, all the things that make him annoyed before are gone, and new features are comming every iteration, he'll appreciate.
+
+
+Back to this post, I always heard something similarly from clients like: we'll have 7 million users, we need a guy must have experience working with performance optimization. The website need to handle at least 1 million requests at the same time. 
+
+Ofcourse there are many websites like that. However, have you asked them back for how long it does take to get 7 million users, are they able to get 7 million users in 1st year. It isn't possible to have this amount of traffics in 1 years, or 2 years. Okay, if unfortunately it happened and I was the business owner, I am happy to pay a huge amount of money to improve the website better. I can either put more instances in AWS, upgrade whatever cloud service and subscription plan. I can hire more Sr. developers and pay more to help scaling the website, improve the code or even rewrite everything in C.
+
+We shouldn't care too much about complex logic, scaling, and performance at the beginning. We focus only on a working software. It's too much to think about all possible cases right at the beginning. Just make it works. I will be back.
