@@ -3,13 +3,15 @@ layout: post
 title: Performance, should I care first? 
 ---
 
-In this post, I will tell you my thought about performance when I start to developing.
+In this post, I want to share my thought about focusing on performance when start developing.
 
-The first step in development process, assume we pass all product plans, database designs, reporting... is coding.
-But actually not, many developer instead of thinking of make something work, they are try to be sophisticated at the first time. And so do I. I get the requirements, and think how to do it perfectly, and think how to make it run fast, which algorithm I should use to optimize my code performance.
+The first step in to produce a software product in general is programming.
 
-But I tell you, it's too early to care about the performance. The requirements will change soon for sure. So why you need to write a good performance app now, and you remove them all very soon. It's no point to write a too good code to remove.
-At the beginning, we just need something really works, no matter of the code isn't good, well design, because several weeks later, the boss will come to you and ask you remove some of them, or rewrite the whole things because the logic doesn't work.
+However, instead of making something work, we are trying to do it perfectly, make it run fast. I start picking the algorithm to optimize the code.
+
+After many times doing this, I realize it's too early to care about performance. The requirements will change soon. The optimization state will change very soon. Your awesome good code will be removed soon.
+
+At the beginning, all we need is something really works. Several weeks later, the boss will come to you and ask you remove some of them, or rewrite the whole things because the logic doesn't work.
 
 You may ask me, "Hey Kevin, so if I write my code, and my code works. So later on, I'll move on the next features, and how can I come back and improve the code I write today?"
 It's a tough question. But you know what, you always can comeback and improve your code later. You have the tests, so you can change something and run the test again. If it passes, we just move on to next thing. You also may concern about the boss, does he give you time to improve the code that have worked already, if you change, may be.. something wrong and the website is down.
