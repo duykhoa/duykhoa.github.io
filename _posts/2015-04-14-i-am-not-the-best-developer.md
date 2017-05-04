@@ -28,7 +28,6 @@ Instead saying I'm the best developer, I change it to:
 
 "I am not the best developer, I only follow the best discipline".
 
-https://www.youtube.com/watch?v=G5FP7Y4Jy98
 [![The most complete fighter in the world](https://img.youtube.com/vi/G5FP7Y4Jy98/0.jpg)](https://www.youtube.com/watch?v=G5FP7Y4Jy98)
 
 What is the best discipline? There are 3 things I am following:
