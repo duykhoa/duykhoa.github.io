@@ -3,6 +3,8 @@ description: Just A developer
 show_downloads: true
 google_analytics:
 permalink: /posts/:slug-:year-:month-:day
+stackoverflow:
+  page: http://stackoverflow.com/users/1659807/duykhoa
 github:
   username: duykhoa
   page: https://github.com/duykhoa
