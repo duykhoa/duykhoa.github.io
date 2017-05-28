@@ -25,4 +25,4 @@ I have experiences working with ElasticSearch, Hanami, Rails, Polymer Js.
 ---
 
 This page is built by [Jekyll](https://jekyllrb.com/),
-using [Hacker]("https://github.com/pages-themes/hacker") theme.
+using [Hacker](https://github.com/pages-themes/hacker) theme.
