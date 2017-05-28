@@ -14,11 +14,11 @@ func main() {
 Hi everyone, it's such a long time (10 months omg) I haven't writen anything.
 
 I built this blog myself on Rails, and host it in Digital Ocean.
-It was a very cool project, I am the developer, and
-the user, I understand how each feature bring value to user.
+It was a cool project, I am both developer and
+user, I understand how each feature values to users.
 
 However, from time to time, it becomes difficult to maintain the project.
-Many times I want to write a post, and there is some bugs. Then I spent
+Many times I want to write a post, and I found some bugs. Then I spent
 my 2 hours to fix bugs instead of doing what I tend to do. It is demotivated
 me a lot whenever I want to write.
 
@@ -27,7 +27,7 @@ and focus on content more than code. I spent a lot of times to develop my
 blog. It was tough to make this decision.
 
 Now I have a new blog using Github page, Jekyll plugin. There is no excuse
-about not writing blog post because there is a bug. There will be some bugs,
+not writing blog post because there is a bug. There're still bugs,
 but the cost of maintenance the site is much less than.
 
 I think writing content is more valuable than maintain it.
@@ -95,7 +95,7 @@ am not able to do it for 30 days also, I just want to make it happened once
 
 And here is my list to do next
 
-- Contribute to a Golang lib (haven't)
+- Contribute to a Golang lib
 - Pushup 100 times nonstop
 - Writing a blog about Psychology or personal development
 - Go some places alone
@@ -105,3 +105,5 @@ The point here is: feel more naturally to challenge yourself,
 to build a habbit to try new thing, even it's small thing.
 Then there is more opportunity for you, you can do anything 
 with full confident and belief to create a better life.
+
+P.S. This is my non-tech blog
