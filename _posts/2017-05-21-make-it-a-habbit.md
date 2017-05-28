@@ -37,12 +37,12 @@ config the website in Jekyll. After moving, I know that I was too conservative.
 I should have more changes in life and make it as a habbit.
 And that's all I want to share in this post.
 
-We want to change our life, fix our bad habbit to live better life.
-We want to get out of our comfortzone. We want to have something we don't have,
-we must do something that we haven't done before.
+We want to change our life, fix our bad habbit to live better.
+We want to get out of our comfortzone. We want to have something we don't have.
+So, we must do something that we haven't done before.
 
-Knowing this lession is important. However, there is 1 more important thing
-to know, we don't like changing. We know the benefit of changing, but we don't
+Knowing this lession is important. However, there is one more thing
+to know, we don't like changing. We know the benefit of changing, we don't
 change.
 
 For me, I am afraid of changing.
