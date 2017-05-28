@@ -21,3 +21,8 @@ I have experiences working with ElasticSearch, Hanami, Rails, Polymer Js.
   <img src="/assets/images/stackoverflow.png" height="32" style="vertical-align: middle">
   <span>duykhoa</span>
 </a>
+
+---
+
+This page is built by [Jekyll](https://jekyllrb.com/),
+using [Hacker]("https://github.com/pages-themes/hacker") theme.
