@@ -14,14 +14,14 @@ is too small.
 
 A bucket is better, we can take some more back home.
 
-If I can choose, I will bring big jars with me
+If I can choose, I will bring big jars with me.
 
 However, I am not keen in salt or water. I just go to the ocean to see sunset.
 
-Then I should bring nothing but a chair to sit and wait for sunset.
+Then I should bring nothing but a chair to sit and wait.
 
-Regardless I want to see sunset, or get water/salt, or fishing, or swimming,
-I have to prepare for my purpose to go to the ocean.
+Regardless my purpose is seeing sunset, or getting water/salt, or fishing, or swimming,
+I have to prepare for my purpose.
 
 We can use a teaspoon to get this amount of water, and a bucket can get twice
 as this.
