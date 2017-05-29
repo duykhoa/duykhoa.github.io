@@ -9,7 +9,7 @@ This is one of my favorite Jim Rohn's quote.
 
 Great words. Let me walk though it so you can understand the meaning behind.
 
-Obviously, we can get much water with a teaspoon. Ocean is infinite, a teaspoon
+Obviously, we can't get much water with a teaspoon. Ocean is infinite, a teaspoon
 is too small.
 
 A bucket is better, we can take some more back home.
