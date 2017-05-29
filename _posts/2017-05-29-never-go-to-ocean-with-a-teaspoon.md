@@ -40,10 +40,10 @@ Opportunity will come to us, we difinitely have many opportunities.
 They can come very randomly, suddenly. Usually we aren't ready for new
 opportunity. Or we aren't sure it is opportunity or not.
 
-Be prepare, so we don't miss any opportunity. And knowing a opportunity is
+Be prepare, so we don't miss any opportunity. And knowing an opportunity is
 even harder.
 
-I myself need to learn how to define a opportunity, honestly. If you have any
+I myself need to learn how to define an opportunity, honestly. If you have any
 tips, please share with me! I just know that opportunity comes with difficulty.
 Nothing is easy, or we can call it challenge.
 
