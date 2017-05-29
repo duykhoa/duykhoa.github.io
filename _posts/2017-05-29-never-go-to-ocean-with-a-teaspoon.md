@@ -3,9 +3,9 @@ layout: post
 title: Never go to the ocean with a teaspoon
 ---
 
-This is a quote from a Jim Rohn's speech
+This is one of my favorite Jim Rohn's quote.
 
-![Teaspoon](http://www.azquotes.com/picture-quotes/quote-asking-is-the-beginning-of-receiving-make-sure-you-don-t-go-to-the-ocean-with-a-teaspoon-jim-rohn-24-95-78.jpg)
+![Teaspoon](https://cloud.githubusercontent.com/assets/2004218/26551233/087d6650-44b4-11e7-8cbe-bb1b093e10ce.png)
 
 Great words. Let me walk though it so you can understand the meaning behind.
 
@@ -16,7 +16,7 @@ A bucket is better, we can take some more back home.
 
 If I can choose, I will bring big jars with me
 
-![](https://2.bp.blogspot.com/-RlS1jTp_dBE/WOxfSTVRQrI/AAAAAAAAAIA/kys0B1BF69E3VXA8oMfLMty_c7RPY6QYwCLcB/s1600/Capture.PNG)
+![Big jar](https://cloud.githubusercontent.com/assets/2004218/26551243/18da6b2e-44b4-11e7-9be1-2e24629c722b.png)
 
 However, I am not keen in salt or water. I just go to the ocean to see sunset.
 
