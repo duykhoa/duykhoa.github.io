@@ -16,8 +16,6 @@ A bucket is better, we can take some more back home.
 
 If I can choose, I will bring big jars with me
 
-![Big jar](https://cloud.githubusercontent.com/assets/2004218/26551243/18da6b2e-44b4-11e7-9be1-2e24629c722b.png)
-
 However, I am not keen in salt or water. I just go to the ocean to see sunset.
 
 Then I should bring nothing but a chair to sit and wait for sunset.
