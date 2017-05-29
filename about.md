@@ -22,6 +22,11 @@ I have experiences working with ElasticSearch, Hanami, Rails, Polymer Js.
   <span>duykhoa</span>
 </a>
 
+<a href="mailto:duykhoa12t@gmail.com">
+  <img src="/assets/images/gmail.png" height="32" style="vertical-align: middle">
+  <span>duykhoa12t[at]gmail.com</span>
+</a>
+
 ---
 
 This page is built by [Jekyll](https://jekyllrb.com/),
