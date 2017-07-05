@@ -9,7 +9,7 @@ body {
   font-size: 17px;
   line-height: 1.5;
   font-family: 'Fira Mono', monospace;
-  background: #fafafa;
+  background: #f1f1f1;
 }
 
 /* General & 'Reset' Stuff */
@@ -245,7 +245,7 @@ a {
 }
 
 .content-wrapper {
-  text-shadow: -1px 0 1px #d4d2d2;
+  text-shadow: -1px 0 1px #a8a8a8, -1px 1px 5px #f9f9f9;
 }
 
 @media (max-width: 500px) {
