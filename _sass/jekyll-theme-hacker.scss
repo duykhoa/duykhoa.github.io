@@ -237,6 +237,10 @@ a {
 
 .post-continue, .post-meta {
   font-size: 14px;
+
+  a {
+    text-decoration: none !important;
+  }
 }
 
 .post-wrapper {
@@ -246,6 +250,9 @@ a {
 
 .content-wrapper {
   text-shadow: -1px 0 1px #a8a8a8, -1px 1px 5px #f9f9f9;
+  p a {
+    text-decoration: underline;
+  }
 }
 
 @media (max-width: 500px) {
