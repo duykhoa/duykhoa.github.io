@@ -1,3 +1,9 @@
+---
+layout: post
+title: Ant Philosophy
+
+---
+
 Today is the "International Workers' Day 2018" (1 May). By this occasion,  I would share some random thougths about an tiny animal with workaholics, the ant.
 
 I have a good relationship with ant, although I don't like them appear in my food or my room.
