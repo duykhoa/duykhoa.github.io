@@ -83,9 +83,6 @@ section img {
 h1, h2, h3, h4, h5, h6 {
   font-weight: normal;
   letter-spacing: -0.03em;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3),
-               0 0 5px rgba(181, 232, 83, 0.1),
-               0 0 10px rgba(181, 232, 83, 0.1);
 }
 
 #main_content h1 {
@@ -212,9 +209,7 @@ hr {
 */
 
 a {
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3),
-               0 0 5px rgba(181, 232, 83, 0.1),
-               0 0 10px rgba(181, 232, 83, 0.1);
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
 
   text-decoration: none;
   color: inherit;
@@ -249,9 +244,8 @@ a {
 }
 
 .content-wrapper {
-  text-shadow: -1px 0 1px #a8a8a8, -1px 1px 5px #f9f9f9;
   p a {
-    text-decoration: underline;
+    border-bottom: 1px dashed #3535e5;
   }
 }
 
