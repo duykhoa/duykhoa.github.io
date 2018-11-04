@@ -83,3 +83,8 @@ Instead of feeling frustrated about the progress, I choose to learn to fascinate
 make me exhausted.
 
 If you are struggling with balancing things in life, please find me to talk more.
+
+Likewise, here is a song I listen countless times today
+
+{% include youtube.html id='UdYxVsNqFn8' %}
+
