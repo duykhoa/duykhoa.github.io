@@ -1,21 +1,24 @@
 @import "rouge-base16-dark";
 
-@import url('https://fonts.googleapis.com/css?family=Fira+Mono');
+@import url('https://fonts.googleapis.com/css?family=Mukta:400,600');
+
+$primary-color: #33ff33;
+$background-color: #333333;
 
 body {
   margin: 0;
   padding: 0;
-  color: #3535e5;
-  font-size: 15px;
+  color: $primary-color;
+  font-size: 17px;
   line-height: 1.5;
-  font-family: 'Fira Mono', monospace;
-  background: #fafafa;
+  font-family: 'Mukta', sans-serif;
+
+  background: $background-color;
 }
 
 /* General & 'Reset' Stuff */
 
 .container {
-  max-width: 600px;
   padding: 0 3%;
   margin: 0;
 }
@@ -65,7 +68,6 @@ header h1:before {
 header h2 {
   font-size: 18px;
   font-weight: 300;
-  color: #3535e5;
 }
 
 /* Main Content
@@ -81,7 +83,7 @@ section img {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-weight: normal;
+  font-weight: bold;
   letter-spacing: -0.03em;
 }
 
@@ -140,7 +142,7 @@ pre {
   background: rgba(0, 0, 0, 0.9);
   border: 1px solid rgba(255, 255, 255, 0.15);
   padding: 10px;
-  font-size: 16px;
+  font-size: 13px;
   color: #b5e853;
   border-radius: 2px;
   text-wrap: normal;
@@ -155,7 +157,7 @@ table {
 
 th {
   text-align: left;
-  border-bottom: 1px dashed #3535e5;
+  border-bottom: 1px dashed $primary-color;
   padding: 5px 10px;
 }
 
@@ -166,7 +168,7 @@ td {
 hr {
   height: 0;
   border: 0;
-  border-bottom: 1px dashed #3535e5;
+  border-bottom: 1px dashed $primary-color;
 }
 
 /* Buttons
@@ -238,14 +240,18 @@ a {
   }
 }
 
+code {
+  font-size: 14px;
+}
+
 .post-wrapper {
   padding: 10px 0;
-  border-bottom: 1px dashed #3535e5;
+  border-bottom: 1px dashed $primary-color;
 }
 
 .content-wrapper {
   p a {
-    border-bottom: 1px dashed #3535e5;
+    border-bottom: 1px dashed $primary-color;
   }
 }
 
