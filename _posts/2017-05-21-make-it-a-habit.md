@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Make it as a habbit to challenge yourself.
+title: Make it as a habit to challenge yourself.
 ---
 
 ```go
