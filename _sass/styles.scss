@@ -2,17 +2,16 @@
 
 @import url('https://fonts.googleapis.com/css?family=Mukta:400,600');
 
-$primary-color: #33ff33;
+$primary-color: #d4d4d9;
 $background-color: #333333;
 
 body {
   margin: 0;
   padding: 0;
   color: $primary-color;
-  font-size: 17px;
-  line-height: 1.5;
+  line-height: 1.2;
+  font-size: 19px;
   font-family: 'Mukta', sans-serif;
-
   background: $background-color;
 }
 
@@ -29,11 +28,11 @@ section {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  margin: 0 0 20px;
+  margin: 0;
 }
 
 li {
-  line-height: 1.4 ;
+  line-height: 1.4;
 }
 
 /* Header, <header>
@@ -79,7 +78,7 @@ header h2 {
 }
 
 section img {
-  max-width: 100%
+  max-width: 100%;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -171,45 +170,6 @@ hr {
   border-bottom: 1px dashed $primary-color;
 }
 
-/* Buttons
-*/
-
-.btn {
-  display: inline-block;
-  padding: 8px 18px;
-  border-radius: 50px;
-  border: 2px solid rgba(0, 0, 0, 0.7);
-  border-bottom: 2px solid rgba(0, 0, 0, 0.7);
-  border-top: 2px solid rgba(0, 0, 0, 1);
-  color: rgba(255, 255, 255, 0.2);
-  font-weight: bold;
-  font-size: 13px;
-  text-decoration: none;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.75);
-  transition: all 0.2s ease;
-}
-
-.btn:hover {
-  background: rgba(0, 0, 0, 0.8);
-  color: #e8e8e8;
-}
-
-.btn .icon {
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  margin: 1px 8px 0 0;
-  float: left;
-}
-
-.btn-github .icon {
-  opacity: 0.6;
-}
-
-/* Links
-   a, a:hover, a:visited
-*/
-
 a {
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
 
@@ -246,7 +206,6 @@ code {
 
 .post-wrapper {
   padding: 10px 0;
-  border-bottom: 1px dashed $primary-color;
 }
 
 .content-wrapper {
