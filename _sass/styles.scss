@@ -1,8 +1,8 @@
 @import "rouge-base16-dark";
 
-@import url('https://fonts.googleapis.com/css?family=Mukta:400,600');
+@import url('https://fonts.googleapis.com/css?family=Mukta:400');
 
-$primary-color: #d4d4d9;
+$primary-color: #dddddd;
 $background-color: #333333;
 
 body {
@@ -31,6 +31,7 @@ section {
 }
 
 h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
   margin: 0;
   padding: 0;
 }
