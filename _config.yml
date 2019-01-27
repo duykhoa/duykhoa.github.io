@@ -8,6 +8,8 @@ stackoverflow:
 github:
   username: duykhoa
   page: https://github.com/duykhoa
+linkedin:
+  page: https://www.linkedin.com/in/tranduykhoa
 exclude:
   - Gemfile
   - Gemfile.lock
