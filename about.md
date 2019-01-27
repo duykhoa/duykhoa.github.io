@@ -13,18 +13,15 @@ I have experiences working with ElasticSearch, Hanami, Rails, Polymer Js.
 **Find me at**
 
 <a href="{{ site.github.page  }}">
-  <img src="/assets/images/github.png" height="32" style="vertical-align: middle">
-  <span>duykhoa</span>
+  <span>Github: duykhoa</span>
 </a>
 
 <a href="{{ site.stackoverflow.page }}">
-  <img src="/assets/images/stackoverflow.png" height="32" style="vertical-align: middle">
-  <span>duykhoa</span>
+  <span>Twitter: duykhoa</span>
 </a>
 
 <a href="mailto:duykhoa12t@gmail.com">
-  <img src="/assets/images/gmail.png" height="32" style="vertical-align: middle">
-  <span>duykhoa12t[at]gmail.com</span>
+  <span>Email: duykhoa12t[at]gmail.com</span>
 </a>
 
 ---
