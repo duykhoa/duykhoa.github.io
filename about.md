@@ -1,5 +1,6 @@
 ---
 layout: default
+title: About me | Kevin Tran
 ---
 
 ## I'm glad that you are here.
