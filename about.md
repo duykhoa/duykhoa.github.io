@@ -34,6 +34,10 @@ src="https://lh3.googleusercontent.com/YcjsYsbI1MoK9K1MEkmSz2IhU3IFh1ltlQo6-8k3U
 </a>
 
 <a href="{{ site.stackoverflow.page }}">
+  <span>Stackoverflow: duykhoa</span>
+</a>
+
+<a href="{{ site.twitter.page }}">
   <span>Twitter: duykhoa</span>
 </a>
 

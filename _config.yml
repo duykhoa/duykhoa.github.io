@@ -10,6 +10,8 @@ github:
   page: https://github.com/duykhoa
 linkedin:
   page: https://www.linkedin.com/in/tranduykhoa
+twitter:
+  page: https://twitter.com/duykhoa12t
 exclude:
   - Gemfile
   - Gemfile.lock
