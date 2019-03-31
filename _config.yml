@@ -12,12 +12,14 @@ linkedin:
   page: https://www.linkedin.com/in/tranduykhoa
 twitter:
   page: https://twitter.com/duykhoa12t
+logo:
+  url: /assets/images/avatar-resize-220x220.png
 exclude:
   - Gemfile
   - Gemfile.lock
 paginate_path: /posts/:num/
 paginate: 20
-gems:
+pluggins:
   - jekyll-feed
   - jekyll-paginate
   - jekyll-sitemap
