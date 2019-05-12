@@ -9,6 +9,8 @@ Let me start in this way. I think laziness is an important character of a good d
 In [ITviec blog](https://itviec.com/blog/luoi-to-ra-ngu-ngoc-la-ban-nang-cua-developer-gioi-2/), I shared that I feel
 much better to spend a week writing a tool to automate someworks like copy-paste every minute.
 
+<!--more-->
+
 The reason I think I should do it isn't for myself, but for the entire team. For a rough calculation, a team with 5
 people, and this repetive task has to be done twice a day, it takes 5 minutes to finished manually, it would take 1400
 minutes per month to just do this task. Compare to that amount of time, I spend a week (160 hours) to develop a tool
