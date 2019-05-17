@@ -89,5 +89,5 @@ I would like to hear your story or your thoughts on procrastination, drop me a l
 
 # Other resources
 
-- https://www.njlifehacks.com/how-to-stop-procrastinating/
-- https://succeedfeed.com/jim-rohns-2-simple-techniques-to-stop-procrastinating/
+- [https://www.njlifehacks.com/how-to-stop-procrastinating/](https://www.njlifehacks.com/how-to-stop-procrastinating/)
+- [https://succeedfeed.com/jim-rohns-2-simple-techniques-to-stop-procrastinating/](https://succeedfeed.com/jim-rohns-2-simple-techniques-to-stop-procrastinating/)

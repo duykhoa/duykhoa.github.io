@@ -1,9 +1,9 @@
-@import "rouge-base16-dark";
+@import "vim";
 
 @import url('https://fonts.googleapis.com/css?family=Mukta:400');
 
-$primary-color: #c5c6c7;
-$background-color: #1f2833;
+$primary-color: #313638;
+$background-color: #E8E9EB;
 
 body {
   margin: 0;
@@ -13,14 +13,13 @@ body {
   background: $background-color;
 }
 
-/* General & 'Reset' Stuff */
-
 a {
   text-decoration: none;
   color: inherit;
 }
 
 .container {
+  width: 50%;
   padding: 0 1%;
   margin: 0;
 }
@@ -48,4 +47,17 @@ header {
 pre {
   background: darken($background-color, 2%);
   padding: 10px;
+}
+
+blockquote {
+  margin-left: 0;
+  padding-left: 1em;
+  border-left: 3px solid darken($background-color, 20%);
+}
+
+#main_content {
+  a {
+    text-decoration: underline;
+    color: lighter($primary-color, 10%);
+  }
 }
