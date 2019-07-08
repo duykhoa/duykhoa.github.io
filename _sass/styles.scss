@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css?family=Mukta:400');
 
 $primary-color: #313638;
-$background-color: #E8E9EB;
+$background-color: #f9f9f9;
 
 body {
   margin: 0;
@@ -19,9 +19,15 @@ a {
 }
 
 .container {
-  width: 50%;
-  padding: 0 1%;
+  max-width: 70%;
+  padding: 3% 10%;
   margin: 0;
+
+  @media(max-width: 1024px) {
+    width: 80%;
+    padding-left: 10%;
+    padding-right: 10%;
+  }
 }
 
 section {
@@ -41,12 +47,13 @@ p {
 }
 
 header {
-  background: darken($background-color, 5%);
+  background: darken($background-color, 3%);
 }
 
 pre {
   background: darken($background-color, 2%);
   padding: 10px;
+  overflow-x: scroll;
 }
 
 blockquote {
