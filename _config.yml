@@ -18,7 +18,7 @@ exclude:
   - Gemfile
   - Gemfile.lock
 paginate_path: /posts/:num/
-paginate: 5
+paginate: 10
 pluggins:
   - jekyll-feed
   - jekyll-paginate
