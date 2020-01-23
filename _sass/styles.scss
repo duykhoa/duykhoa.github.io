@@ -3,6 +3,7 @@
 $primary-color: #313638;
 $background-color: #ffffff;
 $success-color: #057b37;
+$padding: 10px;
 
 body {
   margin: 0;
@@ -30,8 +31,8 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
   font-weight: normal;
   padding: 10px 0;
-
 }
+
 h1 {
   padding: 13px 0;
 }
@@ -96,6 +97,7 @@ pre {
   background: darken($background-color, 7%);
   padding: 0 10px;
   overflow-x: scroll;
+  width: calc(100% - 2 * #{$padding});
 }
 
 blockquote {
@@ -116,7 +118,7 @@ blockquote {
 }
 
 img {
-  max-width: 100%;
+  max-width: calc(100% - 2 * #{$padding});
   border-radius: 10px;
 }
 
