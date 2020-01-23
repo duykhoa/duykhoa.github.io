@@ -4,19 +4,17 @@ title: I miss my old music
 excerpt_separator: <!--more-->
 ---
 
-# Singapore 16 Nov 2019
-
 It is Friday 16 Nov 2019, 1 month and 14 days before the new decade to 2020.
 
 <!--more-->
 
-{% include youtube.html id='o9xU11pwF3w' %}
+Singapore 16 Nov 2019
+
+{% include youtube.html id='OP27dUrYnLQ' %}
 
 With some various kinds of alcohol.
 
-Here is the post
-
-http://misc-stuff.terraaeon.com/articles/miss-old-internet.html
+Here is the post [miss old internet](http://misc-stuff.terraaeon.com/articles/miss-old-internet.html)
 
 And I miss the internet.
 
@@ -40,5 +38,4 @@ Things are from the past, which is not just the past, but the foundation of the 
 
 > Thuy oi co len thuong de sinh ta ra va dat cho ta nham mot ngoi sao xau. Chi xin mot lan yeu nhau ma khong noi duoc bao
 gio.
-
 

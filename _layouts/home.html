@@ -2,30 +2,28 @@
 layout: default
 ---
 
-<div class="post-list">
+<div class="post-list post-wrapper"{% if lang != empty %} lang="{{ lang }}"{% endif %} >
   {% for post in paginator.posts %}
   {% capture post_lang %}{{ post.lang | default: site_lang }}{% endcapture %}
   {% capture lang %}{% if post_lang != site_lang %}{{ post_lang }}{% endif %}{% endcapture %}
 
-  <div{% if lang != empty %} lang="{{ lang }}"{% endif %}>
-    <div class="post-wrapper">
-      <div class="content-wrapper">
-        <h1 class="post-title">
-          <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}{% if post.external-url %} &rarr;{% endif %}</a>
-        </h1>
+  <div class="content-wrapper">
+    <h3 class="post-title">
+      <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}{% if post.external-url %} &rarr;{% endif %}</a>
 
-        <div class="post-content homepage">
-          {{ post.excerpt }}
-        </div>
+      <span class="read-more">
+        <a class="post-link" href="{{ post.url | relative_url }}">go to post</a>
+      </span>
+    </h3>
 
-        <p class="post-continue">
-          <!--<a href="{{ post.url | relative_url }}">Read on &rarr;</a>-->
-        </p>
-      </div>
+    <div class="post-content homepage">
+      {{ post.excerpt }}
     </div>
+
+    {% endfor %}
   </div>
 
-  {% endfor %}
+  {% include pagination.html %}
 </div>
 
-{% include pagination.html %}
+{% include footer.html %}

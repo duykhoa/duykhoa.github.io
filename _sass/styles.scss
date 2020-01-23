@@ -1,70 +1,130 @@
-@import "vim";
-
-@import url('https://fonts.googleapis.com/css?family=Mukta:400');
+@import 'native';
 
 $primary-color: #313638;
-$background-color: #f9f9f9;
+$background-color: #ffffff;
+$success-color: #023618;
 
 body {
   margin: 0;
   padding: 0;
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 1em;
   color: $primary-color;
-  font-family: 'Mukta', sans-serif;
   background: $background-color;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
+  line-height: 1.3em;
 }
 
 .container {
   max-width: 70%;
-  padding: 3% 10%;
-  margin: 0;
 
   @media(max-width: 1024px) {
     width: 80%;
-    padding-left: 10%;
-    padding-right: 10%;
   }
 }
 
-section {
-  display: block;
-  margin: 0 0 20px 0;
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: normal;
+  padding: 10px 0;
+
+}
+h1 {
+  padding: 13px 0;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-weight: normal;
+h2 {
+  padding: 12px 0;
+}
+
+h3 {
+  padding: 11px 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:visited {
+  color: inherit;
+}
+
+p {
   margin: 0;
   padding: 0;
 }
 
-p {
-  margin-block-start: 0.3em;
-  margin-block-end: 0.3em;
+.markup {
+  p {
+    margin: 0;
+    padding: 0.5em 0 0 0;
+  }
+
+  p::first-letter {
+    font-size: 1.3em;
+    text-transform: uppercase;
+  }
+
+  a {
+    border-bottom: 1px solid lighten($primary-color, 20%);
+  }
+}
+
+.small {
+  font-size: 0.8em;
+}
+
+.text-light {
+  color: lighten($primary-color, 10%);
 }
 
 header {
-  background: darken($background-color, 3%);
+  background: darken($background-color, 5%);
+  padding: 10px;
 }
 
 pre {
-  background: darken($background-color, 2%);
-  padding: 10px;
+  font-family: monospace, sans-serif;
+  background: darken($background-color, 7%);
+  padding: 0 10px;
   overflow-x: scroll;
 }
 
 blockquote {
   margin-left: 0;
   padding-left: 1em;
-  border-left: 3px solid darken($background-color, 20%);
+  position: relative;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+
+  &:before {
+    content: '';
+    height: 100%;
+    display: block;
+    border-left: 3px solid $success-color;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
 }
 
-#main_content {
-  a {
-    text-decoration: underline;
-    color: lighter($primary-color, 10%);
+.post-wrapper {
+  padding: 0 0 5px 10px;
+
+  &:nth-child(even) {
+    background-color: darken($background-color, 5%);
   }
+}
+
+.read-more {
+  color: darken($background-color, 20%);
+  font-size: 10px;
+  border-bottom: 1px dashed;
+}
+
+footer {
+  color: lighten($primary-color, 30%);
+  font-size: 0.8em;
+  margin-top: 10px;
+  padding: 10px 10px 15px 0;
+  border-top: 1px solid darken($background-color, 10%);
 }

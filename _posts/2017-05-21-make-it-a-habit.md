@@ -1,17 +1,21 @@
 ---
 layout: post
 title: Make it as a habit to challenge yourself.
+excerpt_separator: <!--more-->
 ---
 
+Hi everyone, it's such a long time (10 months omg) I haven't writen anything.
+
+<!--more-->
+
+
 ```go
-import('fmt')
+import("fmt")
 
 func main() {
   fmt.Println("Hello World!")
 }
 ```
-
-Hi everyone, it's such a long time (10 months omg) I haven't writen anything.
 
 I built this blog myself on Rails, and host it in Digital Ocean.
 It was a cool project, I am both developer and
@@ -79,7 +83,7 @@ I still don't take action, because I don't have the habbit of doing new thing.
 I feel not enough to take action yet.
 
 My solution for this is challenge myself more often. I read this blog
-https://themission.co/a-list-of-30-day-challenges-you-can-start-today-532c28bc2585
+[30 days challenges you can start today](https://themission.co/a-list-of-30-day-challenges-you-can-start-today-532c28bc2585).
 
 At first, it sounds a bit weird. However, it's exactly what I don't have,
 that's why I feel nervous to change, to challenge myself to do
@@ -88,7 +92,6 @@ am not able to do it for 30 days also, I just want to make it happened once
 
 - Cycles 12kms nonstop
 - Write a non-tech blog
-- Talk to my ex-girlfriend
 - Give free advice to some strangers
 - Order something different with Ice Latte
 - Give a talk about something that isn't related to my experience or knowledge 
@@ -107,3 +110,4 @@ Then there is more opportunity for you, you can do anything
 with full confident and belief to create a better life.
 
 P.S. This is my non-tech blog
+
