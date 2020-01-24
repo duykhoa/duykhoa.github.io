@@ -122,8 +122,12 @@ img {
   border-radius: 10px;
 }
 
+iframe {
+  max-width: calc(100% - 2 * #{$padding});
+}
+
 .post-wrapper {
-  padding: 0 0 5px 10px;
+  padding: 0 $padding 5px $padding;
 
   &:nth-child(even) {
     background-color: darken($background-color, 5%);
