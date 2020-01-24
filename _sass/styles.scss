@@ -120,6 +120,11 @@ blockquote {
 img {
   max-width: calc(100% - 2 * #{$padding});
   border-radius: 10px;
+
+  @media(max-width: 768px) {
+    width: 100%;
+    max-width: inherit;
+  }
 }
 
 iframe {
