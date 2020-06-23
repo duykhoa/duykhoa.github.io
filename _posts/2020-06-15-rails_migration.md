@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Rails migration
+tags: rails sql
+cover_image: /assets/images/rails-migration.png
 excerpt_separator: <!--more-->
 ---
 

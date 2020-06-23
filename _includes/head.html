@@ -8,6 +8,8 @@
 {% endif %}
 
 {% assign cover_image = page.cover_image | default: site.logo.url %}
+{% assign description = page.excerpt | default: site.description %}
+{% assign tags = page.tags %}
 
 <meta http-equiv="X-UA-Compatible" content="chrome=1">
 
@@ -16,9 +18,17 @@
 
 <!-- SOCIAL WEBSITES META DATA -->
 <meta property="og:title" content="{{ title }}">
-<meta property="og:description" content="{{ site.description }}">
-<meta property="og:image" content="{{ cover_image }}">
+<meta property="og:description" content="{{ description }}">
+<meta property="og:image" content="{{ cover_image | prepend: site.url }}">
 <meta property="og:url" content="{{ page.url | prepend: site.url }}">
+<meta property="og:type" content="article">
+<meta property="article:author" content="Kevin Tran">
+<meta property="article:section" content="Web development">
+<meta property="article:published_time" content="{{ page.date }}">
+
+{% for tag in tags %}
+  <meta property="article:tag" content="{{ tag }}">
+{% endfor %}
 <!-- END SOCIAL WEBSITES META DATA -->
 
 <title>{{ title }}</title>
