@@ -2,31 +2,30 @@
 layout: default
 ---
 
-<div class="py-4"{% if lang != empty %} lang="{{ lang }}"{% endif %} >
+<div class="border-b-3 border-b-cl-mintcream"></div>
+<div class="py-4 px-3 bg-light-secondary"{% if lang != empty %} lang="{{ lang }}"{% endif %} >
   {% for post in paginator.posts %}
   {% capture post_lang %}{{ post.lang | default: site_lang }}{% endcapture %}
   {% capture lang %}{% if post_lang != site_lang %}{{ post_lang }}{% endif %}{% endcapture %}
 
-  <div class="pb-1">
-    <div class="pb-1">
-      <a class="post-link" href="{{ post.url | relative_url }}">
-        <h3 class="d-inline-block text-hover-highlight">
+  <div class="pb-2 clear-both">
+    <div class="f-left">
+      <a class="post-link d-block clear-both" href="{{ post.url | relative_url }}">
+        <h3 class="d-inline-block text-hover-highlight border-b border-b-dashed border-b-cl-primary">
           {{ post.title | escape }}{% if post.external-url %} &rarr;{% endif %}
         </h3>
-        <span class="text-xsmall text-secondary">
-          Click to read
-        </span>
       </a>
     </div>
 
-    <div class="pl-3 text-small">
-      {{ post.excerpt }}
+    <div class="f-right text-align-right">
+      <div class="text-small">
+        {{ post.date | date: "%b %-d, %Y" }}
+      </div>
     </div>
   </div>
 
   {% endfor %}
 
-  {% include pagination.html %}
   {% include footer.html %}
 </div>
 

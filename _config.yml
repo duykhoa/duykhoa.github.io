@@ -1,5 +1,5 @@
 title: Kevin Tran
-description: i`Writing Code` and _Grinding Coffee_. jk
+description: "`Writing Code` and _Grinding Coffee_."
 show_downloads: true
 google_analytics:
 permalink: /posts/:slug-:year-:month-:day
@@ -14,11 +14,13 @@ twitter:
   page: https://twitter.com/duykhoa12t
 logo:
   url: /assets/images/avatar-resize-220x220.png
+include:
+  - fonts/
 exclude:
   - Gemfile
   - Gemfile.lock
 paginate_path: /posts/:num/
-paginate: 20
+paginate: 100
 pluggins:
   - jekyll-feed
   - jekyll-paginate

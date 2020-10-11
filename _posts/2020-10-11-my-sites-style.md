@@ -54,7 +54,7 @@ const add = (a) => (b) => a + b;
 
 {% include youtube.html id='o8NPllzkFhE' %}
 
-```css
+```scss
 footer {
   color: lighten($primary-color, 10%);
   font-size: 0.8em;
