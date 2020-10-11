@@ -2,21 +2,24 @@
 layout: default
 ---
 
-<div class="post-list"{% if lang != empty %} lang="{{ lang }}"{% endif %} >
+<div class="py-4"{% if lang != empty %} lang="{{ lang }}"{% endif %} >
   {% for post in paginator.posts %}
   {% capture post_lang %}{{ post.lang | default: site_lang }}{% endcapture %}
   {% capture lang %}{% if post_lang != site_lang %}{{ post_lang }}{% endif %}{% endcapture %}
 
-  <div class="post-wrapper">
-    <h3 class="post-title">
-      <a class="post-link text-bold" href="{{ post.url | relative_url }}">{{ post.title | escape }}{% if post.external-url %} &rarr;{% endif %}</a>
+  <div class="pb-1">
+    <div class="pb-1">
+      <a class="post-link" href="{{ post.url | relative_url }}">
+        <h3 class="d-inline-block text-hover-highlight">
+          {{ post.title | escape }}{% if post.external-url %} &rarr;{% endif %}
+        </h3>
+        <span class="text-xsmall text-secondary">
+          Click to read
+        </span>
+      </a>
+    </div>
 
-      <span class="read-more">
-        <a class="post-link" href="{{ post.url | relative_url }}">go to post</a>
-      </span>
-    </h3>
-
-    <div class="post-content homepage">
+    <div class="pl-3 text-small">
       {{ post.excerpt }}
     </div>
   </div>

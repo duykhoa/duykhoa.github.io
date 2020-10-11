@@ -1,5 +1,5 @@
 title: Kevin Tran
-description: Writing Code and Grinding Coffee.
+description: i`Writing Code` and _Grinding Coffee_. jk
 show_downloads: true
 google_analytics:
 permalink: /posts/:slug-:year-:month-:day
@@ -18,7 +18,7 @@ exclude:
   - Gemfile
   - Gemfile.lock
 paginate_path: /posts/:num/
-paginate: 10
+paginate: 20
 pluggins:
   - jekyll-feed
   - jekyll-paginate

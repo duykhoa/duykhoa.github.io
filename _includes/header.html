@@ -1,13 +1,21 @@
-<header>
-  <h1>
-    <a href="/" class="text-bold">{{ site.title | default: site.github.repository_name }}</a>
-  </h1>
+<header class="text-center bg-primary fg-revert py-2">
+  <div class="title">
+    <a href="/" class="text-bold">
+      <h1 class="py-2">
+        {{ site.title | default: site.github.username }}
+      </h1>
+    </a>
+  </div>
 
-  <h3>
-    <a href="/">{{ site.description | default: site.github.project_tagline }}</a>
-  </h3>
+  <div class="elevator-pitch">
+    <a href="/">
+      {{ site.description | default: site.github.project_tagline }}
+    </a>
+  </div>
 
-  <h4>
-    <a href="/about">About me</a>
-  </h4>
+  <div class="links">
+    <small class="text-small">
+      <a href="/about">About me</a>
+    </small>
+  </div>
 </header>
