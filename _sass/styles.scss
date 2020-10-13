@@ -16,6 +16,7 @@ $post-title-font: "PlayfairDisplay", sans-serif;
 $post-header-font: "PlayfairDisplay", sans-serif;
 $post-quote-font: "PlayfairDisplay", sans-serif;
 $font: "DavidLibre-Regular", serif;
+$bold-font: "DavidLibre-Bold", serif;
 
 body {
   margin: 0;
@@ -87,17 +88,6 @@ h1, h2, h3, h4, h5, h6 {
   color: $secondary-color;
 }
 
-.text-hover-highlight {
-  transition: 0.2s all ease-in-out;
-  -webkit-transition: 0.2s all ease-in-out;
-  -o-transition: 0.2s all ease-in-out;
-
-  &:hover {
-    color: $highlight-color;
-    border-color: $highlight-color;
-  }
-}
-
 .text-align-right {
   text-align: right;
 }
@@ -123,6 +113,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .post-title-font {
   font-family: $post-title-font;
+  font-size: 2em;
 }
 
 // spacing
@@ -162,6 +153,10 @@ h1, h2, h3, h4, h5, h6 {
     padding-left: 0;
     padding-right: 0;
   }
+}
+
+.pt-1 {
+  padding-top: 10px;
 }
 
 .py-1 {
@@ -256,18 +251,21 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 1.3em;
     line-height: 1.3em;
     padding: 8px 0;
+    font-family: $post-header-font;
   }
 
   h5 {
     font-size: 1.2em;
     line-height: 1.2em;
     padding: 5px 0;
+    font-family: $post-header-font;
   }
 
   h6 {
     font-size: 1.05em;
     line-height: 1.05em;
     padding: 5px 0;
+    font-family: $post-header-font;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -282,26 +280,33 @@ h1, h2, h3, h4, h5, h6 {
 
   code, pre {
     font-family: monospace, sans-serif;
-    font-size: 0.95em;
+    font-size: 0.9em;
     background: lighten($shadowblue-color, 27%);
-    padding: 3px 10px;
-    border-radius: 3px;
+    border-radius: 8px;
     overflow-x: scroll;
     max-width: 100%;
   }
 
+  code {
+    padding: 2px 10px;
+  }
+
   pre {
     padding: 10px 20px;
-    overflow-x: hidden;
+    overflow-x: scroll;
 
     code {
-      padding: 0 10px;
+      padding: 0;
     }
   }
 
   p {
     padding-bottom: 8px;
     font-size: 0.95em;
+  }
+
+  strong {
+    font-family: $bold-font;
   }
 
   blockquote {
@@ -333,25 +338,18 @@ h1, h2, h3, h4, h5, h6 {
     }
   }
 
-  a {
-    outline: none;
-    display: inline-block;
-    border-bottom: 1px solid lighten($primary-color, 10%);
-    color: lighten($primary-color, 10%);
-
-    transition: 0.3s all ease;
-    -webkit-transition: 0.3s all ease;
-    -o-transition: 0.3s all ease;
-
-    &:hover {
-      color: $shadowblue-color;
-      border-bottom: 1px solid $shadowblue-color;
-    }
-  }
-
   iframe {
     width: 100%;
     height: 400px;
+    border-radius: 8px;
+  }
+
+  a {
+    border-bottom: 1px solid $primary-color;
+
+    &:hover {
+      border-bottom: 1px solid $secondary-color;
+    }
   }
 }
 
@@ -366,12 +364,38 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 a {
+  outline: none;
+  display: inline-block;
   color: inherit;
   text-decoration: none;
 }
 
-a:visited {
-  color: inherit;
+a:not(.no-hover) {
+  outline: none;
+  display: inline-block;
+  color: lighten($primary-color, 10%);
+  text-decoration: none;
+
+  transition: 0.3s all ease;
+  -o-transition: 0.3s all ease;
+  -webkit-transition: 0.3s all ease;
+
+  &:visited {
+    color: inherit;
+    outline: none;
+  }
+
+  &:hover {
+    color: $shadowblue-color;
+  }
+
+  &.underlined {
+    border-bottom: 1px solid $primary-color;
+
+    &:hover {
+      border-bottom: 1px solid $shadowblue-color;
+    }
+  }
 }
 
 p {
@@ -426,6 +450,20 @@ p {
 
 .border-b-dashed {
   border-bottom-style: dashed;
+}
+
+.border-rounded {
+  border-radius: 8px;
+}
+
+.border-t-rounded {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.border-b-rounded {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
 }
 
 // custom

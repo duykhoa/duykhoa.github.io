@@ -1,6 +1,6 @@
 <header class="text-center bg-primary fg-revert py-2">
   <div class="title">
-    <a href="/" class="text-bold">
+    <a href="/" class="text-bold no-hover">
       <h1 class="py-2">
         {{ site.title | default: site.github.username }}
       </h1>
@@ -8,16 +8,15 @@
   </div>
 
   <div class="elevator-pitch">
-    <a href="/">
-      <code>i</code>
+    <a href="/" class="no-hover">
       {{ site.description | default: site.github.project_tagline }}
       <code>jk</code>
     </a>
   </div>
 
   <div class="links">
-    <small class="text-small">
-      <a href="/about">About me 🏸</a>
+    <small class="text-small no-hover">
+      <a href="/about" class="no-hover">About me 🏸</a>
     </small>
   </div>
 </header>

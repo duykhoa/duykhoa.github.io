@@ -10,10 +10,8 @@ layout: default
 
   <div class="pb-2 clear-both">
     <div class="f-left">
-      <a class="post-link d-block clear-both" href="{{ post.url | relative_url }}">
-        <h3 class="d-inline-block text-hover-highlight border-b border-b-dashed border-b-cl-primary">
-          {{ post.title | escape }}{% if post.external-url %} &rarr;{% endif %}
-        </h3>
+      <a class="post-link d-block underlined" href="{{ post.url | relative_url }}">
+        {{ post.title | escape }}{% if post.external-url %} &rarr;{% endif %}
       </a>
     </div>
 

@@ -38,6 +38,10 @@ Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adi
 const add = (a) => (b) => a + b;
 ```
 
+~~Strikethrough text~~
+
+Normal text
+
 **Bold text**
 
 *Italic text*
