@@ -2,7 +2,7 @@
 layout: default
 ---
 
-<div class="border-b-3 border-b-cl-mintcream"></div>
+<div class="pt-1"></div>
 <div class="py-4 px-3 bg-light-secondary"{% if lang != empty %} lang="{{ lang }}"{% endif %} >
   {% for post in paginator.posts %}
   {% capture post_lang %}{{ post.lang | default: site_lang }}{% endcapture %}
