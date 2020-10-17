@@ -1,6 +1,6 @@
 ---
 layout: post
-title: From Ansible to Kubernetes
+title: Deploy application on Kubernetes
 tags: Kubernetes Ansible k8s EC2 AWS Rails
 excerpt_separator: <!--more-->
 ---
@@ -34,20 +34,18 @@ It can be a little bit different from my solution, here is how I setup the infra
 
 The app is hosted in AWS infras. AWS provides a lot of services beside hosting - as you all know EC2.
 Those services I used to deploy this app include some new services, and they could be changed in the future.
-Hopefully when you find this post, the content is still relevant. Otherwise, please send me an email or reach to me to
-update. You can find me in the [About me](/about).
-
-I go deeper to this part soon. Be calm!
+Hopefully when you find this post, the content is still relevant.
 
 People usually recommend to draw the setup to diagram, a term for it is "software architecture design". There are a
 certain type of activities happen while doing the architecture design, including analysis, synthesis, evalution,
 evolution, knowledge management and communication, design reasoning and decision making, documentation (from [Wikipedia][1]).
 
-I use this as a reference only. I believe the architecture is itself document, just as the code.
+I use this as a reference. I believe the architecture should be self documented, just like the code.
 
 > Good code is like good joke, no need for explanation.
 
-I still draw the design to whitepaper the design in some simple form. It is used for my thought process, not an output.
+I still draw the design to whitepaper the design in some simple form.
+It is used for my thought process, not an output.
 
 For a machine to run the Rails app, here is what it needs to installed:
 
@@ -61,31 +59,22 @@ Things aren't necessary when using AWS services
 - Ruby version manager - rvm, rbenv, chruby, ruby-install
 - iptable, ufw
 
-## Step by step setting up a Rails app on EC2
+## A comprehence to-be-done list:
 
 To disappoint you, I won't do that here. But don't too disappointed, here is a tutorial [The great code adventure][2].
 I thought Digital Ocean should be the place for those tutorials, turn out they don't focus on that any more.
 The last tutorial is a few years ago, using Rails 4 and Ubuntu 14.04, which may be out of date.
 
-I am not going too much details, my setup usually is:
-
 1. Add a new user: EC2 usually setup a different user from root, depends on the image, usually is `ubuntu` or
    `ec2-user`.
-   This user can escalate privilege like root. We need another user without this ability. This user is used to access
-   from outside to deploy the code in and run the web server command.
 
-1. Ensure the server config doesn't allow password login via SSH protocol. It is very dangerous as hackers can
-   bruteforce your password. It is safer to use SSH key to access.
-
-1. Even better, no SSH access at all.
-   You may feel it confused because how can we deploy to a host without access to the host.
-   No worry, the answer is below.
-
+1. Ensure the server config doesn't allow password login via SSH protocol. Even better, no SSH access at all.
 1. Install necessary dependencies
 1. Install Ruby from source
 1. Install Node JS
-1. Setup monit and systemd
+1. Setup service monitoring
    Maitain the app's life cycle isn't an easy work. It is more difficult when the app is scaled in many servers.
+
    A tool like systemd and monit can help.
 
    **Pro tips**: `systemd` spelling is ["System Five Hundred"][3].
@@ -102,139 +91,149 @@ I am not going too much details, my setup usually is:
 1. Time Sync
    Even when you have only 1 server, it is a good idea to have it configured.
 
-### How's about other services like Cache and Database?
+1. Strategy to manage multiple servers
+1. Servers don't have public IP
+1. Security groups
+1. Have a CI/CD tool
 
-  It seems like all resources finding online tells us to install the database and other services to the same server, the
-  one run the Rails server.
+### Short comings
 
-  **No one do that in Production.** We should separate the app and the database, as well as other components.
+The main concern is how to setup a centralize control to the infras.
 
-  If the app goes down, the team can create new server and run the app on that. The new instance still connects to the
-  same DB.
+Currently to maintain the system, there is a must to understand deeply in AWS service.
 
-  This approach also prevents resources competition between multiple processes.
+Last but not least, I am not an expert Devops yet, such things like adding the secret vault to store credential data
+isn't a default practice for me, plus I don't want to spend efforts on maintaining the vault.
 
-  The next question is "should I set it up myself?" or get a RDS (Amazon Relational Database Service).
-  And the common answer is going with RDS. If pricing isn't your problem, just go with it and put less 1 thing outside
-  your head. I have done the setup manually before for database and some search engines, the maintainance cost is much
-  higher than the setup.
 
-## Swap space
+# Life with Kubernetes
 
-  Swapspace is a term describes a portion of your disk that is reserved for your system to use as a virtual memory.
+My setup only depends on Kubernetes tool, I don't use Helm.
 
-  With swap space, you can use less powerful machine to run your app.
+## A to be done list
 
-  As my setup, a nano or micro instance with 1Gb swapspace is quite okay to run a Rails application.
+To match with previous session format, I start by writing down the list:
 
-## Time synchronize
+1. Setup an IAM account (with permission and role)
+1. Create a EKS cluster. Right now the control plane price is 0.1$/hours (72$/month)
+1. Create an Ec2 profile. The Fargate profile allows to allocate resource dynamically, use it if your app are
+   completely stateless.
+1. Install those tools: `kubectl`, `aws`, `eksctl`, `kubefwd`.
+1. Setup ECR on AWS to store docker images. Setp up the policy to retain few images to save cost.
+1. Create your docker files.
+1. Setup postgres cluster with `pgo`. The document isn't very good, need to chew the code to digest
+1. Develop a playbook (I use Ansible) to template and build those docker files on CI
+1. Setup supports tools (EFK, Kubernetes-dashboard, Caching, etc.)
+1. Setup EBS Persistent volume. It creates dynamic volume claim to map into Kubernetes container
+1. Setup Nginx ingress controller and ingress for each service.
 
-  Having multiple servers leads to different problems. One of those is the time sync.
+I don't think this list is enough, hence I talk more.
 
-  This is the most easy to forget step, until you have weird timing data because your background
-  processor server write data with not-in- sync timestamp to the database. It is my experience before.
+## Diving in
 
-  The `ntp` (Network Time Protocol) service is used for this case.
+### Some overview notes
 
-  This is an [excellent document from AWS][4] for configuring the `ntp` service. The service is available out of the
-  box, even when you don't use AWS platform.
+EKS, a short form for Elastic Kubernetes Service, a Kubernetes solution from Amazon Web service.
 
-## How to manage multiple servers
+It is an implementation of Kubernetes that well integrated with existing AWS services. If you have some experiences
+working with AWS services before, it definitely helps you in the setup and deploy in EKS.
 
-  There are 2 problems to solve: configuring and maintaining.
+There is a [great document][6] for step by steps setting up the EKS cluster.
 
-  For both configuring & maintaining multiple servers, my short answer is to repeat those steps above for each server.
+The IAM roles and policy is quite confusing at first.
 
-  Seriously, there is no other choice. You need to run those steps for each server. However, you don't have to do it
-  manually. By "Document" those steps to an executable code, you can use it to run in each server.
+Use `eksctl` to setup the node group configuration. I don't want to do it manually from the Console UI.
 
-  I used to write the instructions to a bashscript file, which was very exciting that time. There is condition
-  checking to check if it needs to perform installation for specific packages.
+The ENI defines how many pods can run in a node.
+When the nodes is started, at least 2 pods are using to run by default. They are proxy and aws-node daemon.
 
-  After a while, I couldn't maintain the script since it grown too fat. Later on when I tried to find a better way to
-  organize the scripts, I found Ansible. Since then, I only use Ansible to provision servers. There are many automation
-  tools liek Chef, Puppet, SaltStack, Terraform, etc.
+Usually we need to use the persistent storage to store long term data, it means another pod is occupied just right after
+the node is started.
 
-  There are quite countless time I have spent to try to improve my playbook - a term using in Ansible to describe a set
-  of instructions running on a target group of servers.
+Hence around 1 pod left for the small and micro node instance to run your app.
+My suggestion is using `medium` or `large` instance to be able to run more pods.
 
-  After reaching to a level of optimization the playbook, make it more robust in handling edge cases,
-  compatible in several platforms, reusable etc. I was looking for a solution to run it automatically. Yes, I know you
-  already know the name. I use a Continuous Integration tool to run the Ansible Playbook.
+Here is the documment for this constraint: [Amazon Eks AMI][6]
 
-## Servers don't have public IP
+### My setup
 
-  A good practice I found is not to give server a public IP. Keeps the instance in the private network is safer. 
-  Without public IP, there is no room for people to attack your instance. Every traffic needs to go from the
-  LoadBalancer.
+Each service is sitting inside a namespace.
 
-  And how can the server connect to the internet?
+Service can access other namespaces' services. A service can be access by `<service_name>.<namespace>`.
 
-  Without public IP, the instance can't connect to the internet. Such command like `yum install`, `apt-get update` will
-  fail and you stuck.
+My Rails app has those components:
 
-  The cure for that is the NAT Gateway. To make it easy to relate, a NAT Gateway works like the router in your home
-  networks. Not all of your devices need an IP, instead they all use the Router IP to access to internet.
+- Main app
+- API
+- Static Assets
+- Background processes
+- Cache
+- Database
+- Config map and Secret
+- Ingress
 
-  Amazon offers the NAT Gateway service. They also have the NAT Gateway instance, which is an AMI image from the
-  community. You can purchase an EC2 Instance to launch this image. There is some configurations to make it works like
-  the cross network traffic.
+Each component has it own deployment strategy and scaling factor.
 
-  **It seems like amazing. How can I access to the instance?**
+The main app, api, background process are using the same Docker image.
+More than that, the Static asset is used the assets from the main App.
 
-  If you can access to the VPC private network first, then you can access to the instance by its private IP.
+However, things aren't confusing at all.
 
-  Amazon supports a few ways to access to the instance, one of them is the Session manager. The session manager agent is
-  install by default in some instance types includes Amazon Linux and Ubuntu. This Session Manager allows you to connect
-  to the instance using the web console.
+The Build step manages those relationship of building the Docker images and push to ECR.
 
-## Security groups
+While applying Kubernetes manifests, Kubernetes only responses for pulling and firing the deployment with given deployed
+command.
 
-  This replaces the `ufw` or `iptables` nicely.
+As those API, main app, static assets are all stateless component, it can be easily wiped out.
+Cache and Database aren't. They must retain the data even the pod is terminated.
 
-  By adding the inbound and outbound rules for each security group, we can guarantee certain traffic can reach to a
-  component in your system.
+Let's discuss a bit more about the Database setup.
 
-## Teamcity CI
+### From statefulset to Postgres HA cluster
 
-  Teamcity is a powerful CI tool, it provides both opensource version and enterprise version. The open source version
-  allows 3 agents to run and 100 build configurations, which is more than enough in most of the project.
+Statefulset is a sibling of Deployment. Plus it handles the volume template per pod.
 
-  There is offical Docker images for server and agent. That allows you to launch the Teamcity easily.
-  The agent image even supports docker in docker feature, which allows to run a job in a docker container.
+If using empty dir, the pod needs to stick with same node. It means if the pod got killed, new pod must be spawned in
+the same node.
 
-  Compare to other CI, Teamcity has a friendly UI for both running and setting up the pipeline. There are [Kotlin
-  DSL][5] supports, which provides complicated logic included.
+If using EBS volume, the new pod must be spawned in the same subnet node.
 
-## Integrate everything together
+Statefulset is a good candidate for setting up a database and other data store.
 
-  At this point, we have the server and other components hosted by AWS, the instructions for configuring servers are
-  store in Ansible, the Teamcity CI is used to run the deployment.
+However, depending on the statefulset only isn't enough.
+Setting up a database cluster requires more works.
 
-## Shortcomings
+Take Postgres cluster as an example. We needs to config the master and replica nodes.
+Beside that, we want the balancer to redirect traffic to replicas and master.
+Backup and restore is another operation needs to be implemented.
 
-  After launching this system, one of the biggest question I have is how to scale this easily.
+[Pgo][8] is a great tool for that.
 
-  Open new instance and run the playbook on is easy. However, to make this step run automated, the auto scaling group
-  feature is required.
+I have researched few different approaches and from my opinion, this may be the most complete solution.
 
-  The second disadvantage of this setup is the static assets server is coupling with the main app.
+### Ingress
 
-  Each server equals with 1 process. To scale the service, the only way to spin up new server. Actually I'm quite okay
-  with that. It is quite fast to create new instance and deploy the code (together with provisioning).
+Go with Nginx ingress!
 
-  The third one, which is the most unsolveable problem I have with this. There are many manual works involved in this
-  system design. Everytime is done almost from scratch, which is hard to catch up with the business requirements.
+There are many, I have tried the AWS ALB and Nginx ingress.
 
-  Since there are many manual steps, migrating the process requires a huge effort and time.
+The ALB is quite costly because it fires up new AWS load balancer for each ingress.
 
-**That leads me to give Kubernetes a try**
+##### Not good parts of Nginx ingress
 
-**Notes:** I also want to ensure that nothing is perfect. Even Kubernetes serves well in some cases, there are disadvantages
+Only support one TLS certificate. Make sure your cert can be used for all subdomains.
 
+You can purchase SSL cert from AWS, it is painless things everseen.
+
+
+
+*Enjoy reading!*
 
   [1]: https://en.wikipedia.org/wiki/Software_architecture
   [2]: https://www.thegreatcodeadventure.com/deploying-rails-to-digitalocean-the-hard-way/
   [3]: https://www.freedesktop.org/wiki/Software/systemd/
   [4]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/set-time.html
   [5]: https://www.jetbrains.com/help/teamcity/kotlin-dsl.html
+  [6]: https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html
+  [7]: https://github.com/awslabs/amazon-eks-ami/blob/master/files/eni-max-pods.txt
+  [8]: https://github.com/CrunchyData/postgres-operator
