@@ -247,19 +247,19 @@ With this, the staging environment, CI tools, logging and mornitoring can safely
         kubectl apply -f ./dist/app/${stage}/
         
         echo "-- DEBUG: wait for deployments to be finished"
-        for deployment in ${'$'}(kubectl get deployments -n %env.NAMESPACE% -o='name') ; do
-            kubectl rollout status ${'$'}{deployment} -n %env.NAMESPACE% --timeout=%env.K8S_TIMEOUT%
+        for deployment in $(kubectl get deployments -n %env.NAMESPACE% -o='name') ; do
+            kubectl rollout status ${deployment} -n %env.NAMESPACE% --timeout=%env.K8S_TIMEOUT%
         done
         
         echo "-- INFO: Run deployment jobs"
-        pod_name=${'$'}(kubectl get pods --selector=app=app -n %env.NAMESPACE% -o jsonpath="{.items[0].metadata.name}")
+        pod_name=$(kubectl get pods --selector=app=app -n %env.NAMESPACE% -o jsonpath="{.items[0].metadata.name}")
         tasks="bundle exec rails db:migrate"
         if [ -n "%env.AFTER_DEPLOYED_TASKS%" ]; then
-            tasks="${'$'}tasks && %env.AFTER_DEPLOYED_TASKS%"
+            tasks="$tasks && %env.AFTER_DEPLOYED_TASKS%"
         fi
         
-        echo "-- DEBUG: tasks ${'$'}tasks"
-        kubectl exec ${'$'}pod_name -n %env.NAMESPACE% -- bash -c "${'$'}tasks"
+        echo "-- DEBUG: tasks $tasks"
+        kubectl exec $pod_name -n %env.NAMESPACE% -- bash -c "$tasks"
   ```
 
   Hence Helm and other template tool can be skipped. I currently use `envsubst` to template the manifests
