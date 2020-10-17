@@ -177,8 +177,6 @@ Each component has it own deployment strategy and scaling factor.
 The main app, api, background process are using the same Docker image.
 More than that, the Static asset is used the assets from the main App.
 
-However, things aren't confusing at all.
-
 The Build step manages those relationship of building the Docker images and push to ECR.
 
 While applying Kubernetes manifests, Kubernetes only responses for pulling and firing the deployment with given deployed
@@ -186,8 +184,6 @@ command.
 
 As those API, main app, static assets are all stateless component, it can be easily wiped out.
 Cache and Database aren't. They must retain the data even the pod is terminated.
-
-Let's discuss a bit more about the Database setup.
 
 ### From statefulset to Postgres HA cluster
 
@@ -219,15 +215,63 @@ There are many, I have tried the AWS ALB and Nginx ingress.
 
 The ALB is quite costly because it fires up new AWS load balancer for each ingress.
 
-##### Not good parts of Nginx ingress
+Nginx ingress supports only one TLS certificate. Your purchasing cert must be able to use for all subdomains.
 
-Only support one TLS certificate. Make sure your cert can be used for all subdomains.
+You can purchase SSL cert from AWS, it is painless things ever seen.
 
-You can purchase SSL cert from AWS, it is painless things everseen.
+### Not everything need to expose to outside
 
+We may have a lot of services, but some of them are only used in internal, e.g. the logging, monitoring tool, database
+tool, etc. Those tools aren't supposed to be exposed to end users shouldn't be exposed to the end users.
 
+To access them, we can forward the port using the `kubectl port-forward` command.
 
-*Enjoy reading!*
+The `kubefwd` ultility is a great tool that forward all the services to the local machine.
+It works like a VPN to the clusters.
+
+With this, the staging environment, CI tools, logging and mornitoring can safely stay away from the internet.
+
+### Other advices
+
+- If it is the first time you have worked with Kubernetes, focus on those important concepts first.
+- Making change incremental with a lot of small steps. The achievement will be massive. Don't start with a complicated
+  design upfront.
+- Document everything. When you find something takes more time than expected, check out the tutorial and online
+  resources.
+- Bash script is quite useful. You are absolutely able to write some code in bash like below
+
+  ```bash
+
+        echo "-- INFO: Apply manifests"
+        echo "-- DEBUG: apply services' manifests"
+        kubectl apply -f ./dist/app/${stage}/
+        
+        echo "-- DEBUG: wait for deployments to be finished"
+        for deployment in ${'$'}(kubectl get deployments -n %env.NAMESPACE% -o='name') ; do
+            kubectl rollout status ${'$'}{deployment} -n %env.NAMESPACE% --timeout=%env.K8S_TIMEOUT%
+        done
+        
+        echo "-- INFO: Run deployment jobs"
+        pod_name=${'$'}(kubectl get pods --selector=app=app -n %env.NAMESPACE% -o jsonpath="{.items[0].metadata.name}")
+        tasks="bundle exec rails db:migrate"
+        if [ -n "%env.AFTER_DEPLOYED_TASKS%" ]; then
+            tasks="${'$'}tasks && %env.AFTER_DEPLOYED_TASKS%"
+        fi
+        
+        echo "-- DEBUG: tasks ${'$'}tasks"
+        kubectl exec ${'$'}pod_name -n %env.NAMESPACE% -- bash -c "${'$'}tasks"
+  ```
+
+  Hence Helm and other template tool can be skipped. I currently use `envsubst` to template the manifests
+
+- Setup an EFK (Elastic Search, Fluentd, Kibana) to monitor the cluster. Instead of using the container insight service,
+  set it up yourself is quite good for your own learning and cost effective.
+
+- Always config the minimum resources for each deployment.
+
+That's all I got for this post.
+
+Til next time. Take care!
 
   [1]: https://en.wikipedia.org/wiki/Software_architecture
   [2]: https://www.thegreatcodeadventure.com/deploying-rails-to-digitalocean-the-hard-way/
