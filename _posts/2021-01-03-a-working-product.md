@@ -18,9 +18,9 @@ Hence I want to write a notes for myself and for everyone who reaches to my blog
 
 I have wondered a lot of what makes a product successful.
 
-Nowadays there are many product that failed from the execution phrase, some products failed in even earlier phrases.
+Nowadays there are many product that failed from the execution phase, some products failed in even earlier phases.
 
-The early it fails, the least damage it does.
+The earlier it fails, the less damage it does.
 
 2 things to consider while building the product: realize and accept failure and move on, adjust the goal quickly and
 turn the direction.
