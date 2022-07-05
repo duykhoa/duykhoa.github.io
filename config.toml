@@ -1,0 +1,8 @@
+baseURL = 'http://example.org/'
+languageCode = 'en-us'
+title = 'Kevin Tran'
+theme = 'sk1'
+
+[Params]
+mainSections = "posts"
+subtitle = "Blog"
