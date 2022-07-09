@@ -1,8 +1,11 @@
 baseURL = 'https://duykhoa.github.io'
 languageCode = 'en-us'
 title = 'Kevin Tran'
-theme = 'sk1'
+theme = 'mini'
+disqusShortname = "duykhoa12t"
 
 [Params]
 mainSections = "posts"
 subtitle = "Blog"
+showToc = true
+enableComments = true

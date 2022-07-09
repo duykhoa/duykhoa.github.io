@@ -4,8 +4,6 @@ date: 2022-06-07T09:55:09-04:00
 draft: false
 ---
 
-## Intro
-
 Nowadays, there are a variety of choices to deploy a website. Developers could choose a container service like Heroku, or go with the most trendy infrastructure of choice with Kubernetes, or use the Serverless strategy to run the website without the need of setting up the server by their own.
 However, configuring a web server is no longer a rocket surgery with the modern Devops technologies and the revolution of the Cloud providers. This post explores in details a simple infrastructure setup with Amazon infrastructure using Terraform, Ansible and Jenkins.
 This is a real usecase that fits to a certain software project, therefore it requires some consideration before implementing this setup in another organization.
