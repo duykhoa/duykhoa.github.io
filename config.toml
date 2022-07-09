@@ -1,11 +1,11 @@
-baseURL = 'https://duykhoa.github.io'
+baseURL = 'https://duykhoa.github.io/'
 languageCode = 'en-us'
 title = 'Kevin Tran'
 theme = 'mini'
-disqusShortname = "duykhoa12t"
+disqusShortname = 'https-duykhoa-github-io-1'
 
 [Params]
-mainSections = "posts"
-subtitle = "Blog"
+mainSections = 'posts'
+subtitle = 'Blog'
 showToc = true
 enableComments = true
