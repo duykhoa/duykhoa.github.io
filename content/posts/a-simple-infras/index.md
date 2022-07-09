@@ -103,7 +103,10 @@ test_running_files:
 
 As the code shows how complicated the test running could be, Ansible is clearly a better choice to build the script due to its extendability. Each application config could override the test_running_files list if necessary.
 
+## All the logs go
+
+To manage several applications with the minimum resources, we need a logging tool where we can locate the problem. Finding the right log entry across multiple apps could be a challenge, however, the first step is to set it up. Amazon offers the OpenSearch service, which were susprisingly easy to bootstrap and integrate. It is clearly that we would go with an external logging service as we don't have to maintain the infrastructure to run the logging stack on, because the effort to maintain the server is a big concern for a small team.
+
 ## Conclusion
 
-The post covers a few technologies together, hence it couldn't deep dive into each technology in details. The main idea is to bring an idea of how to design and build the infrastructure using these basic tools.
-We could get our hands dirty in the future posts with more deeper details in using these tools.
+The post covers a few technologies together, and it couldn't deep dive into each technology in details, instead the post makes its attempt to demonstrate the possibility of designing and building the infrastructure using these basic tools with the minimum resource and effort. More details about the implementation of each technology will be discussed in the future posts. Thanks for reading!
