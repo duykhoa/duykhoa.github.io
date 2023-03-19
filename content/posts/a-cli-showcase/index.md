@@ -1,5 +1,5 @@
 ---
-title: "A specific project command line tool"
+title: "A project specific command-line"
 date: 2023-02-28T22:59:40-05:00
 ---
 
