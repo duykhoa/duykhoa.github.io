@@ -1,6 +1,9 @@
 ---
 title: "A project specific command-line"
 date: 2023-02-28T22:59:40-05:00
+tags:
+  - developer-experience
+  - devops
 ---
 
 We have a Nodejs monorepo project that is the place where we develop the code of all applications.
