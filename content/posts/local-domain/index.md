@@ -142,7 +142,7 @@ Noted that we don't have to import the cert for the local domain name.
 
 # Config the proxy
 
-We can configure the SSL cert for the website from the proxy level instead of the app server. However, if you prefer to configure the cert from the app, please skip this secion.
+We can configure the SSL cert for the website from the proxy level instead of the app server. However, if you prefer to configure the cert from the app, please skip this section.
 
 I prefer to use Nginx for the proxy because it is easy to setup and the document is excellent.
 
@@ -206,7 +206,7 @@ server {
 
 With Nginx, we can setup complicated routing rule to for the website traffic and configure the SSL without hassle.
 
-A pro tips: If nginx is installed through **brew**, we can use the **brew services** to make it starting automatically when the laptop is boosted.
+A pro tips: If nginx is installed through **brew**, we can use the **brew services** to make it starting automatically when the laptop is boot.
 
 # Recap
 
