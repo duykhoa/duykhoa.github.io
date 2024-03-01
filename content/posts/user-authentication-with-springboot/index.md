@@ -14,16 +14,7 @@ In Spring Boot, there is no plug-and-play like other frameworks. To get the user
 
 # Overview design
 
-## Authentication architecture
-
-![spring-security-authentication-design.png](spring-security-authentication-design.png)
-
-*source from [SpringIO](https://docs.spring.io/spring-security/reference/servlet/authentication/architecture.html)*
-
-After a request is sent to a Spring application, the `SecurityContext` is created and passed through the entire authentication flow.
-The `Authentication` represents the authenticated user, it includes: `principal`, `credentials` and `authorities`. Usually, the principal is an `UserDetails` object, which holds the user information, credentials is responsible for the user password, and authorities take care of `scopes` and `roles` list assigned to the user.
-
-## Filter chains
+## Servlet Filter chains
 
 ![filterchain.png](filterchain.png)
 
@@ -54,7 +45,7 @@ public class SecurityConfig {
 
 With this security configuration, the application permits unrestricted access to the "/demo/default" path, while other paths require basic authentication. By specifying `httpBasic` configuration, it expects the `Authorization` header alongside the Basic authentication strategy, adhering to the format `Basic xxxxx`. 
 
-## UserDetailsService
+## Create custom implementation of UserDetailsService interface
 
 This service is the core service to load the user information, this has an abstract method to load the user by username (`loadUserByUsername`). The service is a dependency of `DaoAuthenticationProvider`, which handles the authentication logic.
 
@@ -62,7 +53,7 @@ This service is the core service to load the user information, this has an abstr
 
 The [Spring documentation](https://docs.spring.io/spring-security/reference/servlet/authentication/passwords/dao-authentication-provider.html) provides a detailed explanation of how these components are interconnected to execute the authentication logic using username and password.
 
-By implementing the UserDetailsService, we can specify how SpringSecurity will fetch the user information from the local Postgres database.
+By implementing the UserDetailsService, we can specify how SpringSecurity will fetch the user information from the local database.
 
 ```java
 @Service
@@ -365,3 +356,6 @@ This `hasAnyAuthorityName` invokes a utility function `getRoleWithDefaultPrefix`
 # Conclusion
 
 This post is a short tutorial of how to connect the SpringSecurity with the local database credentials provider to authenticate and authorize the request. Through this post, my aim is to guide you how to navigate the SpringSecurity source code using debugger tool, which I believe is an invaluable method for gaining a deeper understanding of its design. By grasping the intricacies of its structure, not only does development become more streamlined, but troubleshooting also becomes significantly more efficient.
+The example repository can be found in [Github](https://github.com/duykhoa/sec).
+
+Thanks for reading!
