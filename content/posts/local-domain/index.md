@@ -4,6 +4,9 @@ date: 2023-04-18T22:51:16-04:00
 tags:
   - devops 
 ---
+This is a post about setting up the local domain and SSL certs for testing purpose.
+
+<!--more-->
 
 # Objective
 

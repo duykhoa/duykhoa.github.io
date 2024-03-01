@@ -1,11 +1,14 @@
 baseURL = 'https://duykhoa.github.io/'
 languageCode = 'en-us'
-title = "Kevin Blog: A Developer's Journey through Web Technologies"
+title = "Kevin's Blog"
 theme = 'mini'
 disqusShortname = 'https-duykhoa-github-io-1'
 
 [Params]
 mainSections = 'posts'
-subtitle = 'Blog'
 showToc = false
 enableComments = true
+customCSS = ['/css/custom.css']
+bio = "A Developer's Journey through Web Technologies"
+author = 'Kevin Tran'
+showPowerBy = false

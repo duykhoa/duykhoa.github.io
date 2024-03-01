@@ -5,6 +5,9 @@ tags:
   - developer-experience
   - devops
 ---
+Build a commandline tool that helps bootstrap the project
+
+<!--more-->
 
 We have a Nodejs monorepo project that is the place where we develop the code of all applications.
 The inspiration behind using monorepo is focusing on improving developer productivity.

@@ -6,6 +6,9 @@ tags:
   - email
   - web development
 ---
+This post explains in detailed how to track email sending activities using SNS HTTPs endpoint.
+
+<!--more-->
 
 # Introduction
 

@@ -6,7 +6,9 @@ tags:
   - springboot
   - springsecurity
 ---
-This post is a short tutorial of how to configure the spring security for your app to support user authentication using local database.
+
+This post explains how to configure the spring security for your app to support user authentication using local database.
+<!--more-->
 
 # Introduction
 
