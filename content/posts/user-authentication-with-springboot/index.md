@@ -316,10 +316,13 @@ Both classes mentioned here are located under SpringSecurity library, you can fi
 
 When sending the request from the `http request` above, the debugger stops at the `DaoAuthenticationProvider#retrieveUser`.
 Since the `UserDetailsService` is a dependency of `DaoAuthenticationProvider`, we can check if our implementation for the `CustomUserDetailsService#loadUserByUsername` works correctly.
-
 ![debugLoadedUser.png](debugLoadedUser.png)
 
-This screenshot shows a lot of useful information, for example the data type of the `principal`, `credential`, etc. which helps us to understand SpringSecurity better. We also see the `UserDetailsServices` has been used in the `DaoAuthenticationProvider` and it returns the `loadedUser` in type `UserDetailsImpl` correctly from the database.
+This screenshot shows a lot of useful information, for example the data type of the `principal`, `credential`, etc. which helps us to understand SpringSecurity better. 
+
+![spring-security-authentication-design.png](spring-security-authentication-design.png)
+
+We also see the `UserDetailsServices` has been used in the `DaoAuthenticationProvider` and it returns the `loadedUser` in type `UserDetailsImpl` correctly from the database.
 
 And this screenshot shows how the `hasRole` annotation works, this annotation is used in the controller to check if the principal has sufficient authority to access the endpoint.
 
