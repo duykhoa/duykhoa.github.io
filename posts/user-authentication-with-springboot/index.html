@@ -188,47 +188,47 @@ After the account is found, the service builds the authorities list by looking a
 </span></span><span style=display:flex><span>            .<span style=color:#a6e22e>build</span>();
 </span></span><span style=display:flex><span>    <span style=color:#75715e>//...</span>
 </span></span><span style=display:flex><span>    accountRepository.<span style=color:#a6e22e>saveAll</span>(accounts);
-</span></span></code></pre></div><h2 id=running-the-app>Running the app <a href=#running-the-app class=anchor>🔗</a></h2><p>First, we can run the app in the <code>Run</code> mode, and use the <code>http.request</code> collection to test each endpoint (ensure to run the &ldquo;/superadmin/run-me-first&rdquo; first).</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-http data-lang=http><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>### Run this request first to setup testing data
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>POST {{ apiUrl }}/demo/superadmin/run-me-first
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>Authorization: {{ authorization_token }}
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>Accept: application/json
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>Content-Type: application/json
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>### /admin/dashboard returns 200
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>GET {{ apiUrl }}/demo/admin/dashboard
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>Authorization: Basic superadmin@email.com password
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>Accept: application/json
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>Content-Type: application/json
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>### /user/dashboard returns 200
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>GET {{ apiUrl }}/demo/user/dashboard
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>Authorization: Basic user@email.com password
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>Accept: application/json
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>Content-Type: application/json
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>### /user/dashboard with multi roles 1 returns 200
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>GET {{ apiUrl }}/demo/admin/dashboard
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>Authorization: Basic multiroles1@email.com password
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>Accept: application/json
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>Content-Type: application/json
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>### /user/dashboard with multi roles 1 result 403
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>GET {{ apiUrl }}/demo/superadmin/dashboard
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>Authorization: Basic multiroles1@email.com password
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>Accept: application/json
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>Content-Type: application/json
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>### /user/dashboard with multi roles 2
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>GET {{ apiUrl }}/demo/user/dashboard
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>Authorization: Basic multiroles2@email.com password
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>Accept: application/json
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>Content-Type: application/json
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>### /default no authorization required
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>GET {{ apiUrl }}/demo/default
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>Accept: application/json
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>Content-Type: application/json
-</span></span></span></code></pre></div><p>After that, we could run the app in debugger mode, here are my breakpoints for your preferences</p><ul><li><code>DaoAuthenticationProvider</code>, function <code>retrieveUser</code> and <code>additionalAuthenticationChecks</code></li><li><code>SecurityExpressionRoot</code>, function <code>hasRole</code> and <code>hasAnyAuthorityName</code></li></ul><p>Both classes mentioned here are located under SpringSecurity library, you can find them in the external libraries section, the path is <code>org/springframework/security/authentication/dao/DaoAuthenticationProvider.class</code>.</p><p>When sending the request from the <code>http request</code> above, the debugger stops at the <code>DaoAuthenticationProvider#retrieveUser</code>.
+</span></span></code></pre></div><h2 id=running-the-app>Running the app <a href=#running-the-app class=anchor>🔗</a></h2><p>First, we can run the app in the <code>Run</code> mode, and use the <code>http.request</code> collection to test each endpoint (ensure to run the &ldquo;/superadmin/run-me-first&rdquo; first).</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>### Run this request first to setup testing data
+</span></span><span style=display:flex><span>POST {{ apiUrl }}/demo/superadmin/run-me-first
+</span></span><span style=display:flex><span>Authorization: {{ authorization_token }}
+</span></span><span style=display:flex><span>Accept: application/json
+</span></span><span style=display:flex><span>Content-Type: application/json
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>### /admin/dashboard returns 200
+</span></span><span style=display:flex><span>GET {{ apiUrl }}/demo/admin/dashboard
+</span></span><span style=display:flex><span>Authorization: Basic superadmin@email.com password
+</span></span><span style=display:flex><span>Accept: application/json
+</span></span><span style=display:flex><span>Content-Type: application/json
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>### /user/dashboard returns 200
+</span></span><span style=display:flex><span>GET {{ apiUrl }}/demo/user/dashboard
+</span></span><span style=display:flex><span>Authorization: Basic user@email.com password
+</span></span><span style=display:flex><span>Accept: application/json
+</span></span><span style=display:flex><span>Content-Type: application/json
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>### /user/dashboard with multi roles 1 returns 200
+</span></span><span style=display:flex><span>GET {{ apiUrl }}/demo/admin/dashboard
+</span></span><span style=display:flex><span>Authorization: Basic multiroles1@email.com password
+</span></span><span style=display:flex><span>Accept: application/json
+</span></span><span style=display:flex><span>Content-Type: application/json
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>### /user/dashboard with multi roles 1 result 403
+</span></span><span style=display:flex><span>GET {{ apiUrl }}/demo/superadmin/dashboard
+</span></span><span style=display:flex><span>Authorization: Basic multiroles1@email.com password
+</span></span><span style=display:flex><span>Accept: application/json
+</span></span><span style=display:flex><span>Content-Type: application/json
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>### /user/dashboard with multi roles 2
+</span></span><span style=display:flex><span>GET {{ apiUrl }}/demo/user/dashboard
+</span></span><span style=display:flex><span>Authorization: Basic multiroles2@email.com password
+</span></span><span style=display:flex><span>Accept: application/json
+</span></span><span style=display:flex><span>Content-Type: application/json
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>### /default no authorization required
+</span></span><span style=display:flex><span>GET {{ apiUrl }}/demo/default
+</span></span><span style=display:flex><span>Accept: application/json
+</span></span><span style=display:flex><span>Content-Type: application/json
+</span></span></code></pre></div><p>After that, we could run the app in debugger mode, here are my breakpoints for your preferences</p><ul><li><code>DaoAuthenticationProvider</code>, function <code>retrieveUser</code> and <code>additionalAuthenticationChecks</code></li><li><code>SecurityExpressionRoot</code>, function <code>hasRole</code> and <code>hasAnyAuthorityName</code></li></ul><p>Both classes mentioned here are located under SpringSecurity library, you can find them in the external libraries section, the path is <code>org/springframework/security/authentication/dao/DaoAuthenticationProvider.class</code>.</p><p>When sending the request from the <code>http request</code> above, the debugger stops at the <code>DaoAuthenticationProvider#retrieveUser</code>.
 Since the <code>UserDetailsService</code> is a dependency of <code>DaoAuthenticationProvider</code>, we can check if our implementation for the <code>CustomUserDetailsService#loadUserByUsername</code> works correctly.<p class=markdown-image><img src=debugLoadedUser.png alt=debugLoadedUser.png></p></p><p>This screenshot shows a lot of useful information, for example the data type of the <code>principal</code>, <code>credential</code>, etc. which helps us to understand SpringSecurity better.</p><p><p class=markdown-image><img src=spring-security-authentication-design.png alt=spring-security-authentication-design.png></p></p><p>We also see the <code>UserDetailsServices</code> has been used in the <code>DaoAuthenticationProvider</code> and it returns the <code>loadedUser</code> in type <code>UserDetailsImpl</code> correctly from the database.</p><p>And this screenshot shows how the <code>hasRole</code> annotation works, this annotation is used in the controller to check if the principal has sufficient authority to access the endpoint.</p><p><p class=markdown-image><img src=debugHasRole.png alt=debugHasRole.png></p></p><p>The code for the <code>hasRole</code> function is implemented in SpringSecurity as following:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#a6e22e>@Override</span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>boolean</span> <span style=color:#a6e22e>hasRole</span>(String role) {
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> hasAnyRole(role);
