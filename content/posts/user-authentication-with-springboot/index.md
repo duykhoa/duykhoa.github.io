@@ -265,7 +265,7 @@ As mentioned earlier, an account could have multiple roles, the `setupTestDataUs
 
 First, we can run the app in the `Run` mode, and use the `http.request` collection to test each endpoint (ensure to run the "/superadmin/run-me-first" first).
 
-```http request
+```text
 ### Run this request first to setup testing data
 POST {{ apiUrl }}/demo/superadmin/run-me-first
 Authorization: {{ authorization_token }}
