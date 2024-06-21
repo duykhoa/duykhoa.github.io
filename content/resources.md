@@ -31,4 +31,5 @@ The format I am using is
 1. [Buf connect][go|grpc][[buf blog](https://buf.build/blog/connect-a-better-grpc)]
     
     This blog post explain why buf-connect is a better framework compare to Google gRPC implementation
+1. [Segment tree][cp][[cp-algo](https://www.geeksforgeeks.org/segment-tree-data-structure/)|[cp-algo](https://cp-algorithms.com/data_structures/segment_tree.html)|[cses][https://cses.fi/problemset/task/1143/]]
 # OPEN SOURCES
