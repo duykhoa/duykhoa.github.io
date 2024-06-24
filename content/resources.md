@@ -33,3 +33,12 @@ The format I am using is
     This blog post explain why buf-connect is a better framework compare to Google gRPC implementation
 1. [Segment tree][cp][[cp-algo](https://www.geeksforgeeks.org/segment-tree-data-structure/)|[cp-algo](https://cp-algorithms.com/data_structures/segment_tree.html)|[cses][https://cses.fi/problemset/task/1143/]]
 # OPEN SOURCES
+
+# Blogs
+
+The list doesn't include general tech news (InfoQ, the new web, tech explore, wired, etc.)
+
+- [hackernews](https://news.ycombinator.com) and [hnalgolia](https://hn.algolia.com)
+- [I Will Fucking Piledrive You If You Mention AI Again](https://ludic.mataroa.blog/blog/i-will-fucking-piledrive-you-if-you-mention-ai-again/)
+- [Sequence diagrams, the only good thing UML brought to software development](https://www.mermaidchart.com/blog/posts/sequence-diagrams-the-good-thing-uml-brought-to-software-development) This works for me, not sure if it works for everyone, but lately I have used sequence diagram intensively
+- 
