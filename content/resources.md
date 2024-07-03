@@ -35,6 +35,7 @@ The format I am using is
 # OPEN SOURCES
 
 # Blogs
+1. [Code review tips][codereview][[google eng practice](https://google.github.io/eng-practices/review/reviewer/)|[code reviewer fall in love](https://mtlynch.io/code-review-love/)|[redhat dev blog](https://developers.redhat.com/blog/2019/07/08/10-tips-for-reviewing-code-you-dont-like)]
 
 The list doesn't include general tech news (InfoQ, the new web, tech explore, wired, etc.)
 
