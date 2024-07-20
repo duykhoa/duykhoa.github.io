@@ -32,8 +32,9 @@ The format I am using is
     
     This blog post explain why buf-connect is a better framework compare to Google gRPC implementation
 1. [Segment tree][cp][[cp-algo](https://www.geeksforgeeks.org/segment-tree-data-structure/)|[cp-algo](https://cp-algorithms.com/data_structures/segment_tree.html)|[cses][https://cses.fi/problemset/task/1143/]]
+# Tips
+1. [java use equals instead of == when comparing integers][java][[stackoverflow](https://stackoverflow.com/questions/3637936/java-integer-equals-vs)]
 # OPEN SOURCES
-
 # Blogs
 1. [Code review tips][codereview][[google eng practice](https://google.github.io/eng-practices/review/reviewer/)|[code reviewer fall in love](https://mtlynch.io/code-review-love/)|[redhat dev blog](https://developers.redhat.com/blog/2019/07/08/10-tips-for-reviewing-code-you-dont-like)]
 
