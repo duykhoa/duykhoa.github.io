@@ -22,6 +22,7 @@ The format I am using is
 
 # PROGRAMING
 1. [Sparse Table][cp][[wikipedia](https://en.wikipedia.org/wiki/Sparse_matrix?useskin=vector)|[cp-algo](https://cp-algorithms.com/data_structures/sparse-table.html)]
+2. [Algomonster][algo][[url](https://algo.monster/liteproblems/31)]
 
     A memoir technique to answer a range of queries without recalculating the result per query, using 2d array matrix.
 1. [Disjoint set][cp][[cp-algo](https://cp-algorithms.com/data_structures/disjoint_set_union.html)]
