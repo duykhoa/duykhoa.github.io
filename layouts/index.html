@@ -1,5 +1,4 @@
 {{ define "main" }}
-{{ partial "profile.html" . }}
 
 <div id="list-page">
     {{ $pages := where .Site.RegularPages ".Params.unlisted" "!=" "true" }}
