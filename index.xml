@@ -113,8 +113,6 @@ To provide a clear picture, here is a pattern I am using when defind the command
 
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#a6e22e">baseHandler</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">createArticleHandler</span>{}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">createArticleHandler</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">DecorateCommand</span>(<span style="color:#a6e22e">baseHandler</span>, <span style="color:#a6e22e">zerolog</span>.<span style="color:#a6e22e">New</span>(<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">StdErr</span>))
-</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">DecorateCommand</span>[<span style="color:#a6e22e">H</span> <span style="color:#a6e22e">any</span>](<span style="color:#a6e22e">handler</span> <span style="color:#a6e22e">CommandHandler</span>[<span style="color:#a6e22e">H</span>], <span style="color:#a6e22e">logger</span>: <span style="color:#a6e22e">logger</span>) {
 </span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">commandLogging</span> {
 </span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">base</span>:   <span style="color:#a6e22e">handler</span>,
@@ -145,7 +143,26 @@ To provide a clear picture, here is a pattern I am using when defind the command
 </span></span><span style="display:flex;"><span>	}()
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">base</span>.<span style="color:#a6e22e">Handle</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">cmd</span>)
-</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>This setup adheres to the <strong>open for extension, closed for modification</strong> principle, enabling the addition of logging functionality without altering the <code>createArticleHandler</code> function directly.</p>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>The <code>commandLogging</code> produces the logs when running the command handler. It adds a log entry before calling the handler <code>Handle</code> function, and depending on the Handle function&rsquo;s result, it will produce success or failure log entry. The <code>commandLogging</code> also implements the <code>CommandHandler</code> interface, the consumer doesn&rsquo;t require to change.</p>
+<p>Let&rsquo;s assume the application expects the <code>GetArticleHandler</code> as a dependency, the application could be initialized as follow</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span>	<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewApplication</span>(<span style="color:#a6e22e">cmdHandler</span> <span style="color:#a6e22e">GetArticleHandler</span>) <span style="color:#a6e22e">Application</span> {<span style="color:#f92672">...</span>}
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">cmdHandler</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">createArticleHandler</span>{}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">app</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">NewApplication</span>(<span style="color:#a6e22e">cmdHandler</span>)</span></span></code></pre></div><p>Using the <code>DecorateCommand</code> function to add the logging functionality, the code is changed to</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span>	<span style="color:#a6e22e">wrappedHandler</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">DecorateCommand</span>(<span style="color:#a6e22e">baseHandler</span>, <span style="color:#a6e22e">zerolog</span>.<span style="color:#a6e22e">New</span>(<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">StdErr</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">app</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">NewApplication</span>(<span style="color:#a6e22e">cmdHandler</span>)</span></span></code></pre></div><p>The application layer remains unaffected by the wrapped GetArticleHandler. The app&rsquo;s behavior remains unchanged, requiring no modifications to implement this setup.</p>
+<p>This setup adheres to the <strong>open for extension, closed for modification</strong> principle, enabling the addition of logging functionality without altering the <code>createArticleHandler</code> function directly.</p>
 <p>The DecorateCommand function applies the decorators, wrapping the original handler with a commandLogging struct.
 This allows for the application of multiple decorators to the original handler, each providing additional functionalities while keeping the original handler agnostic to these modifications.</p>
 <h2 id="recap">Recap</h2>
