@@ -1,1 +1,74 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Developer-Experience on Kevin's Blog</title><link>https://duykhoa.github.io/tags/developer-experience/</link><description>Recent content in Developer-Experience on Kevin's Blog</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Tue, 28 Feb 2023 22:59:40 -0500</lastBuildDate><atom:link href="https://duykhoa.github.io/tags/developer-experience/index.xml" rel="self" type="application/rss+xml"/><item><title>A project specific command-line</title><link>https://duykhoa.github.io/posts/a-cli-showcase/</link><pubDate>Tue, 28 Feb 2023 22:59:40 -0500</pubDate><guid>https://duykhoa.github.io/posts/a-cli-showcase/</guid><description>&lt;p>Build a commandline tool that helps bootstrap the project&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Developer-Experience on Kevin's Blog</title><link>https://duykhoa.github.io/tags/developer-experience/</link><description>Recent content in Developer-Experience on Kevin's Blog</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>duykhoa12t[at]gmail[dot]com (Kevin Tran)</managingEditor><webMaster>duykhoa12t[at]gmail[dot]com (Kevin Tran)</webMaster><copyright>Kevin Tran</copyright><lastBuildDate>Tue, 28 Feb 2023 22:59:40 -0500</lastBuildDate><atom:link href="https://duykhoa.github.io/tags/developer-experience/index.xml" rel="self" type="application/rss+xml"/><item><title>A project specific command-line</title><link>https://duykhoa.github.io/posts/a-cli-showcase/</link><pubDate>Tue, 28 Feb 2023 22:59:40 -0500</pubDate><author>duykhoa12t[at]gmail[dot]com (Kevin Tran)</author><guid>https://duykhoa.github.io/posts/a-cli-showcase/</guid><description>&lt;p>Build a commandline tool that helps bootstrap the project&lt;/p></description><content:encoded><![CDATA[<p>Build a commandline tool that helps bootstrap the project</p>
+<p>We have a Nodejs monorepo project that is the place where we develop the code of all applications.
+The inspiration behind using monorepo is focusing on improving developer productivity.
+Having our own commandline is an idea to further enhance the productivity by providing a simpler way to develop the code.</p>
+<p>In this post, we will walk through the use cases of the tool and how does it help the team.</p>
+<h1 id="usecases">Usecases</h1>
+<h1 id="running-the-app">Running the app</h1>
+<p>As a typical NodeJS project, the common scripts is defined in the <code>package.json</code> file. By typing <code>npm start -- &lt;app_name&gt;</code>, the actual command to run the app web server is executed, and the app is up.
+A web application usually requires some components like database, cache service. By using the npm script alone, the developer has to ensure the dependent services are available for the app to run.
+This isn&rsquo;t always straightforward task depends on the software&rsquo;s installation and configuration complexity.
+Once in a while, developer may face the issue where the <a href="https://stackoverflow.com/questions/36436120/fatal-error-lock-file-postmaster-pid-already-exists">database software couldn&rsquo;t start</a>.
+Spending time on configuring and troubleshooting the software issue significantly affects to the productivity, and the effects could multiply if more than one developers having the issue.</p>
+<p>That&rsquo;s why Docker has been used in our setup to minimize the cost of setting up these dependency softwares. A docker-compose configuration file is added under each application sourcecode in the monorepo,
+which defines the software services required and how they are interacted.</p>
+<p>By calling the same docker-compose command across each application, the developer is able to skip completely the dependencies setup effort, instead jumping into exploring the project and implement the requirement. Of course, as you may think, the command to run the app in docker could be a bit complicated like below</p>
+
+
+
+
+
+<pre tabindex="0"><code>  docker-compose up -d --project-directory ./ --project-name &lt;project_name&gt; --file &lt;path-to-project-docker-compose-file&gt;</code></pre><p>Similar to that, the log command is</p>
+
+
+
+
+
+<pre tabindex="0"><code>  docker-compose logs &lt;service_name&gt; -d --project-directory ./ --project-name &lt;project_name&gt; --file &lt;path-to-project-docker-compose-file&gt;</code></pre><p>In practice, before the app could be run, developers may need to perform some installation tasks. For example, most of the NodeJS applications are built from open source dependencies, hence developers have to run the node package manager to install these dependencies. Other than that, the dependencies&rsquo; services must be ready to proceed with the incoming requests. Without some utility script to check if the services&rsquo; ports are open, developer have to check the services&rsquo; statuses or retry after a couple of seconds.</p>
+<p>With a custom command line solution, these tasks can be handled by the command line. In our project, the only command developer have to type in the terminal is:</p>
+
+
+
+
+
+<pre tabindex="0"><code>  iae serve -a &lt;app_name&gt;</code></pre><p><em>iae</em>: it is my company abbreviation name</p>
+<p>This command takes care of how to run the Docker script, check the dependencies service, install the dependencies and run the app server.
+The restart, stop commands are similar: <code>iae restart -a &lt;app_name&gt;</code>. For logging, <code>iae log -a &lt;app_name&gt;</code> is the log command.</p>
+<h2 id="running-the-test-suite">Running the test suite</h2>
+<p>Typically, there are several kinds of tests in a software project: unit test, integration test, end to end (E2E) test.
+The unit tests aren&rsquo;t required any dependencies&rsquo; services to executed (this statement is based on the best practice of writing test), other types may require some service to run like the database. To support running different kind of tests, the command line tool makes use of Docker and the corresponding test configuration.</p>
+
+
+
+
+
+<pre tabindex="0"><code>  iae test unit|integration|e2e -a &lt;app_name&gt;</code></pre><p>Similar to the command to run the app, there is a utility script to run the test suites after the services&rsquo; ports are open. Each kind of test uses a different configuration file. Our project uses jest, so it has a separate jest configuration for unit test, integration test, and e2e test. To boost the test performance, we use <a href="https://github.com/swc-project/swc">swc</a> instead of <strong>ts-jest</strong> for compiling typescript when running the unit test.</p>
+<p>Once in a while, developer may want to perform all kinds of test in the development machine, instead of typing each test command, the command line has a single command.</p>
+
+
+
+
+
+<pre tabindex="0"><code>  iae ci -a &lt;app_name&gt;</code></pre><h2 id="code-generator">Code generator</h2>
+<p>Our project uses multiple tools that require code generator such as migration files, GRPC proto file, GraphQL Schema file, etc.
+To minimize the learning curve, the command line tools wrap all of these commands from different tools into a simple interface.</p>
+
+
+
+
+
+<pre tabindex="0"><code>  iae protoc gen -a &lt;app_name&gt; -m &lt;module_name&gt; -f &lt;file_path&gt;</code></pre>
+
+
+
+
+<pre tabindex="0"><code>  iae graphql gen -a &lt;app_name&gt; -m &lt;module_name&gt;</code></pre>
+
+
+
+
+<pre tabindex="0"><code>  iae migration gen -a &lt;app_name&gt; -n &lt;migration_name&gt;
+
+  iae migration run -a &lt;app_name&gt;
+  iae migration revert -a &lt;app_name&gt;</code></pre><h1 id="conclusion">Conclusion</h1>
+<p>This post describes some usages of a project specific in supporting development flow. It helps to remove the needs of learning and remembering each commands, as well as knowing what functionalities the project requires during the development stage. I hope this could inspire you to build own tool, please let me know if this post helps.</p>]]></content:encoded></item></channel></rss>

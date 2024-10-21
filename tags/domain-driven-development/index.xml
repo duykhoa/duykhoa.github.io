@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Domain Driven Development on Kevin's Blog</title><link>https://duykhoa.github.io/tags/domain-driven-development/</link><description>Recent content in Domain Driven Development on Kevin's Blog</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>duykhoa12t[at]gmail[dot]com (Kevin Tran)</managingEditor><webMaster>duykhoa12t[at]gmail[dot]com (Kevin Tran)</webMaster><copyright>Kevin Tran</copyright><lastBuildDate>Mon, 14 Oct 2024 15:59:15 -0400</lastBuildDate><atom:link href="https://duykhoa.github.io/tags/domain-driven-development/index.xml" rel="self" type="application/rss+xml"/><item><title>Command Query in Go Project</title><link>https://duykhoa.github.io/posts/command-query-in-go-project/</link><pubDate>Mon, 14 Oct 2024 15:59:15 -0400</pubDate><author>duykhoa12t[at]gmail[dot]com (Kevin Tran)</author><guid>https://duykhoa.github.io/posts/command-query-in-go-project/</guid><description>&lt;p>In Model-View-Controller applications, a common practice is to introduce service objects to encapsulate business logic and manage the interaction to external systems. While service objects are useful abstraction, further structuring them could improve the code organization and maintainability.&lt;/p>
+&lt;p>Command Query Separation (CQS) is a design pattern principle that defines the incoming request handler type, which is either modify the application state - commands, or retrieving data without any side effect - queries. By applying CQS to service objects, we can create clean interface. This blog post will explore further the benefits of CQS and how to create command and query objects in existing application.&lt;/p></description><content:encoded><![CDATA[<p>In Model-View-Controller applications, a common practice is to introduce service objects to encapsulate business logic and manage the interaction to external systems. While service objects are useful abstraction, further structuring them could improve the code organization and maintainability.</p>
+<p>Command Query Separation (CQS) is a design pattern principle that defines the incoming request handler type, which is either modify the application state - commands, or retrieving data without any side effect - queries. By applying CQS to service objects, we can create clean interface. This blog post will explore further the benefits of CQS and how to create command and query objects in existing application.</p>
+<h2 id="service-objects-challenges">Service Object&rsquo;s challenges</h2>
+<p>When using service objects, the application architecture is structured as follows</p>
+<p><img src="./service.png" alt="services"></p>
+<p>Anything could be thrown to the service layer, which is a good convenience at first. When the project grows, the service layer also grows and become complicated to maintain. Take a look at this services diagram</p>
+<p><img src="./services%20dependencies.png" alt="services dependencies"></p>
+<p>The service layer can quickly become bloated since any type of business logic can be encapsulated within. When start working on a new feature, developers often plan to create new service object if no existing service. The more features developed, the higher number of service objects added, which makes the system more complex and difficult to maintain.</p>
+<p>In addition, service objects can introduce dependencies on one another, creating a tangled relationship between services. This adds more difficulty to understand and modify, as changes one service may have unintended consequences to others.</p>
+<p>An effort could be made to unify the service&rsquo;s interfaces, however, this is going to be a challenging task that developers may overlook. A standardized interface is introduced early in the project, it may become technical debt that is abandoned when the requirements are evolved.</p>
+<h2 id="command-query-separation">Command Query Separation</h2>
+<p>To improve maintainability, testability and code readability, the service object could be categorized either as command object, which modifies the application&rsquo;s state, or query object, which returning data without side effects.</p>
+<p>By using this definition, an interface could be introduced for all Command handlers.</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">CommandHandler</span>[<span style="color:#a6e22e">C</span> <span style="color:#a6e22e">any</span>] <span style="color:#66d9ef">interface</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Handle</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">cmd</span> <span style="color:#a6e22e">C</span>) <span style="color:#66d9ef">error</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>The command handler receives a <code>C</code> generic command object, which is just a Go struct.
+Each specific command handler could specifies its <code>C</code> parameter type, performs some actions and returns an error represents if the actions was completed.</p>
+<p>Let&rsquo;s say we are building a command to create an article, the command receives a struct contains field <code>Title</code> and field <code>Body</code>.
+This setup looks like below:</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">CreateArticle</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Title</span> <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Body</span>  <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">CreateArticleHandler</span> = <span style="color:#a6e22e">common</span>.<span style="color:#a6e22e">CommandHandler</span>[<span style="color:#a6e22e">CreateArticle</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">createArticleHandler</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">createArticleHandler</span>) <span style="color:#a6e22e">Handle</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">cmd</span> <span style="color:#a6e22e">CreateArticle</span>) <span style="color:#66d9ef">error</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// TODO
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}</span></span></code></pre></div><p><code>CreateArticleHandler</code> is an interface that implements the generic <code>CommandHandler</code> interface, tailored in handling <code>CreateArticle</code> command.
+The code defines the <code>CreateArticleHandler</code> as a type follows the  <code>CommandHandler</code>, where the generic type is replaced by <code>CreateArticle</code>.
+Later on, it creates a struct <code>createArticleHandler</code> in lowercase that implement the <code>CreateArticleHandler</code>, it means the <code>createArticleHandler</code> must
+have the <code>Handle</code> function that accepts a <code>CreateArticle</code> object as an input.</p>
+<p>For Query handlers, the interface looks a bit different</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">QueryHandler</span>[<span style="color:#a6e22e">Q</span> <span style="color:#a6e22e">any</span>, <span style="color:#a6e22e">R</span> <span style="color:#a6e22e">any</span>] <span style="color:#66d9ef">interface</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Handle</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">q</span> <span style="color:#a6e22e">Q</span>) (<span style="color:#a6e22e">R</span>, <span style="color:#66d9ef">error</span>)
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>The query handler receives a <code>Q</code> generic query object and a <code>R</code> generic result object, which are go struct.
+Similar to the command handler, each query handler despecifiesfines its Q and R types, performs some actions and returns the result with type R and an error represents if the process was successful.</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">GetArticle</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">ID</span> <span style="color:#a6e22e">uuid</span>.<span style="color:#a6e22e">UUID</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">GetArticleHandler</span> = <span style="color:#a6e22e">common</span>.<span style="color:#a6e22e">QueryHandler</span>[<span style="color:#a6e22e">GetArticle</span>, <span style="color:#f92672">*</span><span style="color:#a6e22e">domain</span>.<span style="color:#a6e22e">Article</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">getArticleHandler</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">repo</span> <span style="color:#a6e22e">domain</span>.<span style="color:#a6e22e">Repository</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">getArticleHandler</span>) <span style="color:#a6e22e">Handle</span>(
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">q</span> <span style="color:#a6e22e">GetArticle</span>,
+</span></span><span style="display:flex;"><span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">domain</span>.<span style="color:#a6e22e">Article</span>, <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">article</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">repo</span>.<span style="color:#a6e22e">GetArticle</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">q</span>.<span style="color:#a6e22e">ID</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">err</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">article</span>, <span style="color:#66d9ef">nil</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p><code>GetArticleHandler</code> is an interface that implements the generic <code>QueryHandler</code> interface, specified in handling <code>GetArticle</code> query and returning the <code>Article</code> pointer from the domain package.
+It uses a private struct <code>getArticleHandler</code> that implements the <code>GetArticleHandler</code> interface, so this struct has a <code>Handle</code> function that accepts a <code>GetArticle</code> object as an input, then constructs and returns the <code>Article</code> pointer.</p>
+<p>In this example, the <code>getArticleHandler</code> has an dependency to the <code>Article</code> repository.
+The repository handles the interaction with the data source to fetch the article. With a simple <code>GetArticle</code> function provided by the repository, the query doesn&rsquo;t require to know how the repository get the article from, this helps to encapsulate the persistence logic from the query object.</p>
+<h2 id="cqs-advantages">CQS Advantages</h2>
+<p>The CQS pattern could be confused with the CQRS (Common Queue Responsibility Segregation), they both have the Command and Query concepts.
+The CQRS is usually implemented with an event bus, the pattern is popular in a system built with microservice architecture.</p>
+<p>CQS emphrasizes the separation of commands and queries and could apply to any existing architecture. When introducing CQS to an application, the application
+is easier to test, improve the scalability and establishing a clear structure.</p>
+<p>In term of testing, the query doesn&rsquo;t create any side effect, hence the test focus on the construct the query result from its dependencies. From the above example,
+the <code>GetArticleHandler</code> only depends on the repo, the test can simulate happy path and non-happy path by assuming the result returning by the repository.
+Testing the command is different, since the command doesn&rsquo;t return a value but an error, the testing focuses on the side effect it makes.
+By focusing in a single aspect, the test scenario is more comprehend to build and maintain.</p>
+<p>The command and query implements the generic command handler and query handler interface, additional functionalities such as logging could be implemented without touching to the command/query handler.
+To provide a clear picture, here is a pattern I am using when defind the command handler. The query decorators could be implemented with similar approach.</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#a6e22e">baseHandler</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">createArticleHandler</span>{}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">createArticleHandler</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">DecorateCommand</span>(<span style="color:#a6e22e">baseHandler</span>, <span style="color:#a6e22e">zerolog</span>.<span style="color:#a6e22e">New</span>(<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">StdErr</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">DecorateCommand</span>[<span style="color:#a6e22e">H</span> <span style="color:#a6e22e">any</span>](<span style="color:#a6e22e">handler</span> <span style="color:#a6e22e">CommandHandler</span>[<span style="color:#a6e22e">H</span>], <span style="color:#a6e22e">logger</span>: <span style="color:#a6e22e">logger</span>) {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">commandLogging</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">base</span>:   <span style="color:#a6e22e">handler</span>,
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">logger</span>: <span style="color:#a6e22e">logger</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">commandLogging</span>[<span style="color:#a6e22e">C</span> <span style="color:#a6e22e">any</span>] <span style="color:#66d9ef">struct</span> { <span style="color:#75715e">// implement CommandHandler
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#a6e22e">base</span>: <span style="color:#a6e22e">CommandHandler</span>[<span style="color:#a6e22e">C</span>]
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">logger</span>: <span style="color:#a6e22e">zerolog</span>.<span style="color:#a6e22e">Logger</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">d</span> <span style="color:#a6e22e">commandLogging</span>[<span style="color:#a6e22e">C</span>]) <span style="color:#a6e22e">Handle</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">cmd</span> <span style="color:#a6e22e">C</span>) (<span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">logger</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">logger</span>.
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">With</span>().
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">Str</span>(<span style="color:#e6db74">&#34;command&#34;</span>, <span style="color:#a6e22e">generateActionName</span>(<span style="color:#a6e22e">cmd</span>)).
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">Str</span>(<span style="color:#e6db74">&#34;command_body&#34;</span>, <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;%+v&#34;</span>, <span style="color:#a6e22e">cmd</span>)).
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">Logger</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">logger</span>.<span style="color:#a6e22e">Debug</span>().<span style="color:#a6e22e">Msg</span>(<span style="color:#e6db74">&#34;Executing Command&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">defer</span> <span style="color:#66d9ef">func</span>() {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#a6e22e">logger</span>.<span style="color:#a6e22e">Info</span>().<span style="color:#a6e22e">Msg</span>(<span style="color:#e6db74">&#34;Command executed successfully&#34;</span>)
+</span></span><span style="display:flex;"><span>		} <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#a6e22e">logger</span>.<span style="color:#a6e22e">Error</span>().<span style="color:#a6e22e">Err</span>(<span style="color:#a6e22e">err</span>).<span style="color:#a6e22e">Msg</span>(<span style="color:#e6db74">&#34;Failed to execute command&#34;</span>)
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">base</span>.<span style="color:#a6e22e">Handle</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">cmd</span>)
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>This setup adheres to the <strong>open for extension, closed for modification</strong> principle, enabling the addition of logging functionality without altering the <code>createArticleHandler</code> function directly.</p>
+<p>The DecorateCommand function applies the decorators, wrapping the original handler with a commandLogging struct.
+This allows for the application of multiple decorators to the original handler, each providing additional functionalities while keeping the original handler agnostic to these modifications.</p>
+<h2 id="recap">Recap</h2>
+<p>CQS enhances the modularity and maintainability of the application by separating commands (which modify the system state) from queries (which retrieve information).
+This alignment with the Domain-Driven Design (DDD) paradigm, which favors the Command-Query Separation (CQS) pattern, makes the transition to a DDD-based architecture more seamless.</p>]]></content:encoded></item></channel></rss>

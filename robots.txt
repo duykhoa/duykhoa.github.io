@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://duykhoa.github.io/sitemap.xml

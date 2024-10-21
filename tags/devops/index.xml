@@ -1,1 +1,335 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Devops on Kevin's Blog</title><link>https://duykhoa.github.io/tags/devops/</link><description>Recent content in Devops on Kevin's Blog</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Tue, 18 Apr 2023 22:51:16 -0400</lastBuildDate><atom:link href="https://duykhoa.github.io/tags/devops/index.xml" rel="self" type="application/rss+xml"/><item><title>Setup local domain with self-signed SSL certificate</title><link>https://duykhoa.github.io/posts/local-domain/</link><pubDate>Tue, 18 Apr 2023 22:51:16 -0400</pubDate><guid>https://duykhoa.github.io/posts/local-domain/</guid><description>&lt;p>This is a post about setting up the local domain and SSL certs for testing purpose.&lt;/p></description></item><item><title>A project specific command-line</title><link>https://duykhoa.github.io/posts/a-cli-showcase/</link><pubDate>Tue, 28 Feb 2023 22:59:40 -0500</pubDate><guid>https://duykhoa.github.io/posts/a-cli-showcase/</guid><description>&lt;p>Build a commandline tool that helps bootstrap the project&lt;/p></description></item><item><title>A Simple Infrastructure</title><link>https://duykhoa.github.io/posts/a-simple-infras/</link><pubDate>Tue, 07 Jun 2022 09:55:09 -0400</pubDate><guid>https://duykhoa.github.io/posts/a-simple-infras/</guid><description>&lt;p>Idea of building the infrastructure with Amazon Web Service using Terraform, Ansible and Jenkins.&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Devops on Kevin's Blog</title><link>https://duykhoa.github.io/tags/devops/</link><description>Recent content in Devops on Kevin's Blog</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>duykhoa12t[at]gmail[dot]com (Kevin Tran)</managingEditor><webMaster>duykhoa12t[at]gmail[dot]com (Kevin Tran)</webMaster><copyright>Kevin Tran</copyright><lastBuildDate>Tue, 18 Apr 2023 22:51:16 -0400</lastBuildDate><atom:link href="https://duykhoa.github.io/tags/devops/index.xml" rel="self" type="application/rss+xml"/><item><title>Setup local domain with self-signed SSL certificate</title><link>https://duykhoa.github.io/posts/local-domain/</link><pubDate>Tue, 18 Apr 2023 22:51:16 -0400</pubDate><author>duykhoa12t[at]gmail[dot]com (Kevin Tran)</author><guid>https://duykhoa.github.io/posts/local-domain/</guid><description>&lt;p>This is a post about setting up the local domain and SSL certs for testing purpose.&lt;/p></description><content:encoded><![CDATA[<p>This is a post about setting up the local domain and SSL certs for testing purpose.</p>
+<h1 id="objective">Objective</h1>
+<p>The local domain are helpful to setup the connection between the frontend and backend on the development machine.
+It is also a common solution when the actual address and port is difficult to remember.
+In this post, I will explain how to set up the local domain and config the SSL certificate on the MacOS laptop.</p>
+<h1 id="softwares-required">Softwares required</h1>
+<p>In order to config the local domain name and issue the SSL cert, we&rsquo;ll need these tools installed:</p>
+<ul>
+<li>openssl</li>
+<li>MacOS Keychains app</li>
+<li>Nginx: for configuring the proxy</li>
+<li>Admin access</li>
+<li>vi: to edit the host and create the configuration files</li>
+</ul>
+<p>The nginx and vi are just my preference, you can use VSCode, emacs for editor and Apache, HA proxy for the proxy.</p>
+<h1 id="create-the-local-domain">Create the local domain</h1>
+<p>Setup the domain is the most simple task, you can open the hosts file with the admin privillege.</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  sudo vi /etc/hosts</span></span></code></pre></div><p>Add a line for the new domain and map it to <strong>127.0.0.1</strong></p>
+
+
+
+
+
+<pre tabindex="0"><code>127.0.0.1 mydomain.local</code></pre><p>If you run the server inside a virtual network, for instance by running the proxy in the Virtual box or Docker, then use the IP of the virtual network interface instead.</p>
+<p>After that, you may flush the DNS cache by using this command:</p>
+
+
+
+
+
+<pre tabindex="0"><code>sudo dscacheutil -flushcache</code></pre><h1 id="create-the-root-certificate-authority-root-ca">Create the Root Certificate Authority (Root CA)</h1>
+<p>The SSL in the normal website are issued by a trusted Certificate Authority. However, for the local development, we don&rsquo;t need to purchase a SSL (and we don&rsquo;t own the domain), hence we have to setup the Root CA as well. During the handshake step, the browser checks whether the cert is valid by asking the Root CA about the cert, and if the Root CA doesn&rsquo;t confirm with the browser, the browser marks the site as unsafe.</p>
+<p>To generate the Root CA, we can use the <strong>openssl</strong> tool.
+The steps are:</p>
+<ol>
+<li>Generate the root CA key</li>
+<li>Generate the root CA cert</li>
+</ol>
+<p>Personally, I suggest to create a directory to store all the files that are created during this process together, I usually create one in <code>/tmp/ssl</code> for this purpose. All the files we create after this are in the same directory.</p>
+<p>To start with, we have to create the RootCA configuration file.</p>
+
+
+
+
+
+<pre tabindex="0"><code># fileName: config.conf
+
+[req]
+prompt = no
+distinguished_name = req_distinguished_name
+req_extensions = v3_req
+
+[req_distinguished_name]
+C = CA
+ST = Kitchener
+L = ON
+OU = Org
+CN = mydomain.local
+emailAddress = dev@mydomain.local
+
+[v3_req]
+basicConstraints = CA:FALSE
+keyUsage = nonRepudiation, digitalSignature, keyEncipherment, dataEncipherment
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1 = mydomain.local
+DNS.2 = api.mydomain.local
+DNS.2 = www.mydomain.local</code></pre><p>Please modify the content of the file to match with your information and the local domain.
+The file references and examples can be found from <a href="https://www.ibm.com/docs/en/hpvs/1.2.x?topic=reference-openssl-configuration-examples">IBM openSSL configuraton</a> and <a href="https://www.openssl.org/docs/manmaster/man5/config.html">OpenSSL document</a></p>
+<p>After creating these 2 config files, we can generate the rootCA key and cert with these 2 commands</p>
+
+
+
+
+
+<pre tabindex="0"><code>openssl genrsa -out rootCA.key 2048
+openssl req -x509 -new -nodes -key rootCA.key -sha256 -days 1024 -out rootCA.pem -config config.conf</code></pre><p>The values of each parameters can be altered by different values, such as the number of days can be change to 365, or the algorithm can be set to sha512. For the details of each parameters, checkout the OpenSSL manual.</p>
+<h1 id="issue-the-self-signed-ssl-cert">Issue the Self-signed SSL cert</h1>
+<p>Create the ext file in the same directory with the content like below</p>
+
+
+
+
+
+<pre tabindex="0"><code># filename: mydomain.local.ext 
+
+authoritykeyIdentifier = keyid,issuer
+basicConstraints = CA:FALSE
+keyUsage = nonRepudiation, digitalSignature, keyEncipherment, dataEncipherment
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1 = mydomain.local
+DNS.2 = api.mydomain.local
+DNS.2 = www.mydomain.local</code></pre><p>After this, we can generate the cert key file and the cert signing request file</p>
+
+
+
+
+
+<pre tabindex="0"><code>openssl genrsa -out mydomain.local.key 2048
+openssl req -new -key mydomain.local.key -out mydomain.local.csr -config config.conf</code></pre><p>The last step is to issue the cert</p>
+
+
+
+
+
+<pre tabindex="0"><code>openssl x509 \
+        -in mydomain.local.csr -CA rootCA.pem -CAkey rootCA.key -CAcreateserial \
+        -out mydomain.local.crt -days 1024 -sha256 -extfile mydomain.local.ext</code></pre><p>After that, you should have the the cert (and other files) in the temporary directory. We don&rsquo;t need the config file as well as the ext file.
+A common practice I usually take is to move these files to a more permanent place, such as <code>/etc/ssl</code>, so the files aren&rsquo;t gone after reboot.
+To import the cert to the Apple Keychains, we can either use the Keychains UI or by running a command like below</p>
+
+
+
+
+
+<pre tabindex="0"><code>sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain /etc/ssl/rootCA.pem</code></pre><p>Noted that we don&rsquo;t have to import the cert for the local domain name.</p>
+<h1 id="config-the-proxy">Config the proxy</h1>
+<p>We can configure the SSL cert for the website from the proxy level instead of the app server. However, if you prefer to configure the cert from the app, please skip this section.</p>
+<p>I prefer to use Nginx for the proxy because it is easy to setup and the document is excellent.</p>
+<p>Here is how the nginx config look like</p>
+
+
+
+
+
+<pre tabindex="0"><code>#filename: /opt/homebrew/etc/nginx/servers/mydomain.local.conf
+
+upstream frontend {
+   server localhost:3000;
+   keepalive 100;
+}
+
+upstream backend{
+   server localhost:8888;
+   keepalive 100;
+}
+
+server {
+  listen 443 ssl;
+  server_name mydomain.local www.mydomain.local;
+
+  ssl_certificate     /etc/ssl/mydomain.local.crt;
+  ssl_certificate_key /etc/ssl/mydomain.local.key;
+
+  # location config
+
+  location / {
+    proxy_http_version 1.1;
+    proxy_pass http://frontend/;
+  }
+
+  location ~ /uploads/(file|image) {
+    proxy_http_version 1.1;
+    client_max_body_size 50M;
+    proxy_pass http://frontend/;
+  }
+}
+
+server {
+  listen 443 ssl;
+  server_name api.mydomain.local
+
+  ssl_certificate     /etc/ssl/mydomain.local.crt;
+  ssl_certificate_key /etc/ssl/mydomain.local.key;
+
+  # location config
+
+  location / {
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_set_header Access-Control-Allow-Origin *;
+    proxy_http_version 1.1;
+    proxy_pass http://backend/;
+  }
+}</code></pre><p>With Nginx, we can setup complicated routing rule to for the website traffic and configure the SSL without hassle.</p>
+<p>A pro tips: If nginx is installed through <strong>brew</strong>, we can use the <strong>brew services</strong> to make it starting automatically when the laptop is boot.</p>
+<h1 id="recap">Recap</h1>
+<p>This short post is a summary for the steps to setup the local domain on the local machine.
+I hope you find it useful for your works.</p>]]></content:encoded></item><item><title>A project specific command-line</title><link>https://duykhoa.github.io/posts/a-cli-showcase/</link><pubDate>Tue, 28 Feb 2023 22:59:40 -0500</pubDate><author>duykhoa12t[at]gmail[dot]com (Kevin Tran)</author><guid>https://duykhoa.github.io/posts/a-cli-showcase/</guid><description>&lt;p>Build a commandline tool that helps bootstrap the project&lt;/p></description><content:encoded><![CDATA[<p>Build a commandline tool that helps bootstrap the project</p>
+<p>We have a Nodejs monorepo project that is the place where we develop the code of all applications.
+The inspiration behind using monorepo is focusing on improving developer productivity.
+Having our own commandline is an idea to further enhance the productivity by providing a simpler way to develop the code.</p>
+<p>In this post, we will walk through the use cases of the tool and how does it help the team.</p>
+<h1 id="usecases">Usecases</h1>
+<h1 id="running-the-app">Running the app</h1>
+<p>As a typical NodeJS project, the common scripts is defined in the <code>package.json</code> file. By typing <code>npm start -- &lt;app_name&gt;</code>, the actual command to run the app web server is executed, and the app is up.
+A web application usually requires some components like database, cache service. By using the npm script alone, the developer has to ensure the dependent services are available for the app to run.
+This isn&rsquo;t always straightforward task depends on the software&rsquo;s installation and configuration complexity.
+Once in a while, developer may face the issue where the <a href="https://stackoverflow.com/questions/36436120/fatal-error-lock-file-postmaster-pid-already-exists">database software couldn&rsquo;t start</a>.
+Spending time on configuring and troubleshooting the software issue significantly affects to the productivity, and the effects could multiply if more than one developers having the issue.</p>
+<p>That&rsquo;s why Docker has been used in our setup to minimize the cost of setting up these dependency softwares. A docker-compose configuration file is added under each application sourcecode in the monorepo,
+which defines the software services required and how they are interacted.</p>
+<p>By calling the same docker-compose command across each application, the developer is able to skip completely the dependencies setup effort, instead jumping into exploring the project and implement the requirement. Of course, as you may think, the command to run the app in docker could be a bit complicated like below</p>
+
+
+
+
+
+<pre tabindex="0"><code>  docker-compose up -d --project-directory ./ --project-name &lt;project_name&gt; --file &lt;path-to-project-docker-compose-file&gt;</code></pre><p>Similar to that, the log command is</p>
+
+
+
+
+
+<pre tabindex="0"><code>  docker-compose logs &lt;service_name&gt; -d --project-directory ./ --project-name &lt;project_name&gt; --file &lt;path-to-project-docker-compose-file&gt;</code></pre><p>In practice, before the app could be run, developers may need to perform some installation tasks. For example, most of the NodeJS applications are built from open source dependencies, hence developers have to run the node package manager to install these dependencies. Other than that, the dependencies&rsquo; services must be ready to proceed with the incoming requests. Without some utility script to check if the services&rsquo; ports are open, developer have to check the services&rsquo; statuses or retry after a couple of seconds.</p>
+<p>With a custom command line solution, these tasks can be handled by the command line. In our project, the only command developer have to type in the terminal is:</p>
+
+
+
+
+
+<pre tabindex="0"><code>  iae serve -a &lt;app_name&gt;</code></pre><p><em>iae</em>: it is my company abbreviation name</p>
+<p>This command takes care of how to run the Docker script, check the dependencies service, install the dependencies and run the app server.
+The restart, stop commands are similar: <code>iae restart -a &lt;app_name&gt;</code>. For logging, <code>iae log -a &lt;app_name&gt;</code> is the log command.</p>
+<h2 id="running-the-test-suite">Running the test suite</h2>
+<p>Typically, there are several kinds of tests in a software project: unit test, integration test, end to end (E2E) test.
+The unit tests aren&rsquo;t required any dependencies&rsquo; services to executed (this statement is based on the best practice of writing test), other types may require some service to run like the database. To support running different kind of tests, the command line tool makes use of Docker and the corresponding test configuration.</p>
+
+
+
+
+
+<pre tabindex="0"><code>  iae test unit|integration|e2e -a &lt;app_name&gt;</code></pre><p>Similar to the command to run the app, there is a utility script to run the test suites after the services&rsquo; ports are open. Each kind of test uses a different configuration file. Our project uses jest, so it has a separate jest configuration for unit test, integration test, and e2e test. To boost the test performance, we use <a href="https://github.com/swc-project/swc">swc</a> instead of <strong>ts-jest</strong> for compiling typescript when running the unit test.</p>
+<p>Once in a while, developer may want to perform all kinds of test in the development machine, instead of typing each test command, the command line has a single command.</p>
+
+
+
+
+
+<pre tabindex="0"><code>  iae ci -a &lt;app_name&gt;</code></pre><h2 id="code-generator">Code generator</h2>
+<p>Our project uses multiple tools that require code generator such as migration files, GRPC proto file, GraphQL Schema file, etc.
+To minimize the learning curve, the command line tools wrap all of these commands from different tools into a simple interface.</p>
+
+
+
+
+
+<pre tabindex="0"><code>  iae protoc gen -a &lt;app_name&gt; -m &lt;module_name&gt; -f &lt;file_path&gt;</code></pre>
+
+
+
+
+<pre tabindex="0"><code>  iae graphql gen -a &lt;app_name&gt; -m &lt;module_name&gt;</code></pre>
+
+
+
+
+<pre tabindex="0"><code>  iae migration gen -a &lt;app_name&gt; -n &lt;migration_name&gt;
+
+  iae migration run -a &lt;app_name&gt;
+  iae migration revert -a &lt;app_name&gt;</code></pre><h1 id="conclusion">Conclusion</h1>
+<p>This post describes some usages of a project specific in supporting development flow. It helps to remove the needs of learning and remembering each commands, as well as knowing what functionalities the project requires during the development stage. I hope this could inspire you to build own tool, please let me know if this post helps.</p>]]></content:encoded></item><item><title>A Simple Infrastructure</title><link>https://duykhoa.github.io/posts/a-simple-infras/</link><pubDate>Tue, 07 Jun 2022 09:55:09 -0400</pubDate><author>duykhoa12t[at]gmail[dot]com (Kevin Tran)</author><guid>https://duykhoa.github.io/posts/a-simple-infras/</guid><description>&lt;p>Idea of building the infrastructure with Amazon Web Service using Terraform, Ansible and Jenkins.&lt;/p></description><content:encoded><![CDATA[<p>Idea of building the infrastructure with Amazon Web Service using Terraform, Ansible and Jenkins.</p>
+<p>Nowadays, there are a variety of choices to deploy a website. Developers could choose a container service like Heroku, go with the most trendy infrastructure of choice with Kubernetes, or use the Serverless strategy to run the website without the need of setting up the server on their own. However, configuring a web server is no longer rocket surgery with the modern DevOps technologies and the revolution of the Cloud providers. This post explores in detail a simple infrastructure setup with Amazon infrastructure using Terraform, Ansible, and Jenkins. This is a real use case that fits a certain software project, therefore it requires some consideration before implementing this setup in another organization.</p>
+<h2 id="projects-setup">Projects setup</h2>
+<p>To embrace the culture of Agile development, the platform is split into multiple small applications which are only taken a couple of sprints from the planning phase until going live. With that setup, the monorepo is used in order to keep the consistency between these applications in terms of development best practices, linting rules, scripting commands, and version control. There are a bunch of shared libraries extracted from the apps for common usage.</p>
+<p>Depending on each individual app’s purpose, the micro app could involve several technologies. So far the platform heavily uses GraphQL to provide the frontend clients access. Not only does it keep the number of APIs as small as 1, but it also allows the clients to specify the structure of the response they want to use. These advantages completely convince the team to switch over from the traditional REST (or RESTful) API. Besides GraphQL, GRPC is the main communication protocol from backend to backend services, which allows small apps to communicate with each other with an extremely fast latency.</p>
+<p>Other than that, the rest of the stack follows the typical setup of a web service. A database (PostgreSQL or MySQL) handles the data and a small Redis cluster that acts as a caching layer as well as a backend for the jobs’ queue. Lastly, the application code is running in one or more server instances, which doesn’t produce any state in the server and there could be multiple processes running the code in parallel.</p>
+<h2 id="infrastructure-requirement">Infrastructure requirement</h2>
+<p>The most difficult question when designing the infrastructure is how to maximize the support for the monorepo setup. Each app shares a lot in common for the infrastructure requirements such as the configuration of server instances, load balancer, and security groups besides a few differences in the exposed ports, protocol, and database engine.</p>
+<p>Terraform is the only option we have in mind when choosing the tools for building the infrastructure. Terraform comes with a lot of configurations in each resource type and requires users to know how to link these resources together. Not all members in the teams have deep knowledge about the cloud provider (we are using Amazon Web service) in order to write the code correctly. To solve this problem, we come up with a list of custom modules that combine multiple resources together, this helps to set up the infrastructure quickly and error-free. This example may provide a clearer picture of what a module looks like and how it helps to spin up the infrastructure at ease.</p>
+
+
+
+
+
+<pre tabindex="0"><code>  module &#34;server_instances&#34; {
+    source                                 = &#34;../../../modules/server_instances&#34;
+    instances_count                        = 3
+    instance_type                          = &#34;t4g.micro&#34;
+    instance_ami                           = &#34;ami-xxxxxxxxxxxx&#34;
+    instance_root_block_device_volume_size = 10
+    instance_app_name                      = &#34;app_name&#34;
+    instance_app_env                       = &#34;prod&#34;
+    healthcheck_endpoint                   = &#34;/healthcheck&#34;
+    public_key                             = var.ssh_public_key
+    vpc_id                                 = var.vpc_id
+    jenkins_agent_sg_id                    = &#34;sg-jenkinsxxxxxxxx&#34;
+    loadbalancer_subnets                   = [&#34;subnet-1&#34;, &#34;subnet-2&#34;, &#34;subnet-3&#34;]
+    loadbalancer_tls_cert                  = &#34;arn:aws:acm:region-1:2356:certificate/XXXX-YYYY-ZZZZ&#34;
+  }</code></pre><p>This module doesn’t only create 3 server instances but also configures a load balancer that links to these instance through a target group and allow traffic in and out from these components, plus whitelists the access from Jenkins security group to the instance in order to perform the deployment. The implementation of this “server_instances” module involves 233 lines of Terraform code, 20 resource block usages, provides 16 customized variables, which is quite challenging to write from start to end with no mistake.</p>
+<p>Since a “terraform apply” could affect a numerous of infrastructure components, reviewing the plan carefully and only running the plan if every change looks correct is the practice recommended. Terraform has offered Terraform Enterprise, a paid platform to implement this practice automatically. However, if this is all we need from the Terraform Enterprise, a custom automation Jenkins pipeline might fulfill the job too.</p>
+<h2 id="everything-starts-with-jenkins">Everything starts with Jenkins</h2>
+<p>Jenkins plays an important role in automation and deployment. The Jenkins’ jobs or pipelines are represented in the code form, which makes it easier to maintain. The streamlined monorepo setup makes it possible to have a single deployment pipeline with a predefined list of application names. It reduces a lot of work to maintain the consistency of all Jenkins pipelines as if there are separate deployment jobs for each service. On another hand, Jenkins can be used to run operational tasks such as refreshing AWS credentials, installing software into a server, or even provisioning the infrastructure.</p>
+<p>In general, to deploy an application, a number of steps are performed, which involve compiling the code, uploading the output to the artifact store, updating the code into the server, and restarting the app inside the server. Each of the steps above may includes a few different tasks, for example, before compiling the code, some code evaluation tasks are executed involving checking the dependencies’ vulnerabilities, code smells detection, verify the truthiness by running various kinds of automation testing. If all the steps are passed, the code is compiled and tagged with a new version, and then stored in the artifact store. It is ready to move on to the deploy stage.</p>
+<p>There are usually multiple deployment environments. A deployment pipeline should define the order of each environment based on its criticalness. The most common setup has 2 environments: staging and production. The staging environment is used for internal testing, while the production is for the real user to use the service. Since the production is more critical, the deployment pipeline should be able to block failed deployment to staging from being able to trigger into the production environment. It’s quite often that after completing the deployment into each environment, the pipeline performs some readiness checks. The check could be simple as checking if the healthcheck endpoint returns a 200 status code or more complicated like running the smoke test, load test, and canary deployment.</p>
+<p><img src="jenkins-deployment.png" alt="Sample jenkins deployment pipeline"></p>
+<p>On the other hand, most of the automated tasks could be handled by Jenkins. To illustrate what type of jobs could be run in Jenkins, this job handles some operational tasks related to issuing, revoking, and rotating IAM credential keys. The job takes a few parameters including the action name, the iam user, and the key id (for the delete action). Internally, it performs one of these actions with the given iam user and key, using a pre-configured AWS key with sufficient permissions. Typically, these permissions aren’t granted to developers’ AWS accounts.</p>
+<p><img src="jenkins-aws-iam-credentials.png" alt="Jenkins AWS IAM credentials task"></p>
+<p>As mentioned in the previous section, the Terraform pipeline could be implemented in 3 stages including planning, confirming, and applying. This Jenkins job implements the Terraform flow as planning, confirmation, and applying the plan. The job allows to run the plan with different modes like refresh only, normal, and destroy mode. These operations are well fit to the current DevOps workload.</p>
+<h2 id="ansible">Ansible</h2>
+<p>If Jenkins is a computer then Ansible is the operating system that runs on the computer. It doesn’t only implements the deployment script but also powers the build steps. This section discusses some of Ansible’s strengths in building these operation codes.</p>
+<p>Firstly, we use Ansible to instruct the application deployment. The deployment script doesn’t limit to the code deployment but also includes the checklist to ensure the server is fully set up and operated. It includes tasks to check and install the missing packages, create configuration files and start supporting services, and clean up the server after a successful deployment.</p>
+<p>Secondly, instead of writing the build script in a pure Bash script, we use Ansible for consistency and efficiency. Ansible is designed with strong declarative syntax, which provides unlimited extendability. For example, when defining the test running step, the command we think of is the npm run test. This is good enough to run the test without dependencies, however, in the real project, it requires running against dependencies, and more than that there are different kinds of tests for each application in the monorepo. Taking all of these requirements into account, the Ansible script to run the tests looks like the below:</p>
+
+
+
+
+
+<pre tabindex="0"><code># build.yml
+- include_tasks:
+    file: &#34;{{ item }}&#34;
+  with_items: &#34;{{ test_running_files }}&#34;
+
+# vars file
+test_running_files:
+  - &#34;tests/run_unit_test.yml&#34;
+  - &#34;tests/integration_test.yml&#34;
+  - &#34;tests/e2e_test.yml&#34;
+
+# integration_test.yml
+- name: &#34;Run the integration test suite&#34;
+  shell: &#34;docker-compose -f apps/{{ app_name }}/docker-compose.yml --project-directory ./ --project-name {{ app_name }} run integration-test {{ app_name }}&#34;
+  args:
+    chdir: &#34;{{ workspace_path }}&#34;
+  register: test_output
+  no_log: true
+  ignore_errors: true
+- name: &#34;Display test result&#34;
+  include_tasks: &#34;../pretty_output.yml&#34;
+  vars:
+    output: &#34;{{ test_output }}&#34;</code></pre><p>As the code shows how complicated the test running could be, Ansible is clearly a better choice to build the script due to its extendability. Each application config could override the test_running_files list if necessary.</p>
+<h2 id="all-the-logs-go">All the logs go</h2>
+<p>To manage several applications with the minimum resources, we need a logging tool where we can locate the problem. Finding the right log entry across multiple apps could be a challenge, however, the first step is to set it up. Amazon offers the OpenSearch service, which was surprisingly easy to bootstrap and integrate. It is clear that we would go with an external logging service as we don’t have to maintain the infrastructure to run the logging stack because the effort to maintain the server is a big concern for a small team.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>The post covers a few technologies together, and it couldn’t deep dive into each technology in detail, instead, the post makes its attempt to demonstrate the possibility of designing and building the infrastructure using these basic tools with the minimum resource and effort. More details about the implementation of each technology will be discussed in future posts. Thanks for reading!</p>]]></content:encoded></item></channel></rss>

@@ -1,22 +1,1262 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Kevin's Blog</title><link>https://duykhoa.github.io/</link><description>Recent content on Kevin's Blog</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sun, 30 Jun 2024 16:59:15 -0400</lastBuildDate><atom:link href="https://duykhoa.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>Application Validation and Error Handling</title><link>https://duykhoa.github.io/posts/application-error/</link><pubDate>Sun, 30 Jun 2024 16:59:15 -0400</pubDate><guid>https://duykhoa.github.io/posts/application-error/</guid><description>&lt;p>Some practices and patterns for handling exceptions in Java application.&lt;/p></description></item><item><title>Resources</title><link>https://duykhoa.github.io/resources/</link><pubDate>Sun, 09 Jun 2024 15:00:00 -0400</pubDate><guid>https://duykhoa.github.io/resources/</guid><description>&lt;h1 id="intro">Intro &lt;a href="#intro" class="anchor">🔗&lt;/a>&lt;/h1>&lt;p>This page is for my humble list of resources.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Kevin's Blog</title><link>https://duykhoa.github.io/</link><description>Recent content on Kevin's Blog</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>duykhoa12t[at]gmail[dot]com (Kevin Tran)</managingEditor><webMaster>duykhoa12t[at]gmail[dot]com (Kevin Tran)</webMaster><copyright>Kevin Tran</copyright><lastBuildDate>Mon, 14 Oct 2024 15:59:15 -0400</lastBuildDate><atom:link href="https://duykhoa.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>About</title><link>https://duykhoa.github.io/about/</link><pubDate>Sun, 16 Apr 2023 15:00:15 -0400</pubDate><author>duykhoa12t[at]gmail[dot]com (Kevin Tran)</author><guid>https://duykhoa.github.io/about/</guid><description>&lt;p>&lt;strong>Hey there, software enthusiasts!&lt;/strong>&lt;/p>
+&lt;p>My name is Kevin Tran, and I&amp;rsquo;m a Software Engineer with a burning passion for all things DevOps. Over the years, I&amp;rsquo;ve had the privilege of contributing to successful projects across diverse industries, from private banking to ride-hailing and even the automotive world.&lt;/p>
+&lt;p>For the past five years, I&amp;rsquo;ve been invested my time in building microservices. To ensure top-notch code delivered, I rely on Test-Driven Development and Continuous Integration/Continuous Delivery (CI/CD). While I spent a good chunk of time developing applications with Ruby on Rails and Hanami, I&amp;rsquo;ve recently transitioned to more flexible, high-performance technologies like Go, Java, and NodeJS. I&amp;rsquo;m a big fan of monorepos and trunk-based development. Plus, I love creating internal tools to make life easier for fellow engineers.&lt;/p></description><content:encoded><![CDATA[<p><strong>Hey there, software enthusiasts!</strong></p>
+<p>My name is Kevin Tran, and I&rsquo;m a Software Engineer with a burning passion for all things DevOps. Over the years, I&rsquo;ve had the privilege of contributing to successful projects across diverse industries, from private banking to ride-hailing and even the automotive world.</p>
+<p>For the past five years, I&rsquo;ve been invested my time in building microservices. To ensure top-notch code delivered, I rely on Test-Driven Development and Continuous Integration/Continuous Delivery (CI/CD). While I spent a good chunk of time developing applications with Ruby on Rails and Hanami, I&rsquo;ve recently transitioned to more flexible, high-performance technologies like Go, Java, and NodeJS. I&rsquo;m a big fan of monorepos and trunk-based development. Plus, I love creating internal tools to make life easier for fellow engineers.</p>
+<p>But it&rsquo;s not just code! I also design and manage the infrastructure behind these apps using Infrastructure as Code (IaC). Think of it as an automated blueprint for building everything. Terraform, Ansible, and Kubernetes are my weapons of choice. If containers are your thing, you&rsquo;ll be happy (or not) to know I&rsquo;ve got experience working with Kubernetes and Openshift as well. Make sure you checkout my posts in the future about these topics.</p>
+<p>Now, enough about work! When I&rsquo;m not coding or wrangling infrastructure, you can find me on the badminton court, conquering hills on my bike, or hitting the pavement for a good run.</p>
+<p>This blog is my space to share my knowledge, explore DevOps trends, and delve into the ever-evolving world of software development.  So, buckle up and get ready for some insightful discussions, practical tips, and maybe even a few war stories along the way!</p>
+<hr>
+<p>If you wonder if I&rsquo;m a real person. Yes and here is my latest photo cycling around the <a href="https://www.kitchener.ca/en/parks-and-trails/iron-horse-trail.aspx">Iron Horse Trail</a></p>
+<p><img src="/images/avatar.png" alt="my photo"></p>
+<p><strong>Also</strong> Checkout my <a href="/resources">resources</a> for my curated list of readings</p>
+]]></content:encoded></item><item><title>Command Query in Go Project</title><link>https://duykhoa.github.io/posts/command-query-in-go-project/</link><pubDate>Mon, 14 Oct 2024 15:59:15 -0400</pubDate><author>duykhoa12t[at]gmail[dot]com (Kevin Tran)</author><guid>https://duykhoa.github.io/posts/command-query-in-go-project/</guid><description>&lt;p>In Model-View-Controller applications, a common practice is to introduce service objects to encapsulate business logic and manage the interaction to external systems. While service objects are useful abstraction, further structuring them could improve the code organization and maintainability.&lt;/p>
+&lt;p>Command Query Separation (CQS) is a design pattern principle that defines the incoming request handler type, which is either modify the application state - commands, or retrieving data without any side effect - queries. By applying CQS to service objects, we can create clean interface. This blog post will explore further the benefits of CQS and how to create command and query objects in existing application.&lt;/p></description><content:encoded><![CDATA[<p>In Model-View-Controller applications, a common practice is to introduce service objects to encapsulate business logic and manage the interaction to external systems. While service objects are useful abstraction, further structuring them could improve the code organization and maintainability.</p>
+<p>Command Query Separation (CQS) is a design pattern principle that defines the incoming request handler type, which is either modify the application state - commands, or retrieving data without any side effect - queries. By applying CQS to service objects, we can create clean interface. This blog post will explore further the benefits of CQS and how to create command and query objects in existing application.</p>
+<h2 id="service-objects-challenges">Service Object&rsquo;s challenges</h2>
+<p>When using service objects, the application architecture is structured as follows</p>
+<p><img src="./service.png" alt="services"></p>
+<p>Anything could be thrown to the service layer, which is a good convenience at first. When the project grows, the service layer also grows and become complicated to maintain. Take a look at this services diagram</p>
+<p><img src="./services%20dependencies.png" alt="services dependencies"></p>
+<p>The service layer can quickly become bloated since any type of business logic can be encapsulated within. When start working on a new feature, developers often plan to create new service object if no existing service. The more features developed, the higher number of service objects added, which makes the system more complex and difficult to maintain.</p>
+<p>In addition, service objects can introduce dependencies on one another, creating a tangled relationship between services. This adds more difficulty to understand and modify, as changes one service may have unintended consequences to others.</p>
+<p>An effort could be made to unify the service&rsquo;s interfaces, however, this is going to be a challenging task that developers may overlook. A standardized interface is introduced early in the project, it may become technical debt that is abandoned when the requirements are evolved.</p>
+<h2 id="command-query-separation">Command Query Separation</h2>
+<p>To improve maintainability, testability and code readability, the service object could be categorized either as command object, which modifies the application&rsquo;s state, or query object, which returning data without side effects.</p>
+<p>By using this definition, an interface could be introduced for all Command handlers.</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">CommandHandler</span>[<span style="color:#a6e22e">C</span> <span style="color:#a6e22e">any</span>] <span style="color:#66d9ef">interface</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Handle</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">cmd</span> <span style="color:#a6e22e">C</span>) <span style="color:#66d9ef">error</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>The command handler receives a <code>C</code> generic command object, which is just a Go struct.
+Each specific command handler could specifies its <code>C</code> parameter type, performs some actions and returns an error represents if the actions was completed.</p>
+<p>Let&rsquo;s say we are building a command to create an article, the command receives a struct contains field <code>Title</code> and field <code>Body</code>.
+This setup looks like below:</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">CreateArticle</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Title</span> <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Body</span>  <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">CreateArticleHandler</span> = <span style="color:#a6e22e">common</span>.<span style="color:#a6e22e">CommandHandler</span>[<span style="color:#a6e22e">CreateArticle</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">createArticleHandler</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">createArticleHandler</span>) <span style="color:#a6e22e">Handle</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">cmd</span> <span style="color:#a6e22e">CreateArticle</span>) <span style="color:#66d9ef">error</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// TODO
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}</span></span></code></pre></div><p><code>CreateArticleHandler</code> is an interface that implements the generic <code>CommandHandler</code> interface, tailored in handling <code>CreateArticle</code> command.
+The code defines the <code>CreateArticleHandler</code> as a type follows the  <code>CommandHandler</code>, where the generic type is replaced by <code>CreateArticle</code>.
+Later on, it creates a struct <code>createArticleHandler</code> in lowercase that implement the <code>CreateArticleHandler</code>, it means the <code>createArticleHandler</code> must
+have the <code>Handle</code> function that accepts a <code>CreateArticle</code> object as an input.</p>
+<p>For Query handlers, the interface looks a bit different</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">QueryHandler</span>[<span style="color:#a6e22e">Q</span> <span style="color:#a6e22e">any</span>, <span style="color:#a6e22e">R</span> <span style="color:#a6e22e">any</span>] <span style="color:#66d9ef">interface</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Handle</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">q</span> <span style="color:#a6e22e">Q</span>) (<span style="color:#a6e22e">R</span>, <span style="color:#66d9ef">error</span>)
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>The query handler receives a <code>Q</code> generic query object and a <code>R</code> generic result object, which are go struct.
+Similar to the command handler, each query handler despecifiesfines its Q and R types, performs some actions and returns the result with type R and an error represents if the process was successful.</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">GetArticle</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">ID</span> <span style="color:#a6e22e">uuid</span>.<span style="color:#a6e22e">UUID</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">GetArticleHandler</span> = <span style="color:#a6e22e">common</span>.<span style="color:#a6e22e">QueryHandler</span>[<span style="color:#a6e22e">GetArticle</span>, <span style="color:#f92672">*</span><span style="color:#a6e22e">domain</span>.<span style="color:#a6e22e">Article</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">getArticleHandler</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">repo</span> <span style="color:#a6e22e">domain</span>.<span style="color:#a6e22e">Repository</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">getArticleHandler</span>) <span style="color:#a6e22e">Handle</span>(
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">q</span> <span style="color:#a6e22e">GetArticle</span>,
+</span></span><span style="display:flex;"><span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">domain</span>.<span style="color:#a6e22e">Article</span>, <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">article</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">repo</span>.<span style="color:#a6e22e">GetArticle</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">q</span>.<span style="color:#a6e22e">ID</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">err</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">article</span>, <span style="color:#66d9ef">nil</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p><code>GetArticleHandler</code> is an interface that implements the generic <code>QueryHandler</code> interface, specified in handling <code>GetArticle</code> query and returning the <code>Article</code> pointer from the domain package.
+It uses a private struct <code>getArticleHandler</code> that implements the <code>GetArticleHandler</code> interface, so this struct has a <code>Handle</code> function that accepts a <code>GetArticle</code> object as an input, then constructs and returns the <code>Article</code> pointer.</p>
+<p>In this example, the <code>getArticleHandler</code> has an dependency to the <code>Article</code> repository.
+The repository handles the interaction with the data source to fetch the article. With a simple <code>GetArticle</code> function provided by the repository, the query doesn&rsquo;t require to know how the repository get the article from, this helps to encapsulate the persistence logic from the query object.</p>
+<h2 id="cqs-advantages">CQS Advantages</h2>
+<p>The CQS pattern could be confused with the CQRS (Common Queue Responsibility Segregation), they both have the Command and Query concepts.
+The CQRS is usually implemented with an event bus, the pattern is popular in a system built with microservice architecture.</p>
+<p>CQS emphrasizes the separation of commands and queries and could apply to any existing architecture. When introducing CQS to an application, the application
+is easier to test, improve the scalability and establishing a clear structure.</p>
+<p>In term of testing, the query doesn&rsquo;t create any side effect, hence the test focus on the construct the query result from its dependencies. From the above example,
+the <code>GetArticleHandler</code> only depends on the repo, the test can simulate happy path and non-happy path by assuming the result returning by the repository.
+Testing the command is different, since the command doesn&rsquo;t return a value but an error, the testing focuses on the side effect it makes.
+By focusing in a single aspect, the test scenario is more comprehend to build and maintain.</p>
+<p>The command and query implements the generic command handler and query handler interface, additional functionalities such as logging could be implemented without touching to the command/query handler.
+To provide a clear picture, here is a pattern I am using when defind the command handler. The query decorators could be implemented with similar approach.</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#a6e22e">baseHandler</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">createArticleHandler</span>{}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">createArticleHandler</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">DecorateCommand</span>(<span style="color:#a6e22e">baseHandler</span>, <span style="color:#a6e22e">zerolog</span>.<span style="color:#a6e22e">New</span>(<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">StdErr</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">DecorateCommand</span>[<span style="color:#a6e22e">H</span> <span style="color:#a6e22e">any</span>](<span style="color:#a6e22e">handler</span> <span style="color:#a6e22e">CommandHandler</span>[<span style="color:#a6e22e">H</span>], <span style="color:#a6e22e">logger</span>: <span style="color:#a6e22e">logger</span>) {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">commandLogging</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">base</span>:   <span style="color:#a6e22e">handler</span>,
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">logger</span>: <span style="color:#a6e22e">logger</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">commandLogging</span>[<span style="color:#a6e22e">C</span> <span style="color:#a6e22e">any</span>] <span style="color:#66d9ef">struct</span> { <span style="color:#75715e">// implement CommandHandler
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#a6e22e">base</span>: <span style="color:#a6e22e">CommandHandler</span>[<span style="color:#a6e22e">C</span>]
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">logger</span>: <span style="color:#a6e22e">zerolog</span>.<span style="color:#a6e22e">Logger</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">d</span> <span style="color:#a6e22e">commandLogging</span>[<span style="color:#a6e22e">C</span>]) <span style="color:#a6e22e">Handle</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">cmd</span> <span style="color:#a6e22e">C</span>) (<span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">logger</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">logger</span>.
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">With</span>().
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">Str</span>(<span style="color:#e6db74">&#34;command&#34;</span>, <span style="color:#a6e22e">generateActionName</span>(<span style="color:#a6e22e">cmd</span>)).
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">Str</span>(<span style="color:#e6db74">&#34;command_body&#34;</span>, <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;%+v&#34;</span>, <span style="color:#a6e22e">cmd</span>)).
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">Logger</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">logger</span>.<span style="color:#a6e22e">Debug</span>().<span style="color:#a6e22e">Msg</span>(<span style="color:#e6db74">&#34;Executing Command&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">defer</span> <span style="color:#66d9ef">func</span>() {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#a6e22e">logger</span>.<span style="color:#a6e22e">Info</span>().<span style="color:#a6e22e">Msg</span>(<span style="color:#e6db74">&#34;Command executed successfully&#34;</span>)
+</span></span><span style="display:flex;"><span>		} <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#a6e22e">logger</span>.<span style="color:#a6e22e">Error</span>().<span style="color:#a6e22e">Err</span>(<span style="color:#a6e22e">err</span>).<span style="color:#a6e22e">Msg</span>(<span style="color:#e6db74">&#34;Failed to execute command&#34;</span>)
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">base</span>.<span style="color:#a6e22e">Handle</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">cmd</span>)
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>This setup adheres to the <strong>open for extension, closed for modification</strong> principle, enabling the addition of logging functionality without altering the <code>createArticleHandler</code> function directly.</p>
+<p>The DecorateCommand function applies the decorators, wrapping the original handler with a commandLogging struct.
+This allows for the application of multiple decorators to the original handler, each providing additional functionalities while keeping the original handler agnostic to these modifications.</p>
+<h2 id="recap">Recap</h2>
+<p>CQS enhances the modularity and maintainability of the application by separating commands (which modify the system state) from queries (which retrieve information).
+This alignment with the Domain-Driven Design (DDD) paradigm, which favors the Command-Query Separation (CQS) pattern, makes the transition to a DDD-based architecture more seamless.</p>]]></content:encoded></item><item><title>Application Validation and Error Handling</title><link>https://duykhoa.github.io/posts/application-error/</link><pubDate>Sun, 30 Jun 2024 16:59:15 -0400</pubDate><author>duykhoa12t[at]gmail[dot]com (Kevin Tran)</author><guid>https://duykhoa.github.io/posts/application-error/</guid><description>&lt;p>Some practices and patterns for handling exceptions in Java application.&lt;/p></description><content:encoded><![CDATA[<p>Some practices and patterns for handling exceptions in Java application.</p>
+<p>I&rsquo;m building online payment software that caters to both businesses and consumers.
+This software seamlessly integrates with various third-party services to facilitate secure money transfers between bank accounts.
+However, such transfers involve a complex multi-step process, with potential failure points at each stage due to various factors.</p>
+<p>To address this challenge, I&rsquo;m developing a comprehensive error mapping system that provides clear and actionable information to both merchants and consumers.
+This ensures transparency without compromising internal system details.</p>
+<p>By relying on HTTP status isn&rsquo;t sufficient for this system.
+HTTP protocol supports 4xx errors for the client side, like unauthorized (401), forbidden action (403), or unprocessible entity (422).
+Any invalid format in the payload results bad request (400). The project wants to support more detailed errors, hence there is requirement to generate more details in the error response.</p>
+<p>Here is the basic user exception handling to start with.</p>
+<p>Since the app is written in Java and Spring Boot, the basic validation rules are handled by Spring Boot Validation framework.
+Any violation will be reported in the <code>ConstraintViolation</code> set for further process.</p>
+<p>Spring Boot supports the <code>@Valid</code> annotation when defining the controller action, which throws an error of <code>ConstraintViolationException</code> for the details of any violation in the request payload.
+Further more, Spring Boot supports Error Handling involves <code>ControllerAdvice</code>, <code>ResponseStatusException</code>, <code>ExceptionHandler</code> that helps to structurize the error handling logic.
+If the app performs validation logic programmatically (calling the <code>validator</code> bean function directly), the validation only returns a list of violations and doesn&rsquo;t throw any error, hence it doesn&rsquo;t utilize
+the error handling support in Spring Boot.</p>
+<p>In a small project, directly handling the predefined <code>ConstraintViolationException</code> class should be a good enough solution. The entire process of validating the request payload, capturing the violations,
+and generate the exception object which contains the information of the user error are done out of the box. The only missing part is to generate the error response from the exception object.
+The exception object provides 2 methods <code>getPropertyPath</code> and <code>getMessage</code>, which tells the field name and the reason the validation fails.</p>
+<p>By default, Spring Boot Validator supports a few validator annotations, including <code>NotNull</code>, <code>NotBlank</code>, <code>Min</code>, <code>Max</code>, <code>Size</code>, <code>Pattern</code>, these validator rules may not be enough to validate the user input.
+Luckily, it isn&rsquo;t difficult to define a new validator, this <a href="https://www.baeldung.com/spring-mvc-custom-validator">post</a> is the most simple tutorial I could find on Internet for defining customizable validator.</p>
+<p>Until now, the validation logic still only handle field validation. For collaborative fields logic, such as the postal code format uses different formats for each supported country,
+or the amount is required when the transaction type is transferable, for non-transferable types, the amount can be omitted.
+For these validation logic, it is simpler to call the validator bean directly with the <a href="https://www.baeldung.com/javax-validation-groups">Group validation contraints</a>.</p>
+<p>With that additions, the app still works well with the Spring Boot predefined exception class, and we don&rsquo;t need to define new flow to return user&rsquo;s error response.
+Any error occurs after the validation step could be treated as <strong>Internal</strong> error, hence the common practice is to return a generic internal error message.</p>
+<p>Unfortunately, for a payment service, this level of detail doesn&rsquo;t provide enough context for the merchants to make the decision.
+There could be an error with the bank website, or the bank account got blocked by any reason, or the transaction limit exceeded, or the card info is in the blacklist, etc.
+These info aren&rsquo;t only helpful for our system, but also help to protect the merchant from making decision from their end. Which means the payment service has to construct the error payload
+that allows the merchant system to understand to react upon the returning error.</p>
+<p>Before I get deeper into the design of the merchant error code mapping, I think this part is worth to mention.
+Spring Boot <code>ConstraintViolationException</code> is limited for our needs. To effectively handle both validation exceptions and other exceptions, a robust error hierachy is needed.
+<a href="https://data-flair.training/blogs/java-exception/">Java error hierachy</a> has predefined the difference between error, and exception. Most projects has the own set of error class, where the base error class is inherit from the <code>RuntimeException</code>.
+It is rarely a good idea to throw a predefined error by Java, for instance the app shouldn&rsquo;t throw <code>NullPointerException</code>, instead, it handles the logic to prevent this exception to be thrown.</p>
+<p>In the payment project, there are a base exception class, and other exception inherits from it.
+As exception is a Java object, it shares the common OOP attributes with other POJOs, hence the exception could carry some information to use in the exception handler.
+This class could be an abstract class to avoid developers to use it directly.</p>
+<p>The first exception class the project should have is <code>InvalidPayloadException</code>, and this exception inherits from the base exception class.
+Other validation exceptions (related to validating user request payload) could inherit from this <code>InvalidPayloadException</code>.</p>
+<p>After the request is piped into the controller action, more programmatically validations could be executed, where the custom exceptions are thrown. The <code>ExceptionHandler</code> allows multiple exception class
+to be handled by a handling logic. However it is more complicated if the structure of the exception isn&rsquo;t the same. As mentioned above, the <code>ConstraintViolationException</code> has 2 methods to retrieve the field name and the failing reason,
+but the custom exception may not follow this setup.</p>
+<p>A simple solution is having a middle step to handle the <code>ConstraintViolationException</code> and rethrow the corresponding subclass of the <code>InvalidPayloadException</code> (application defined exception class).
+The app could have a map of field name to the exception class.</p>
+<p>Next exception is the <code>InternalException</code>, which also inherits from the base exception class. All other exceptions should inherit this exception class.
+These exceptions are used when any step in processing the user request cause an error. There should be no predefined exception throwed, only the application defined exception.</p>
+<p>Now we have the exceptions setup correctly, we can discuss about aggregating the exception and construct the error response.
+<a href="https://docs.oracle.com/en/java/javase/21/language/pattern-matching-switch-expressions-and-statements.html">Pattern matching</a> simplifies the mapping a lot with a switch statement, where the app can map certain exception classes to a merchant facing error code.
+The mapping could be many-to-one or one-to-one. In my case, it is many-to-one since the many exceptions are used for internal, those results the same merchant error code.</p>
+<p>The app is written in micro-services fashion, there are internal error codes and external error codes mapping.
+The internal error codes are useful for other internal consumer services to define the actions on the returning error code.
+The error codes are also captured in database and logs for further auditting and business intelligence purpose.</p>
+<p>Java Stream allows to swallow the exceptions, and return the error at the end. By utilizing this feature, the app can ignore the exception until the end of the process.
+It is useful for batch processing, such as performing multiple risk calculation rules for an incoming transaction, when several calculations failed, the process continues.
+At the end of the process, depends on the returned values of these successful evaluations, and the exception details, the software determine to stop or continue processing the request.
+Another example is uploading photos attached in a new post, the upload could be failed but the post is still created. Hence these exceptions shouldn&rsquo;t failed the process.</p>
+<p>That&rsquo;s it, thanks for reading this post. People come to a programmer blogs and see no code or diagram, it isn&rsquo;t satisfied, so here they are</p>
+<ul>
+<li>
+<p>Application Exception hierachy
+<img src="./errorhierachy.jpg" alt="hierachy"></p>
+</li>
+<li>
+<p>Use Pattern matching to map the exception class to merchant error code</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#75715e">// In the actual code, the merchantErrorCode is defined as enum, for simplicity, it is passed as a string</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">switch</span> (exception) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">case</span> InvalidPayloadException e <span style="color:#f92672">-&gt;</span> MerchantErrorCode.<span style="color:#a6e22e">builder</span>().<span style="color:#a6e22e">httpErrorCode</span>(400).<span style="color:#a6e22e">merchantErrorCode</span>(<span style="color:#e6db74">&#34;ME400&#34;</span>).<span style="color:#a6e22e">build</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">case</span> GetBalanceException e <span style="color:#f92672">-&gt;</span> MerchantErrorCode.<span style="color:#a6e22e">builder</span>().<span style="color:#a6e22e">httpErrorCode</span>(422).<span style="color:#a6e22e">merchantErrorCode</span>(<span style="color:#e6db74">&#34;ME402&#34;</span>).<span style="color:#a6e22e">build</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">default</span>: <span style="color:#75715e">// handle unexpected exception (not from the application exceptions)</span>
+</span></span><span style="display:flex;"><span>    }</span></span></code></pre></div></li>
+<li>
+<p>Catch <code>ConstraintViolationException</code> and return an application exception (subclass of <code>InvalidPayloadException</code>)</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#75715e">//  @ExceptionHandler(value = {ConstraintViolationException.class})</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">switch</span> (exception.<span style="color:#a6e22e">getPropertyPath</span>()) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">case</span> RequestPayloadDto.<span style="color:#a6e22e">Fields</span>.<span style="color:#a6e22e">transactionStatus</span> <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> InvalidTransactionStatusException(exception.<span style="color:#a6e22e">getMessage</span>());
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// other cases</span>
+</span></span><span style="display:flex;"><span>    }</span></span></code></pre></div></li>
+</ul>]]></content:encoded></item><item><title>Resources</title><link>https://duykhoa.github.io/resources/</link><pubDate>Sun, 09 Jun 2024 15:00:00 -0400</pubDate><author>duykhoa12t[at]gmail[dot]com (Kevin Tran)</author><guid>https://duykhoa.github.io/resources/</guid><description>&lt;h1 id="intro">Intro&lt;/h1>
+&lt;p>This page is for my humble list of resources.&lt;/p>
 &lt;p>There are many online resources, but not of them are worth my time.
 The tricky part is saving them so I can find next time.&lt;/p>
 &lt;p>The format I am using is&lt;/p>
+
+
+
+
+
 &lt;pre tabindex="0">&lt;code>[Title][Category|Category][URL|URL...]
 
-[DESCRIPTION - optional]
-&lt;/code>&lt;/pre>&lt;h1 id="programing">PROGRAMING &lt;a href="#programing" class="anchor">🔗&lt;/a>&lt;/h1>&lt;ol>
+[DESCRIPTION - optional]&lt;/code>&lt;/pre>&lt;h1 id="programing">PROGRAMING&lt;/h1>
+&lt;ol>
 &lt;li>
-&lt;p>[Sparse Table][cp][&lt;a href="https://en.wikipedia.org/wiki/Sparse_matrix?useskin=vector" target="_blank" rel="noopener">wikipedia&lt;/a>|&lt;a href="https://cp-algorithms.com/data_structures/sparse-table.html" target="_blank" rel="noopener">cp-algo&lt;/a>]&lt;/p>
+&lt;p>[Sparse Table][cp][&lt;a href="https://en.wikipedia.org/wiki/Sparse_matrix?useskin=vector">wikipedia&lt;/a>|&lt;a href="https://cp-algorithms.com/data_structures/sparse-table.html">cp-algo&lt;/a>]&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>[Algomonster][algo][&lt;a href="https://algo.monster/liteproblems/31" target="_blank" rel="noopener">url&lt;/a>]&lt;/p>
+&lt;p>[Algomonster][algo][&lt;a href="https://algo.monster/liteproblems/31">url&lt;/a>]&lt;/p>
 &lt;p>A memoir technique to answer a range of queries without recalculating the result per query, using 2d array matrix.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>[Disjoint set][cp][&lt;a href="https://cp-algorithms.com/data_structures/disjoint_set_union.html" target="_blank" rel="noopener">cp-algo&lt;/a>]&lt;/p>
+&lt;p>[Disjoint set][cp][&lt;a href="https://cp-algorithms.com/data_structures/disjoint_set_union.html">cp-algo&lt;/a>]&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>[Disjoint sparse table][cp][&lt;a href="https://discuss.codechef.com/t/tutorial-disjoint-sparse-table/17404" target="_blank" rel="noopener">cp-algo&lt;/a>]&lt;/p></description></item><item><title>User Authentication With Springboot using local database</title><link>https://duykhoa.github.io/posts/user-authentication-with-springboot/</link><pubDate>Mon, 05 Feb 2024 08:07:22 -0500</pubDate><guid>https://duykhoa.github.io/posts/user-authentication-with-springboot/</guid><description>&lt;p>This post explains how to configure the spring security for your app to support user authentication using local database.&lt;/p></description></item><item><title>Tracking Email Activity Ses</title><link>https://duykhoa.github.io/posts/tracking-email-activity-ses/</link><pubDate>Wed, 28 Jun 2023 16:41:25 -0400</pubDate><guid>https://duykhoa.github.io/posts/tracking-email-activity-ses/</guid><description>&lt;p>This post explains in detailed how to track email sending activities using SNS HTTPs endpoint.&lt;/p></description></item><item><title>Setup local domain with self-signed SSL certificate</title><link>https://duykhoa.github.io/posts/local-domain/</link><pubDate>Tue, 18 Apr 2023 22:51:16 -0400</pubDate><guid>https://duykhoa.github.io/posts/local-domain/</guid><description>&lt;p>This is a post about setting up the local domain and SSL certs for testing purpose.&lt;/p></description></item><item><title>About</title><link>https://duykhoa.github.io/about/</link><pubDate>Sun, 16 Apr 2023 15:00:15 -0400</pubDate><guid>https://duykhoa.github.io/about/</guid><description>&lt;p>&lt;strong>Hey there, software enthusiasts!&lt;/strong>&lt;/p>
-&lt;p>My name is Kevin Tran, and I&amp;rsquo;m a Software Engineer with a burning passion for all things DevOps. Over the years, I&amp;rsquo;ve had the privilege of contributing to successful projects across diverse industries, from private banking to ride-hailing and even the automotive world.&lt;/p>
-&lt;p>For the past five years, I&amp;rsquo;ve been invested my time in building microservices. To ensure top-notch code delivered, I rely on Test-Driven Development and Continuous Integration/Continuous Delivery (CI/CD). While I spent a good chunk of time developing applications with Ruby on Rails and Hanami, I&amp;rsquo;ve recently transitioned to more flexible, high-performance technologies like Go, Java, and NodeJS. I&amp;rsquo;m a big fan of monorepos and trunk-based development. Plus, I love creating internal tools to make life easier for fellow engineers.&lt;/p></description></item><item><title>A project specific command-line</title><link>https://duykhoa.github.io/posts/a-cli-showcase/</link><pubDate>Tue, 28 Feb 2023 22:59:40 -0500</pubDate><guid>https://duykhoa.github.io/posts/a-cli-showcase/</guid><description>&lt;p>Build a commandline tool that helps bootstrap the project&lt;/p></description></item><item><title>A Simple Infrastructure</title><link>https://duykhoa.github.io/posts/a-simple-infras/</link><pubDate>Tue, 07 Jun 2022 09:55:09 -0400</pubDate><guid>https://duykhoa.github.io/posts/a-simple-infras/</guid><description>&lt;p>Idea of building the infrastructure with Amazon Web Service using Terraform, Ansible and Jenkins.&lt;/p></description></item></channel></rss>
+&lt;p>[Disjoint sparse table][cp][&lt;a href="https://discuss.codechef.com/t/tutorial-disjoint-sparse-table/17404">cp-algo&lt;/a>]&lt;/p></description><content:encoded><![CDATA[<h1 id="intro">Intro</h1>
+<p>This page is for my humble list of resources.</p>
+<p>There are many online resources, but not of them are worth my time.
+The tricky part is saving them so I can find next time.</p>
+<p>The format I am using is</p>
+
+
+
+
+
+<pre tabindex="0"><code>[Title][Category|Category][URL|URL...]
+
+[DESCRIPTION - optional]</code></pre><h1 id="programing">PROGRAMING</h1>
+<ol>
+<li>
+<p>[Sparse Table][cp][<a href="https://en.wikipedia.org/wiki/Sparse_matrix?useskin=vector">wikipedia</a>|<a href="https://cp-algorithms.com/data_structures/sparse-table.html">cp-algo</a>]</p>
+</li>
+<li>
+<p>[Algomonster][algo][<a href="https://algo.monster/liteproblems/31">url</a>]</p>
+<p>A memoir technique to answer a range of queries without recalculating the result per query, using 2d array matrix.</p>
+</li>
+<li>
+<p>[Disjoint set][cp][<a href="https://cp-algorithms.com/data_structures/disjoint_set_union.html">cp-algo</a>]</p>
+</li>
+<li>
+<p>[Disjoint sparse table][cp][<a href="https://discuss.codechef.com/t/tutorial-disjoint-sparse-table/17404">cp-algo</a>]</p>
+</li>
+<li>
+<p>[Defer Recover Panic in Golang][go][<a href="https://go.dev/blog/defer-panic-and-recover">go.dev</a>]</p>
+</li>
+<li>
+<p>[Concurrency pattern in Go][go][<a href="https://github.com/luk4z7/go-concurrency-guide">github</a>]</p>
+</li>
+<li>
+<p>[Buf connect][go|grpc][<a href="https://buf.build/blog/connect-a-better-grpc">buf blog</a>]</p>
+<p>This blog post explain why buf-connect is a better framework compare to Google gRPC implementation</p>
+</li>
+<li>
+<p>[Segment tree][cp][<a href="https://www.geeksforgeeks.org/segment-tree-data-structure/">cp-algo</a>|<a href="https://cp-algorithms.com/data_structures/segment_tree.html">cp-algo</a>|[cses][https://cses.fi/problemset/task/1143/]]</p>
+</li>
+</ol>
+<h1 id="tips">Tips</h1>
+<ol>
+<li>[java use equals instead of == when comparing integers][java][<a href="https://stackoverflow.com/questions/3637936/java-integer-equals-vs">stackoverflow</a>]</li>
+</ol>
+<h1 id="open-sources">OPEN SOURCES</h1>
+<h1 id="blogs">Blogs</h1>
+<ol>
+<li>[Code review tips][codereview][<a href="https://google.github.io/eng-practices/review/reviewer/">google eng practice</a>|<a href="https://mtlynch.io/code-review-love/">code reviewer fall in love</a>|<a href="https://developers.redhat.com/blog/2019/07/08/10-tips-for-reviewing-code-you-dont-like">redhat dev blog</a>]</li>
+</ol>
+<p>The list doesn&rsquo;t include general tech news (InfoQ, the new web, tech explore, wired, etc.)</p>
+<ul>
+<li><a href="https://news.ycombinator.com">hackernews</a> and <a href="https://hn.algolia.com">hnalgolia</a></li>
+<li><a href="https://ludic.mataroa.blog/blog/i-will-fucking-piledrive-you-if-you-mention-ai-again/">I Will Fucking Piledrive You If You Mention AI Again</a></li>
+<li><a href="https://www.mermaidchart.com/blog/posts/sequence-diagrams-the-good-thing-uml-brought-to-software-development">Sequence diagrams, the only good thing UML brought to software development</a> This works for me, not sure if it works for everyone, but lately I have used sequence diagram intensively</li>
+<li></li>
+</ul>
+]]></content:encoded></item><item><title>User Authentication With Springboot using local database</title><link>https://duykhoa.github.io/posts/user-authentication-with-springboot/</link><pubDate>Mon, 05 Feb 2024 08:07:22 -0500</pubDate><author>duykhoa12t[at]gmail[dot]com (Kevin Tran)</author><guid>https://duykhoa.github.io/posts/user-authentication-with-springboot/</guid><description>&lt;p>This post explains how to configure the spring security for your app to support user authentication using local database.&lt;/p></description><content:encoded><![CDATA[<p>This post explains how to configure the spring security for your app to support user authentication using local database.</p>
+<h1 id="introduction">Introduction</h1>
+<p>In Spring Boot, there is no plug-and-play like other frameworks. To get the user authentication working, you need to write some code to glue the required components working together. Spring Security was designed to be flexible with multiple authentication/authorization strategies.</p>
+<h1 id="overview-design">Overview design</h1>
+<h2 id="servlet-filter-chains">Servlet Filter chains</h2>
+<p><img src="filterchain.png" alt="filterchain.png"></p>
+<p><em>source from <a href="https://docs.spring.io/spring-security/reference/servlet/authentication/architecture.html">SpringIO</a></em></p>
+<p>Here is an example of configuring the security filter</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Configuration</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@EnableWebSecurity</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SecurityConfig</span> {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Bean</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> SecurityFilterChain <span style="color:#a6e22e">filterChain</span>(HttpSecurity httpSecurity) <span style="color:#66d9ef">throws</span> Exception {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> httpSecurity
+</span></span><span style="display:flex;"><span>                .<span style="color:#a6e22e">authorizeHttpRequests</span>(authorize <span style="color:#f92672">-&gt;</span> authorize
+</span></span><span style="display:flex;"><span>                        .<span style="color:#a6e22e">requestMatchers</span>(<span style="color:#e6db74">&#34;/demo/default&#34;</span>)
+</span></span><span style="display:flex;"><span>                        .<span style="color:#a6e22e">permitAll</span>()
+</span></span><span style="display:flex;"><span>                        .<span style="color:#a6e22e">anyRequest</span>()
+</span></span><span style="display:flex;"><span>                        .<span style="color:#a6e22e">authenticated</span>()
+</span></span><span style="display:flex;"><span>                ).<span style="color:#a6e22e">csrf</span>(AbstractHttpConfigurer::disable)
+</span></span><span style="display:flex;"><span>                .<span style="color:#a6e22e">httpBasic</span>(Customizer.<span style="color:#a6e22e">withDefaults</span>())
+</span></span><span style="display:flex;"><span>                .<span style="color:#a6e22e">build</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>With this security configuration, the application permits unrestricted access to the &ldquo;/demo/default&rdquo; path, while other paths require basic authentication. By specifying <code>httpBasic</code> configuration, it expects the <code>Authorization</code> header alongside the Basic authentication strategy, adhering to the format <code>Basic xxxxx</code>.</p>
+<h2 id="create-custom-implementation-of-userdetailsservice-interface">Create custom implementation of UserDetailsService interface</h2>
+<p>This service is the core service to load the user information, this has an abstract method to load the user by username (<code>loadUserByUsername</code>). The service is a dependency of <code>DaoAuthenticationProvider</code>, which handles the authentication logic.</p>
+<p><img src="DaoAuthenticationProvider.png" alt="DaoAuthenticationProvider.png"></p>
+<p>The <a href="https://docs.spring.io/spring-security/reference/servlet/authentication/passwords/dao-authentication-provider.html">Spring documentation</a> provides a detailed explanation of how these components are interconnected to execute the authentication logic using username and password.</p>
+<p>By implementing the UserDetailsService, we can specify how SpringSecurity will fetch the user information from the local database.</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Service</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CustomUserDetailsService</span> <span style="color:#66d9ef">implements</span> UserDetailsService {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> AccountRepository accountRepository;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">CustomUserDetailsService</span>(AccountRepository accountRepository) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">accountRepository</span> <span style="color:#f92672">=</span> accountRepository;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> UserDetails <span style="color:#a6e22e">loadUserByUsername</span>(String email) <span style="color:#66d9ef">throws</span> UsernameNotFoundException {
+</span></span><span style="display:flex;"><span>        Account account <span style="color:#f92672">=</span> accountRepository.<span style="color:#a6e22e">findByEmail</span>(email);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (account <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> UsernameNotFoundException(<span style="color:#e6db74">&#34;account not found&#34;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        List<span style="color:#f92672">&lt;</span>GrantedAuthority<span style="color:#f92672">&gt;</span> grantedAuthorities <span style="color:#f92672">=</span> AuthorityUtils
+</span></span><span style="display:flex;"><span>                .<span style="color:#a6e22e">createAuthorityList</span>(account.<span style="color:#a6e22e">getRoles</span>().<span style="color:#a6e22e">stream</span>().<span style="color:#a6e22e">map</span>(Role::getName).<span style="color:#a6e22e">toList</span>());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> UserDetailsImpl
+</span></span><span style="display:flex;"><span>                .<span style="color:#a6e22e">builder</span>()
+</span></span><span style="display:flex;"><span>                .<span style="color:#a6e22e">id</span>(account.<span style="color:#a6e22e">getId</span>())
+</span></span><span style="display:flex;"><span>                .<span style="color:#a6e22e">email</span>(account.<span style="color:#a6e22e">getEmail</span>())
+</span></span><span style="display:flex;"><span>                .<span style="color:#a6e22e">password</span>(account.<span style="color:#a6e22e">getEncodedPassword</span>())
+</span></span><span style="display:flex;"><span>                .<span style="color:#a6e22e">enabled</span>(account.<span style="color:#a6e22e">getEnabled</span>())
+</span></span><span style="display:flex;"><span>                .<span style="color:#a6e22e">credentialsExpiredAt</span>(account.<span style="color:#a6e22e">getCredentialsExpiredAt</span>())
+</span></span><span style="display:flex;"><span>                .<span style="color:#a6e22e">expiredAt</span>(account.<span style="color:#a6e22e">getExpiredAt</span>())
+</span></span><span style="display:flex;"><span>                .<span style="color:#a6e22e">lockedAt</span>(account.<span style="color:#a6e22e">getLockedAt</span>())
+</span></span><span style="display:flex;"><span>                .<span style="color:#a6e22e">createdAt</span>(account.<span style="color:#a6e22e">getCreatedAt</span>())
+</span></span><span style="display:flex;"><span>                .<span style="color:#a6e22e">updatedAt</span>(account.<span style="color:#a6e22e">getUpdatedAt</span>())
+</span></span><span style="display:flex;"><span>                .<span style="color:#a6e22e">authorityList</span>(grantedAuthorities)
+</span></span><span style="display:flex;"><span>                .<span style="color:#a6e22e">build</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>The <code>CustomUserDetailsService</code> implements the <code>UserDetailsService</code>, which is an interface defined by <code>SpringSecurity</code>. It override the <code>loadUserByUsername</code> function by fetching the <code>account</code> using the repository.
+After the account is found, the service builds the authorities list by looking at the <code>roles</code> association.</p>
+<p>In this demo, the relationship between <code>Account</code> and <code>Role</code> is many-to-many, as an account can have many roles, and a role could be attached to multiple accounts. In SpringSecurity, beside roles, there are different terminologies for granted authorities, such as <code>scopes</code> and <code>groups</code>.</p>
+<p>The <code>UserDetailsImpl</code> is a java class that implements the Spring <code>UserDetails</code> interface. The implement could look like following</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@SuperBuilder</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@AllArgsConstructor</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserDetailsImpl</span> <span style="color:#66d9ef">extends</span> Account <span style="color:#66d9ef">implements</span> UserDetails {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> List<span style="color:#f92672">&lt;</span>GrantedAuthority<span style="color:#f92672">&gt;</span> authorityList;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Collection<span style="color:#f92672">&lt;?</span> <span style="color:#66d9ef">extends</span> GrantedAuthority<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">getAuthorities</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> Collections.<span style="color:#a6e22e">unmodifiableList</span>(authorityList);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getUsername</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> getEmail();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">isAccountNonExpired</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> getExpiredAt() <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">||</span> getExpiredAt().<span style="color:#a6e22e">isBefore</span>(Instant.<span style="color:#a6e22e">now</span>());
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">isAccountNonLocked</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> getLockedAt() <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">isCredentialsNonExpired</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> getCredentialsExpiredAt() <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">||</span> getCredentialsExpiredAt().<span style="color:#a6e22e">isBefore</span>(Instant.<span style="color:#a6e22e">now</span>());
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">isEnabled</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> getEnabled();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>In this implementation, I use some columns in the <code>accounts</code> table like <code>expiredAt</code>. In real project, these logic can be implemented differently based on the project requirements.</p>
+<h2 id="encoded-password">Encoded password</h2>
+<p>In Java, we can use PasswordEncoder to encode and check if the provided password is matched with the encoded password, here is a sample code to create the encoder and call its behaviors</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    PasswordEncoder encoder <span style="color:#f92672">=</span> PasswordEncoderFactories.<span style="color:#a6e22e">createDelegatingPasswordEncoder</span>();
+</span></span><span style="display:flex;"><span>    String encodedPassword <span style="color:#f92672">=</span> encoder.<span style="color:#a6e22e">encode</span>(<span style="color:#e6db74">&#34;password&#34;</span>); <span style="color:#75715e">// the value of encodedPassword is &#34;{bcrypt}$2a$10$tBC.TeiMDcNt8rBHeqB6.eFg5Yb6HxlRy7RapEyxLM9ZEhV4fDZAq&#34;;</span>
+</span></span><span style="display:flex;"><span>    String rawPassword <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;password&#34;</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">boolean</span> isMatched <span style="color:#f92672">=</span> encoder.<span style="color:#a6e22e">matches</span>(rawPassword, encodedPassword);
+</span></span><span style="display:flex;"><span>    assertTrue(isMatched);</span></span></code></pre></div><p>Both encoding and decoding would require the password encoder, it is a good idea to define a bean for it. SpringSecurity looks for the bean automatically. Hence the full configuration would look like following</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Configuration</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@EnableMethodSecurity</span>()
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SecConfiguration</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Bean</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> PasswordEncoder <span style="color:#a6e22e">passwordEncoder</span>(){
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> PasswordEncoderFactories.<span style="color:#a6e22e">createDelegatingPasswordEncoder</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Bean</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> SecurityFilterChain <span style="color:#a6e22e">filterChain</span>(HttpSecurity httpSecurity) <span style="color:#66d9ef">throws</span> Exception {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> httpSecurity
+</span></span><span style="display:flex;"><span>                .<span style="color:#a6e22e">authorizeHttpRequests</span>(authorize <span style="color:#f92672">-&gt;</span> authorize
+</span></span><span style="display:flex;"><span>                        .<span style="color:#a6e22e">requestMatchers</span>(<span style="color:#e6db74">&#34;/demo/default&#34;</span>)
+</span></span><span style="display:flex;"><span>                        .<span style="color:#a6e22e">permitAll</span>()
+</span></span><span style="display:flex;"><span>                        .<span style="color:#a6e22e">anyRequest</span>()
+</span></span><span style="display:flex;"><span>                        .<span style="color:#a6e22e">authenticated</span>()
+</span></span><span style="display:flex;"><span>                ).<span style="color:#a6e22e">csrf</span>(AbstractHttpConfigurer::disable)
+</span></span><span style="display:flex;"><span>                .<span style="color:#a6e22e">httpBasic</span>(Customizer.<span style="color:#a6e22e">withDefaults</span>())
+</span></span><span style="display:flex;"><span>                .<span style="color:#a6e22e">build</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><h2 id="controller">Controller</h2>
+<p>After configuring the entire authentication logic, we can finally create a controller to test if the code works correctly</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Conditional</span>(IsDevEnvCondition.<span style="color:#a6e22e">class</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@RestController</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@RequestMapping</span>(<span style="color:#e6db74">&#34;/demo&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DevAuthenticationController</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> SetupTestDataUsecase setupTestDataUsecase;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">DevAuthenticationController</span>(SetupTestDataUsecase setupTestDataUsecase) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">setupTestDataUsecase</span> <span style="color:#f92672">=</span> setupTestDataUsecase;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@GetMapping</span>(<span style="color:#e6db74">&#34;/admin/dashboard&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@PreAuthorize</span>(<span style="color:#e6db74">&#34;hasRole(&#39;ADMIN&#39;)&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">showAdminDashboard</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Successfully access admin dashboard&#34;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@GetMapping</span>(<span style="color:#e6db74">&#34;/user/dashboard&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@PreAuthorize</span>(<span style="color:#e6db74">&#34;hasRole(&#39;USER&#39;)&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">showUserDashboard</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Successfully access User dashboard&#34;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@GetMapping</span>(<span style="color:#e6db74">&#34;/superadmin/dashboard&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@PreAuthorize</span>(<span style="color:#e6db74">&#34;hasRole(&#39;SUPER_ADMIN&#39;)&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">showSuperAdminDashboard</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Successfully access Super Admin dashboard&#34;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@GetMapping</span>(<span style="color:#e6db74">&#34;/default&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">showDefaultPage</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Without any authority, guest can see this page&#34;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@PostMapping</span>(<span style="color:#e6db74">&#34;/superadmin/run-me-first&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@PreAuthorize</span>(<span style="color:#e6db74">&#34;hasRole(&#39;SUPER_ADMIN&#39;)&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">runMeFirst</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> setupTestDataUsecase.<span style="color:#a6e22e">execute</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>This <code>DevAuthenticationController</code> is only available in the dev environment by specifying the <code>@Conditional(IsDevEnvCondition.class)</code> annotation. This annotation is easy to write, I&rsquo;d skip to talk about it to focus on the controller activities.</p>
+<p>We need to run the <code>/superadmin/run-me-first</code>, this will create the test data. When starting the application, only the super admin account is created. We would need other roles to perform different tests, hence this endpoint helps to create other testing accounts.</p>
+<p>The <code>/default</code> path accepts all traffics, there is no restriction on this path due to previous configuration on the <code>SecConfiguration</code>. Other path requires the basic authentication and sufficient role to access the content, for instance the <code>/user/dashboard</code> requires the account to have the <code>USER</code> role.</p>
+<p>As mentioned earlier, an account could have multiple roles, the <code>setupTestDataUsecase</code> creates some test accounts with several roles attached:</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    Account adminAccount <span style="color:#f92672">=</span> Account
+</span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">builder</span>()
+</span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">email</span>(<span style="color:#e6db74">&#34;admin@email.com&#34;</span>)
+</span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">password</span>(<span style="color:#e6db74">&#34;password&#34;</span>)
+</span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">enabled</span>(<span style="color:#66d9ef">true</span>)
+</span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">roles</span>(Set.<span style="color:#a6e22e">of</span>(adminRole))
+</span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">build</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    Account multiRolesAccount1 <span style="color:#f92672">=</span> Account
+</span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">builder</span>()
+</span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">email</span>(<span style="color:#e6db74">&#34;multiroles1@email.com&#34;</span>)
+</span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">password</span>(<span style="color:#e6db74">&#34;password&#34;</span>)
+</span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">enabled</span>(<span style="color:#66d9ef">true</span>)
+</span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">roles</span>(Set.<span style="color:#a6e22e">of</span>(userRole, adminRole))
+</span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">build</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    Account multiRolesAccount2 <span style="color:#f92672">=</span> Account
+</span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">builder</span>()
+</span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">email</span>(<span style="color:#e6db74">&#34;multiroles2@email.com&#34;</span>)
+</span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">password</span>(<span style="color:#e6db74">&#34;password&#34;</span>)
+</span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">enabled</span>(<span style="color:#66d9ef">true</span>)
+</span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">roles</span>(Set.<span style="color:#a6e22e">of</span>(userRole, superAdminRole))
+</span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">build</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//...</span>
+</span></span><span style="display:flex;"><span>    accountRepository.<span style="color:#a6e22e">saveAll</span>(accounts);</span></span></code></pre></div><h2 id="running-the-app">Running the app</h2>
+<p>First, we can run the app in the <code>Run</code> mode, and use the <code>http.request</code> collection to test each endpoint (ensure to run the &ldquo;/superadmin/run-me-first&rdquo; first).</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>### Run this request first to setup testing data
+</span></span><span style="display:flex;"><span>POST {{ apiUrl }}/demo/superadmin/run-me-first
+</span></span><span style="display:flex;"><span>Authorization: {{ authorization_token }}
+</span></span><span style="display:flex;"><span>Accept: application/json
+</span></span><span style="display:flex;"><span>Content-Type: application/json
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>### /admin/dashboard returns 200
+</span></span><span style="display:flex;"><span>GET {{ apiUrl }}/demo/admin/dashboard
+</span></span><span style="display:flex;"><span>Authorization: Basic superadmin@email.com password
+</span></span><span style="display:flex;"><span>Accept: application/json
+</span></span><span style="display:flex;"><span>Content-Type: application/json
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>### /user/dashboard returns 200
+</span></span><span style="display:flex;"><span>GET {{ apiUrl }}/demo/user/dashboard
+</span></span><span style="display:flex;"><span>Authorization: Basic user@email.com password
+</span></span><span style="display:flex;"><span>Accept: application/json
+</span></span><span style="display:flex;"><span>Content-Type: application/json
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>### /user/dashboard with multi roles 1 returns 200
+</span></span><span style="display:flex;"><span>GET {{ apiUrl }}/demo/admin/dashboard
+</span></span><span style="display:flex;"><span>Authorization: Basic multiroles1@email.com password
+</span></span><span style="display:flex;"><span>Accept: application/json
+</span></span><span style="display:flex;"><span>Content-Type: application/json
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>### /user/dashboard with multi roles 1 result 403
+</span></span><span style="display:flex;"><span>GET {{ apiUrl }}/demo/superadmin/dashboard
+</span></span><span style="display:flex;"><span>Authorization: Basic multiroles1@email.com password
+</span></span><span style="display:flex;"><span>Accept: application/json
+</span></span><span style="display:flex;"><span>Content-Type: application/json
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>### /user/dashboard with multi roles 2
+</span></span><span style="display:flex;"><span>GET {{ apiUrl }}/demo/user/dashboard
+</span></span><span style="display:flex;"><span>Authorization: Basic multiroles2@email.com password
+</span></span><span style="display:flex;"><span>Accept: application/json
+</span></span><span style="display:flex;"><span>Content-Type: application/json
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>### /default no authorization required
+</span></span><span style="display:flex;"><span>GET {{ apiUrl }}/demo/default
+</span></span><span style="display:flex;"><span>Accept: application/json
+</span></span><span style="display:flex;"><span>Content-Type: application/json</span></span></code></pre></div><p>After that, we could run the app in debugger mode, here are my breakpoints for your preferences</p>
+<ul>
+<li><code>DaoAuthenticationProvider</code>, function <code>retrieveUser</code> and <code>additionalAuthenticationChecks</code></li>
+<li><code>SecurityExpressionRoot</code>, function <code>hasRole</code> and <code>hasAnyAuthorityName</code></li>
+</ul>
+<p>Both classes mentioned here are located under SpringSecurity library, you can find them in the external libraries section, the path is <code>org/springframework/security/authentication/dao/DaoAuthenticationProvider.class</code>.</p>
+<p>When sending the request from the <code>http request</code> above, the debugger stops at the <code>DaoAuthenticationProvider#retrieveUser</code>.
+Since the <code>UserDetailsService</code> is a dependency of <code>DaoAuthenticationProvider</code>, we can check if our implementation for the <code>CustomUserDetailsService#loadUserByUsername</code> works correctly.
+<img src="debugLoadedUser.png" alt="debugLoadedUser.png"></p>
+<p>This screenshot shows a lot of useful information, for example the data type of the <code>principal</code>, <code>credential</code>, etc. which helps us to understand SpringSecurity better.</p>
+<p><img src="spring-security-authentication-design.png" alt="spring-security-authentication-design.png"></p>
+<p>We also see the <code>UserDetailsServices</code> has been used in the <code>DaoAuthenticationProvider</code> and it returns the <code>loadedUser</code> in type <code>UserDetailsImpl</code> correctly from the database.</p>
+<p>And this screenshot shows how the <code>hasRole</code> annotation works, this annotation is used in the controller to check if the principal has sufficient authority to access the endpoint.</p>
+<p><img src="debugHasRole.png" alt="debugHasRole.png"></p>
+<p>The code for the <code>hasRole</code> function is implemented in SpringSecurity as following:</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">hasRole</span>(String role) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> hasAnyRole(role);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">hasAnyRole</span>(String... roles) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> hasAnyAuthorityName(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">defaultRolePrefix</span>, roles);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">hasAnyAuthorityName</span>(String prefix, String... roles) {
+</span></span><span style="display:flex;"><span>    Set<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> roleSet <span style="color:#f92672">=</span> getAuthoritySet();
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (String role : roles) {
+</span></span><span style="display:flex;"><span>        String defaultedRole <span style="color:#f92672">=</span> getRoleWithDefaultPrefix(prefix, role);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (roleSet.<span style="color:#a6e22e">contains</span>(defaultedRole)) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>;
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>This <code>hasAnyAuthorityName</code> invokes a utility function <code>getRoleWithDefaultPrefix</code>, that function takes the <code>prefix</code> (ROLE_) and appends the role value (loaded from the account roles table) to construct the <code>defaultRole</code>, hence the role value in database can omit the <code>ROLE_</code> prefix.</p>
+<h1 id="conclusion">Conclusion</h1>
+<p>This post is a short tutorial of how to connect the SpringSecurity with the local database credentials provider to authenticate and authorize the request. Through this post, my aim is to guide you how to navigate the SpringSecurity source code using debugger tool, which I believe is an invaluable method for gaining a deeper understanding of its design. By grasping the intricacies of its structure, not only does development become more streamlined, but troubleshooting also becomes significantly more efficient.
+The example repository can be found in <a href="https://github.com/duykhoa/sec">Github</a>.</p>
+<p>Thanks for reading!</p>]]></content:encoded></item><item><title>Tracking Email Activity Ses</title><link>https://duykhoa.github.io/posts/tracking-email-activity-ses/</link><pubDate>Wed, 28 Jun 2023 16:41:25 -0400</pubDate><author>duykhoa12t[at]gmail[dot]com (Kevin Tran)</author><guid>https://duykhoa.github.io/posts/tracking-email-activity-ses/</guid><description>&lt;p>This post explains in detailed how to track email sending activities using SNS HTTPs endpoint.&lt;/p></description><content:encoded><![CDATA[<p>This post explains in detailed how to track email sending activities using SNS HTTPs endpoint.</p>
+<h1 id="introduction">Introduction</h1>
+<p>The email sending function is a common feature found in almost every website. For developers, <a href="https://docs.aws.amazon.com/ses/index.html">AWS SES (AWS Simple Email Service)</a> is a popular choice, particularly when the website is hosted on the AWS cloud. Although AWS SES doesn&rsquo;t directly support email activity tracking, it does offer the possibility to create custom tracking features by integrating with other AWS services. In this post, I will explain how to build an application that tracks email sending activities using SNS HTTPs endpoint.</p>
+<h1 id="ses-setup">SES Setup</h1>
+<h2 id="configure-aws-ses">Configure AWS SES</h2>
+<p>Implementing email communication with AWS SES is a straightforward task, thanks to the support of various programming languages provided by <a href="https://aws.amazon.com/developer/tools/">AWS developer tools</a>.
+To send an email using SES, we can directly call the AWS SDK. Here&rsquo;s an example using NodeJS:</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">client</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">SESClient</span>(<span style="color:#a6e22e">config</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">AWS</span>.<span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">loadFromPath</span>(<span style="color:#e6db74">&#39;./credentials.json&#39;</span>); <span style="color:#75715e">// for testing purpose
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">command</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">SendEmailCommand</span>({
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Destination</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">ToAddresses</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">&#39;testemail@gmail.com&#39;</span>],
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Message</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">Subject</span><span style="color:#f92672">:</span> { <span style="color:#a6e22e">Data</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Test Subject&#39;</span> },
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">Body</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Text</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">Charset</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;UTF-8&#39;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">Data</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;This is a test email&#39;</span>,
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Source</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;noreply@mydomain.com&#39;</span>,
+</span></span><span style="display:flex;"><span>  });
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">response</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">send</span>(<span style="color:#a6e22e">command</span>);</span></span></code></pre></div><p>For production ready, I am using the <a href="https://nodemailer.com/">NodeMailer package</a> instead, which provides a slightly better interface:</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ses</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">aws</span>.<span style="color:#a6e22e">SES</span>({});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">message</span> <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">from</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;noreply@mydomain.com&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">to</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;testemail@gmail.com&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">subject</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Test Subject&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">text</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;body in text&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">html</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;&lt;p&gt;HTML content&lt;/p&gt;&#39;</span>,
+</span></span><span style="display:flex;"><span>  };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">transport</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">nodemailer</span>.<span style="color:#a6e22e">createTransport</span>({
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">SES</span><span style="color:#f92672">:</span> {<span style="color:#a6e22e">ses</span>, <span style="color:#a6e22e">aws</span>},
+</span></span><span style="display:flex;"><span>  });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">transport</span>.<span style="color:#a6e22e">sendMail</span>(<span style="color:#a6e22e">data</span>);</span></span></code></pre></div><p>Rather than directly calling the SES Client, NodeMailer redirects the API call to SES through the Transport object, making it easy to switch to different transportation options.
+This flexibility is particularly helpful for developers when running the code in development and test environments. We&rsquo;ll explore this further in the <strong>Testing</strong> section later on.</p>
+<h2 id="ses-dashboard">SES Dashboard</h2>
+<p>In the code example, the app only needs to pass the necessary data, such as fromEmail, toEmail, subject, body (and attachments), to the function.
+AWS SES will then handle the entire process of sending out the email.</p>
+<p>A pressing question arises: how can we determine whether the email has been successfully delivered to the user&rsquo;s inbox or rejected by the user&rsquo;s email server?</p>
+<p>The <strong>SES Dashboard</strong> provides valuable insights into account usage, such as the total number of sent emails, historical sending data, rejected rate, bouncing rate, and complaint rate. However, these metrics do not provide specific details about each individual email activity. A complete email system requires this information to troubleshoot any potential bounces or rejections caused by external factors. Thankfully, the SES Notifications feature, integrated with AWS Simple Notification Service and AWS Simple Queue Service, helps bridge this gap and provides the necessary information for a complete email system.</p>
+<h2 id="complete-email-system">Complete email system</h2>
+<p>Below is a draft design that outlines the components of an email system.</p>
+<p><img src="EmailSystemDesign.drawio.png" alt="EmailSystemDesign"></p>
+<p>In our context, after observing how SES integration is set up in various applications, we have separated the Email sending system as a standalone application.
+This approach allows other applications to avoid managing their individual AWS configurations for email communication. Instead, they can simply make an API call to the email system, which will handle the entire lifecycle of the emails.</p>
+<p>Here are some more details about each component:</p>
+<ul>
+<li><strong>API Gateway</strong>: allows client applications, SNS Subscriber (HTTP/HTTPS) and dashboard interacts with the Email System.</li>
+<li><strong>Email Sending API</strong>: provides API to trigger email, it handles the Emails Service that responses for communicate with the AWS SES, and the Recipients Service that creates/updates the recipients&rsquo;s profiles.</li>
+<li><strong>Activity API</strong>: provides public endpoints for SNS subscriber to push the notification about the email&rsquo;s activities. The notification will be proceed later by a background job processor to the domain data.</li>
+<li><strong>Dashboard API</strong>: provides APIs for the Frontend Dashboard page to connect and render the email activities data.</li>
+</ul>
+<h1 id="aws-ses-notification-config">AWS SES notification config</h1>
+<p>In each SES Domain Identity, there is a <strong>Notifications</strong> config, where it allows to setup the SNS topic for each feedback type. Here is an example:</p>
+<p><img src="SESIdentityNotifications.png" alt="SESIdentityNotifications.png"></p>
+<p>Before setting up the SES notification, it&rsquo;s essential to create the required SNS Topics. In the example provided, separate topics are used for each notification type (bounce, complaint, and delivery), but a single topic can suffice for simpler use cases.</p>
+<p>The subsequent step involves defining the subscription for the SNS Topic, for which we&rsquo;ll be using the HTTPs (or HTTP) protocol in this blog post.
+AWS SNS supports various other subscription types, including SQS (event queue), email, and SMS subscriptions.</p>
+<p>To create the HTTPs subscription, select the subscription type and provide the endpoint URL. Please note that the endpoint URL should be publicly accessible on the internet, as private IP addresses won&rsquo;t work.</p>
+<p>In the example screenshot, the website supports creating an email hook, wherein each URL is assigned a unique identifier to distinguish email notifications from different identities. However, for simpler use cases, a general URL such as <code>https://mydomain.local/ses_notifications</code> will suffice.</p>
+<p><img src="SNSSubscription.png" alt="SNSSubscription.png"></p>
+<p>After creating the subscription, the SNS will make a request call with <strong>subscription_confirm</strong> message to the subscription URL.
+The application needs to store the request payload, which contains the Subscribe URL and the Subscription Token to <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-message-and-json-formats.html#http-subscription-confirmation-json">confirm the subscription</a>.</p>
+<p>To confirm the subscription, we can open the SubscribeURL on the browser or implement an automated logic that calls the <a href="https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/sns/command/ConfirmSubscriptionCommand/">ConfirmSubscriptionCommand</a> as follow:</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">input</span> <span style="color:#f92672">=</span> { 
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">TopicArn</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;STRING_VALUE&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Token</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;STRING_VALUE&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">AuthenticateOnUnsubscribe</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;STRING_VALUE&#34;</span>,
+</span></span><span style="display:flex;"><span>  };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">command</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">ConfirmSubscriptionCommand</span>(<span style="color:#a6e22e">input</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">response</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">send</span>(<span style="color:#a6e22e">command</span>);</span></span></code></pre></div><p>To avoid the message be formatted, SNS subscription allows to send the raw message instead of the formatted message. However, there could be some issue when reading the request body with the raw payload if the option <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-large-payload-raw-message-delivery.html">&ldquo;Enable raw message delivery&rdquo;</a> was enabled. For example, if the project uses ExpressJS (NodeJS), this <a href="https://www.npmjs.com/package/raw-body">raw-body</a> package can be used to parse the request body, the default access to <code>request.body</code> doesn&rsquo;t return any data.</p>
+<p>Once the subscription is confirmed, whenever an email is sent using this SES domain identity, an <a href="https://docs.aws.amazon.com/ses/latest/dg/notification-examples.html">HTTP request</a> is triggered from SNS to the preconfigured endpoint. The email system captures the request payload and processes it to determine whether the email is delivered successfully.</p>
+<p>The request payload may look like this:</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&#34;notificationType&#34;</span>: <span style="color:#e6db74">&#34;Complaint&#34;</span>,
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&#34;complaint&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;complainedRecipients&#34;</span>: [
+</span></span><span style="display:flex;"><span>         {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;emailAddress&#34;</span>: <span style="color:#e6db74">&#34;richard@example.com&#34;</span>
+</span></span><span style="display:flex;"><span>         }
+</span></span><span style="display:flex;"><span>      ],
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;complaintFeedbackType&#34;</span>: <span style="color:#e6db74">&#34;abuse&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;arrivalDate&#34;</span>: <span style="color:#e6db74">&#34;2016-01-27T14:59:38.237Z&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;timestamp&#34;</span>: <span style="color:#e6db74">&#34;2016-01-27T14:59:38.237Z&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;feedbackId&#34;</span>: <span style="color:#e6db74">&#34;000001378603177f-18c07c78-fa81-4a58-9dd1-fedc3cb8f49a-000000&#34;</span>
+</span></span><span style="display:flex;"><span>   },
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&#34;mail&#34;</span>: { <span style="color:#75715e">// Content is trimmed }
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}</span></span></code></pre></div><p>In this example, the notificationType is &ldquo;Complaint&rdquo; which indicates that the email reached the recipient&rsquo;s mailbox but was marked as spam.</p>
+<h1 id="core-components-implementation">Core components&rsquo; implementation</h1>
+<p>I hope that I have covered the main concepts and functionalities of the Email System which integrates with AWS SES.
+In this section, we will explore the implementation of the core components in this email system.</p>
+<h3 id="email-sending-controller">Email Sending Controller</h3>
+<p>The controller exposes an API that allows other applications to make requests to send out emails.
+gRPC is used as a default choice for microservice protocol, the gRPC proto file looks like this:</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-proto" data-lang="proto"><span style="display:flex;"><span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">TriggerEmailAttribute</span> {<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">string</span> fieldName <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">string</span> value <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">EmailAttachment</span> {<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">string</span> name <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">string</span> remoteUrl <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">optional</span> <span style="color:#66d9ef">string</span> cid <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">TriggerEmailRequest</span> {<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">string</span> subject <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">repeated</span> <span style="color:#66d9ef">string</span> toEmails <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">string</span> mailBody <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">repeated</span> EmailAttachment attachments <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">repeated</span> TriggerEmailAttribute attributes <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">service</span> EmailsServiceController {<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">rpc</span> triggerEmail(TriggerEmailRequest) <span style="color:#66d9ef">returns</span> (TriggerEmailResponse) {};<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>}</span></span></code></pre></div><p>The <code>triggerEmail</code> call receives an input of type <code>TriggerEmailRequest</code> and returns a response with type <code>TriggerEmailResponse</code>. The <code>TriggerEmailRequest</code> definition includes 5 fields used to make the call to the AWS SES API. In the implementation, the controller interacts with two services: the <code>EmailsService</code>, responsible for handling the email submission to AWS SES, and the <code>RecipientsService</code>, which manages the creation of recipients based on the provided information. The notifications received from the SNS Subscription are later mapped to these recipients.</p>
+<p>By providing the <code>toEmails</code> parameter in the request object, the service allows for specifying multiple email addresses to receive the same email in a single request.</p>
+<h3 id="notification-endpoints-management">Notification endpoints management</h3>
+<p>As the Email sending service is used by multiple applications, each application has a distinct notification endpoint for AWS SNS to publish the email notifications.</p>
+<p>To demonstrate how to support separate endpoints for each application, the entity relationship diagram is as follows:</p>
+<p><img src="AppClientER.png" alt="AppClientER"></p>
+<p>When an application makes an API call to the Email Sending Service, it includes the token in the meta fields to authorize the request, enabling the service to determine the email activity based on the hook id. Subsequently, when SNS subscription publishes the notification request to a hook, the system knows how to create the corresponding activity on the application&rsquo;s usage.</p>
+<h3 id="background-job-processor">Background Job Processor</h3>
+<p>Background jobs are crucial in modern software development for two main reasons.
+First, they handle long tasks without slowing down the main application, so users don&rsquo;t have to wait.
+Second, they automatically try again if something goes wrong, minimize number of tasks gets lost or left undone.</p>
+<p>The flow for the email sending and the hook notification processing looks like below:</p>
+<ul>
+<li>
+<p>Send Email flow
+<img src="BackgroundJobSendEmail.png" alt="BackgroundJobSendEmail"></p>
+</li>
+<li>
+<p>Process notification flow
+<img src="BackgroundJobsNotification.png" alt="BackgroundJobsNotification"></p>
+</li>
+</ul>
+<p>Let&rsquo;s clarify the difference between another task scheduler system, where the processor acts as the master node distributing tasks to worker nodes, and the current case.
+Here, the processor is a consumer class with methods that process jobs in the queue or listen to events on the queue. For more information on tasks queue documentation, you can refer to the <a href="https://github.com/OptimalBits/bull">bull documentation</a>.</p>
+<p>Data extraction from the notification can be done in the background as real-time updates are not required for analytic data. Parsing all the data from the payload may not be necessary, but we can store the notification for future data backfilling.</p>
+<h1 id="testing-strategy">Testing strategy</h1>
+<p>Email testing can be expensive if actual emails need to be triggered. Fortunately, there are third-party services like <a href="https://mailcatcher.me">MailCatcher</a> or <a href="https://mailtrap.io/">MailTrap</a> that provide email sandbox solutions, rendering sent emails in a web interface. This eliminates the need to trigger actual emails to test purposes.</p>
+<p>While third-party email sandbox services are often sufficient, I opted for a slightly improved solution with <a href="https://github.com/maildev/maildev">MailDev</a>. Setting up MailDev for this project was straightforward, and I&rsquo;ll document the configuration process here.</p>
+<p>The <code>maildev</code> can be run in Docker, here is the Docker Composer service definition:</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Docker" data-lang="Docker"><span style="display:flex;"><span>  maildev:<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>    image: maildev/maildev<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>    expose:<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>      - <span style="color:#e6db74">&#34;1025&#34;</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>    ports:<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>      - <span style="color:#e6db74">&#34;51080:1080&#34;</span></span></span></code></pre></div><p>Nothing is fancy here. The <code>maildev</code> service exposes the port 1025 for the Email App to connect, and allows the traffic to port <strong>1080</strong> (<strong>51080</strong> from host) to access the dashboard.</p>
+<p>Since we use <strong>NodeMailer</strong> package, it creates a <strong>Transport</strong> object to connect to AWS SES API.
+To make the app send emails to <strong>MailDev</strong> in Dev environment, we need to create another transport object and hook it during the initialization.</p>
+<p>The <code>CreateTransportService</code> takes in a <code>driver</code> parameter, which indicates the type of transport, the code looks like below:</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">enum</span> <span style="color:#a6e22e">MailDriver</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">ses</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">maildev</span>,
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DummyTransportation</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">StreamTransport</span> {}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CreateTransportService</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">constructor</span>(<span style="color:#66d9ef">private</span> <span style="color:#a6e22e">readonly</span> <span style="color:#a6e22e">options</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">TransportServiceOptions</span>) {}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">create</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">switch</span> (<span style="color:#a6e22e">MailDriver</span>[<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">options</span>.<span style="color:#a6e22e">driver</span>]) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">MailDriver</span>.<span style="color:#a6e22e">ses</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ses</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">aws</span>.<span style="color:#a6e22e">SES</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">options</span>.<span style="color:#a6e22e">sesConfig</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">createTransport</span>({
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">SES</span><span style="color:#f92672">:</span> { <span style="color:#a6e22e">ses</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">ses</span>, <span style="color:#a6e22e">aws</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">aws</span> },
+</span></span><span style="display:flex;"><span>        }).<span style="color:#a6e22e">transporter</span>;
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">MailDriver</span>.<span style="color:#a6e22e">maildev</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">createTransport</span>({
+</span></span><span style="display:flex;"><span>          ...<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">options</span>.<span style="color:#a6e22e">mailDev</span>,
+</span></span><span style="display:flex;"><span>        }).<span style="color:#a6e22e">transporter</span>;
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">default</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">DummyTransportation</span>({
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">streamTransport</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>        });
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>The <code>mailDev</code> options object is simple with port and host, which can be passed into the app through a configuration file:</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yml" data-lang="yml"><span style="display:flex;"><span>  <span style="color:#f92672">maildev</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">port</span>: <span style="color:#ae81ff">1025</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">host</span>: <span style="color:#ae81ff">maildev</span></span></span></code></pre></div><p>To speed up the test running time, we can defined the <code>DummyTransportation</code> to create mock Transportation when running test.</p>
+<h1 id="capacity-calculation">Capacity calculation</h1>
+<p>Understanding the traffic and data is important to determine the actual value of the platform we have developed.
+The application primarily focuses on handling email sending requests from various applications within the organization. While it also offers a dashboard to monitor email activities, its main functionality revolves around efficiently managing the email communication.</p>
+<p>To demonstrate, I will give an example how to calculate the capacity of the email system.</p>
+<ul>
+<li>
+<p>Sending rate: assume the app sends out 1 email per second, or 86k emails per day, 2.6M per month</p>
+</li>
+<li>
+<p>For each email, the system stores the activities data and the recipients data
+The recipient data could be like this</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>  <span style="color:#75715e">// TypeORM syntax
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">PrimaryGeneratedColumn</span>(<span style="color:#e6db74">&#39;increment&#39;</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">readonly</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">number</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">Column</span>({ <span style="color:#a6e22e">unique</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span> })
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">email</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">string</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">Column</span>(<span style="color:#e6db74">&#39;json&#39;</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">attributes</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">RecipientAttribute</span>[];
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">readonly</span> <span style="color:#a6e22e">createdAt</span><span style="color:#f92672">:</span> Date;
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// other columns
+</span></span></span></code></pre></div><p>Each row recipient takes ~20bytes, we can assume if there are 10M of users in all managed applications, the total size of the recipients table is around <strong>200MB</strong>, which is very affordable.</p>
+<p>In the another side, the activities table could be a little bigger as the data is keep increasing.
+Let&rsquo;s assume each activity takes around 30bytes, the size of the activities table would be</p>
+<ul>
+<li>in a month: 2.6M * 30bytes = 78MB</li>
+<li>in a year: 1GB</li>
+<li>in 3 year: 3GB</li>
+</ul>
+<p>While storage is not a concern, the sequential scanning of the activities table may result in slow performance. On a 1GB/sec (SSD disk) speed, generating complex dashboard data queries could take up to 3 seconds without optimization. Fortunately, the use of database indexes can greatly improve query times.</p>
+<p>Overall, the application remains well-suited for the next three years, considering its current sending rate and user base.</p>
+</li>
+</ul>
+<h1 id="conclusion">Conclusion</h1>
+<p>In conclusion, I hope you found this blog post insightful and informative.
+We&rsquo;ve discussed some of the key aspects of the centralized Email service, though it&rsquo;s important to acknowledge that there are many other considerations, such as integrating it with different app clients, data tracking, and storage usage, among others.
+As someone who has been involved in this project from its inception, I feel fortunate to have had the opportunity to design the application, define its features, and develop a comprehensive plan. Implementing a robust and efficient Email system can greatly enhance communication and efficiency. However, it&rsquo;s important to acknowledge the challenges that arise with the complexity of email configuration.</p>
+<p>I&rsquo;m thrilled to share this approach with you, and I hope it inspires you to enhance your organization&rsquo;s platform. Thank you for taking the time to read this!</p>]]></content:encoded></item><item><title>Setup local domain with self-signed SSL certificate</title><link>https://duykhoa.github.io/posts/local-domain/</link><pubDate>Tue, 18 Apr 2023 22:51:16 -0400</pubDate><author>duykhoa12t[at]gmail[dot]com (Kevin Tran)</author><guid>https://duykhoa.github.io/posts/local-domain/</guid><description>&lt;p>This is a post about setting up the local domain and SSL certs for testing purpose.&lt;/p></description><content:encoded><![CDATA[<p>This is a post about setting up the local domain and SSL certs for testing purpose.</p>
+<h1 id="objective">Objective</h1>
+<p>The local domain are helpful to setup the connection between the frontend and backend on the development machine.
+It is also a common solution when the actual address and port is difficult to remember.
+In this post, I will explain how to set up the local domain and config the SSL certificate on the MacOS laptop.</p>
+<h1 id="softwares-required">Softwares required</h1>
+<p>In order to config the local domain name and issue the SSL cert, we&rsquo;ll need these tools installed:</p>
+<ul>
+<li>openssl</li>
+<li>MacOS Keychains app</li>
+<li>Nginx: for configuring the proxy</li>
+<li>Admin access</li>
+<li>vi: to edit the host and create the configuration files</li>
+</ul>
+<p>The nginx and vi are just my preference, you can use VSCode, emacs for editor and Apache, HA proxy for the proxy.</p>
+<h1 id="create-the-local-domain">Create the local domain</h1>
+<p>Setup the domain is the most simple task, you can open the hosts file with the admin privillege.</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  sudo vi /etc/hosts</span></span></code></pre></div><p>Add a line for the new domain and map it to <strong>127.0.0.1</strong></p>
+
+
+
+
+
+<pre tabindex="0"><code>127.0.0.1 mydomain.local</code></pre><p>If you run the server inside a virtual network, for instance by running the proxy in the Virtual box or Docker, then use the IP of the virtual network interface instead.</p>
+<p>After that, you may flush the DNS cache by using this command:</p>
+
+
+
+
+
+<pre tabindex="0"><code>sudo dscacheutil -flushcache</code></pre><h1 id="create-the-root-certificate-authority-root-ca">Create the Root Certificate Authority (Root CA)</h1>
+<p>The SSL in the normal website are issued by a trusted Certificate Authority. However, for the local development, we don&rsquo;t need to purchase a SSL (and we don&rsquo;t own the domain), hence we have to setup the Root CA as well. During the handshake step, the browser checks whether the cert is valid by asking the Root CA about the cert, and if the Root CA doesn&rsquo;t confirm with the browser, the browser marks the site as unsafe.</p>
+<p>To generate the Root CA, we can use the <strong>openssl</strong> tool.
+The steps are:</p>
+<ol>
+<li>Generate the root CA key</li>
+<li>Generate the root CA cert</li>
+</ol>
+<p>Personally, I suggest to create a directory to store all the files that are created during this process together, I usually create one in <code>/tmp/ssl</code> for this purpose. All the files we create after this are in the same directory.</p>
+<p>To start with, we have to create the RootCA configuration file.</p>
+
+
+
+
+
+<pre tabindex="0"><code># fileName: config.conf
+
+[req]
+prompt = no
+distinguished_name = req_distinguished_name
+req_extensions = v3_req
+
+[req_distinguished_name]
+C = CA
+ST = Kitchener
+L = ON
+OU = Org
+CN = mydomain.local
+emailAddress = dev@mydomain.local
+
+[v3_req]
+basicConstraints = CA:FALSE
+keyUsage = nonRepudiation, digitalSignature, keyEncipherment, dataEncipherment
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1 = mydomain.local
+DNS.2 = api.mydomain.local
+DNS.2 = www.mydomain.local</code></pre><p>Please modify the content of the file to match with your information and the local domain.
+The file references and examples can be found from <a href="https://www.ibm.com/docs/en/hpvs/1.2.x?topic=reference-openssl-configuration-examples">IBM openSSL configuraton</a> and <a href="https://www.openssl.org/docs/manmaster/man5/config.html">OpenSSL document</a></p>
+<p>After creating these 2 config files, we can generate the rootCA key and cert with these 2 commands</p>
+
+
+
+
+
+<pre tabindex="0"><code>openssl genrsa -out rootCA.key 2048
+openssl req -x509 -new -nodes -key rootCA.key -sha256 -days 1024 -out rootCA.pem -config config.conf</code></pre><p>The values of each parameters can be altered by different values, such as the number of days can be change to 365, or the algorithm can be set to sha512. For the details of each parameters, checkout the OpenSSL manual.</p>
+<h1 id="issue-the-self-signed-ssl-cert">Issue the Self-signed SSL cert</h1>
+<p>Create the ext file in the same directory with the content like below</p>
+
+
+
+
+
+<pre tabindex="0"><code># filename: mydomain.local.ext 
+
+authoritykeyIdentifier = keyid,issuer
+basicConstraints = CA:FALSE
+keyUsage = nonRepudiation, digitalSignature, keyEncipherment, dataEncipherment
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1 = mydomain.local
+DNS.2 = api.mydomain.local
+DNS.2 = www.mydomain.local</code></pre><p>After this, we can generate the cert key file and the cert signing request file</p>
+
+
+
+
+
+<pre tabindex="0"><code>openssl genrsa -out mydomain.local.key 2048
+openssl req -new -key mydomain.local.key -out mydomain.local.csr -config config.conf</code></pre><p>The last step is to issue the cert</p>
+
+
+
+
+
+<pre tabindex="0"><code>openssl x509 \
+        -in mydomain.local.csr -CA rootCA.pem -CAkey rootCA.key -CAcreateserial \
+        -out mydomain.local.crt -days 1024 -sha256 -extfile mydomain.local.ext</code></pre><p>After that, you should have the the cert (and other files) in the temporary directory. We don&rsquo;t need the config file as well as the ext file.
+A common practice I usually take is to move these files to a more permanent place, such as <code>/etc/ssl</code>, so the files aren&rsquo;t gone after reboot.
+To import the cert to the Apple Keychains, we can either use the Keychains UI or by running a command like below</p>
+
+
+
+
+
+<pre tabindex="0"><code>sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain /etc/ssl/rootCA.pem</code></pre><p>Noted that we don&rsquo;t have to import the cert for the local domain name.</p>
+<h1 id="config-the-proxy">Config the proxy</h1>
+<p>We can configure the SSL cert for the website from the proxy level instead of the app server. However, if you prefer to configure the cert from the app, please skip this section.</p>
+<p>I prefer to use Nginx for the proxy because it is easy to setup and the document is excellent.</p>
+<p>Here is how the nginx config look like</p>
+
+
+
+
+
+<pre tabindex="0"><code>#filename: /opt/homebrew/etc/nginx/servers/mydomain.local.conf
+
+upstream frontend {
+   server localhost:3000;
+   keepalive 100;
+}
+
+upstream backend{
+   server localhost:8888;
+   keepalive 100;
+}
+
+server {
+  listen 443 ssl;
+  server_name mydomain.local www.mydomain.local;
+
+  ssl_certificate     /etc/ssl/mydomain.local.crt;
+  ssl_certificate_key /etc/ssl/mydomain.local.key;
+
+  # location config
+
+  location / {
+    proxy_http_version 1.1;
+    proxy_pass http://frontend/;
+  }
+
+  location ~ /uploads/(file|image) {
+    proxy_http_version 1.1;
+    client_max_body_size 50M;
+    proxy_pass http://frontend/;
+  }
+}
+
+server {
+  listen 443 ssl;
+  server_name api.mydomain.local
+
+  ssl_certificate     /etc/ssl/mydomain.local.crt;
+  ssl_certificate_key /etc/ssl/mydomain.local.key;
+
+  # location config
+
+  location / {
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_set_header Access-Control-Allow-Origin *;
+    proxy_http_version 1.1;
+    proxy_pass http://backend/;
+  }
+}</code></pre><p>With Nginx, we can setup complicated routing rule to for the website traffic and configure the SSL without hassle.</p>
+<p>A pro tips: If nginx is installed through <strong>brew</strong>, we can use the <strong>brew services</strong> to make it starting automatically when the laptop is boot.</p>
+<h1 id="recap">Recap</h1>
+<p>This short post is a summary for the steps to setup the local domain on the local machine.
+I hope you find it useful for your works.</p>]]></content:encoded></item><item><title>A project specific command-line</title><link>https://duykhoa.github.io/posts/a-cli-showcase/</link><pubDate>Tue, 28 Feb 2023 22:59:40 -0500</pubDate><author>duykhoa12t[at]gmail[dot]com (Kevin Tran)</author><guid>https://duykhoa.github.io/posts/a-cli-showcase/</guid><description>&lt;p>Build a commandline tool that helps bootstrap the project&lt;/p></description><content:encoded><![CDATA[<p>Build a commandline tool that helps bootstrap the project</p>
+<p>We have a Nodejs monorepo project that is the place where we develop the code of all applications.
+The inspiration behind using monorepo is focusing on improving developer productivity.
+Having our own commandline is an idea to further enhance the productivity by providing a simpler way to develop the code.</p>
+<p>In this post, we will walk through the use cases of the tool and how does it help the team.</p>
+<h1 id="usecases">Usecases</h1>
+<h1 id="running-the-app">Running the app</h1>
+<p>As a typical NodeJS project, the common scripts is defined in the <code>package.json</code> file. By typing <code>npm start -- &lt;app_name&gt;</code>, the actual command to run the app web server is executed, and the app is up.
+A web application usually requires some components like database, cache service. By using the npm script alone, the developer has to ensure the dependent services are available for the app to run.
+This isn&rsquo;t always straightforward task depends on the software&rsquo;s installation and configuration complexity.
+Once in a while, developer may face the issue where the <a href="https://stackoverflow.com/questions/36436120/fatal-error-lock-file-postmaster-pid-already-exists">database software couldn&rsquo;t start</a>.
+Spending time on configuring and troubleshooting the software issue significantly affects to the productivity, and the effects could multiply if more than one developers having the issue.</p>
+<p>That&rsquo;s why Docker has been used in our setup to minimize the cost of setting up these dependency softwares. A docker-compose configuration file is added under each application sourcecode in the monorepo,
+which defines the software services required and how they are interacted.</p>
+<p>By calling the same docker-compose command across each application, the developer is able to skip completely the dependencies setup effort, instead jumping into exploring the project and implement the requirement. Of course, as you may think, the command to run the app in docker could be a bit complicated like below</p>
+
+
+
+
+
+<pre tabindex="0"><code>  docker-compose up -d --project-directory ./ --project-name &lt;project_name&gt; --file &lt;path-to-project-docker-compose-file&gt;</code></pre><p>Similar to that, the log command is</p>
+
+
+
+
+
+<pre tabindex="0"><code>  docker-compose logs &lt;service_name&gt; -d --project-directory ./ --project-name &lt;project_name&gt; --file &lt;path-to-project-docker-compose-file&gt;</code></pre><p>In practice, before the app could be run, developers may need to perform some installation tasks. For example, most of the NodeJS applications are built from open source dependencies, hence developers have to run the node package manager to install these dependencies. Other than that, the dependencies&rsquo; services must be ready to proceed with the incoming requests. Without some utility script to check if the services&rsquo; ports are open, developer have to check the services&rsquo; statuses or retry after a couple of seconds.</p>
+<p>With a custom command line solution, these tasks can be handled by the command line. In our project, the only command developer have to type in the terminal is:</p>
+
+
+
+
+
+<pre tabindex="0"><code>  iae serve -a &lt;app_name&gt;</code></pre><p><em>iae</em>: it is my company abbreviation name</p>
+<p>This command takes care of how to run the Docker script, check the dependencies service, install the dependencies and run the app server.
+The restart, stop commands are similar: <code>iae restart -a &lt;app_name&gt;</code>. For logging, <code>iae log -a &lt;app_name&gt;</code> is the log command.</p>
+<h2 id="running-the-test-suite">Running the test suite</h2>
+<p>Typically, there are several kinds of tests in a software project: unit test, integration test, end to end (E2E) test.
+The unit tests aren&rsquo;t required any dependencies&rsquo; services to executed (this statement is based on the best practice of writing test), other types may require some service to run like the database. To support running different kind of tests, the command line tool makes use of Docker and the corresponding test configuration.</p>
+
+
+
+
+
+<pre tabindex="0"><code>  iae test unit|integration|e2e -a &lt;app_name&gt;</code></pre><p>Similar to the command to run the app, there is a utility script to run the test suites after the services&rsquo; ports are open. Each kind of test uses a different configuration file. Our project uses jest, so it has a separate jest configuration for unit test, integration test, and e2e test. To boost the test performance, we use <a href="https://github.com/swc-project/swc">swc</a> instead of <strong>ts-jest</strong> for compiling typescript when running the unit test.</p>
+<p>Once in a while, developer may want to perform all kinds of test in the development machine, instead of typing each test command, the command line has a single command.</p>
+
+
+
+
+
+<pre tabindex="0"><code>  iae ci -a &lt;app_name&gt;</code></pre><h2 id="code-generator">Code generator</h2>
+<p>Our project uses multiple tools that require code generator such as migration files, GRPC proto file, GraphQL Schema file, etc.
+To minimize the learning curve, the command line tools wrap all of these commands from different tools into a simple interface.</p>
+
+
+
+
+
+<pre tabindex="0"><code>  iae protoc gen -a &lt;app_name&gt; -m &lt;module_name&gt; -f &lt;file_path&gt;</code></pre>
+
+
+
+
+<pre tabindex="0"><code>  iae graphql gen -a &lt;app_name&gt; -m &lt;module_name&gt;</code></pre>
+
+
+
+
+<pre tabindex="0"><code>  iae migration gen -a &lt;app_name&gt; -n &lt;migration_name&gt;
+
+  iae migration run -a &lt;app_name&gt;
+  iae migration revert -a &lt;app_name&gt;</code></pre><h1 id="conclusion">Conclusion</h1>
+<p>This post describes some usages of a project specific in supporting development flow. It helps to remove the needs of learning and remembering each commands, as well as knowing what functionalities the project requires during the development stage. I hope this could inspire you to build own tool, please let me know if this post helps.</p>]]></content:encoded></item><item><title>A Simple Infrastructure</title><link>https://duykhoa.github.io/posts/a-simple-infras/</link><pubDate>Tue, 07 Jun 2022 09:55:09 -0400</pubDate><author>duykhoa12t[at]gmail[dot]com (Kevin Tran)</author><guid>https://duykhoa.github.io/posts/a-simple-infras/</guid><description>&lt;p>Idea of building the infrastructure with Amazon Web Service using Terraform, Ansible and Jenkins.&lt;/p></description><content:encoded><![CDATA[<p>Idea of building the infrastructure with Amazon Web Service using Terraform, Ansible and Jenkins.</p>
+<p>Nowadays, there are a variety of choices to deploy a website. Developers could choose a container service like Heroku, go with the most trendy infrastructure of choice with Kubernetes, or use the Serverless strategy to run the website without the need of setting up the server on their own. However, configuring a web server is no longer rocket surgery with the modern DevOps technologies and the revolution of the Cloud providers. This post explores in detail a simple infrastructure setup with Amazon infrastructure using Terraform, Ansible, and Jenkins. This is a real use case that fits a certain software project, therefore it requires some consideration before implementing this setup in another organization.</p>
+<h2 id="projects-setup">Projects setup</h2>
+<p>To embrace the culture of Agile development, the platform is split into multiple small applications which are only taken a couple of sprints from the planning phase until going live. With that setup, the monorepo is used in order to keep the consistency between these applications in terms of development best practices, linting rules, scripting commands, and version control. There are a bunch of shared libraries extracted from the apps for common usage.</p>
+<p>Depending on each individual app’s purpose, the micro app could involve several technologies. So far the platform heavily uses GraphQL to provide the frontend clients access. Not only does it keep the number of APIs as small as 1, but it also allows the clients to specify the structure of the response they want to use. These advantages completely convince the team to switch over from the traditional REST (or RESTful) API. Besides GraphQL, GRPC is the main communication protocol from backend to backend services, which allows small apps to communicate with each other with an extremely fast latency.</p>
+<p>Other than that, the rest of the stack follows the typical setup of a web service. A database (PostgreSQL or MySQL) handles the data and a small Redis cluster that acts as a caching layer as well as a backend for the jobs’ queue. Lastly, the application code is running in one or more server instances, which doesn’t produce any state in the server and there could be multiple processes running the code in parallel.</p>
+<h2 id="infrastructure-requirement">Infrastructure requirement</h2>
+<p>The most difficult question when designing the infrastructure is how to maximize the support for the monorepo setup. Each app shares a lot in common for the infrastructure requirements such as the configuration of server instances, load balancer, and security groups besides a few differences in the exposed ports, protocol, and database engine.</p>
+<p>Terraform is the only option we have in mind when choosing the tools for building the infrastructure. Terraform comes with a lot of configurations in each resource type and requires users to know how to link these resources together. Not all members in the teams have deep knowledge about the cloud provider (we are using Amazon Web service) in order to write the code correctly. To solve this problem, we come up with a list of custom modules that combine multiple resources together, this helps to set up the infrastructure quickly and error-free. This example may provide a clearer picture of what a module looks like and how it helps to spin up the infrastructure at ease.</p>
+
+
+
+
+
+<pre tabindex="0"><code>  module &#34;server_instances&#34; {
+    source                                 = &#34;../../../modules/server_instances&#34;
+    instances_count                        = 3
+    instance_type                          = &#34;t4g.micro&#34;
+    instance_ami                           = &#34;ami-xxxxxxxxxxxx&#34;
+    instance_root_block_device_volume_size = 10
+    instance_app_name                      = &#34;app_name&#34;
+    instance_app_env                       = &#34;prod&#34;
+    healthcheck_endpoint                   = &#34;/healthcheck&#34;
+    public_key                             = var.ssh_public_key
+    vpc_id                                 = var.vpc_id
+    jenkins_agent_sg_id                    = &#34;sg-jenkinsxxxxxxxx&#34;
+    loadbalancer_subnets                   = [&#34;subnet-1&#34;, &#34;subnet-2&#34;, &#34;subnet-3&#34;]
+    loadbalancer_tls_cert                  = &#34;arn:aws:acm:region-1:2356:certificate/XXXX-YYYY-ZZZZ&#34;
+  }</code></pre><p>This module doesn’t only create 3 server instances but also configures a load balancer that links to these instance through a target group and allow traffic in and out from these components, plus whitelists the access from Jenkins security group to the instance in order to perform the deployment. The implementation of this “server_instances” module involves 233 lines of Terraform code, 20 resource block usages, provides 16 customized variables, which is quite challenging to write from start to end with no mistake.</p>
+<p>Since a “terraform apply” could affect a numerous of infrastructure components, reviewing the plan carefully and only running the plan if every change looks correct is the practice recommended. Terraform has offered Terraform Enterprise, a paid platform to implement this practice automatically. However, if this is all we need from the Terraform Enterprise, a custom automation Jenkins pipeline might fulfill the job too.</p>
+<h2 id="everything-starts-with-jenkins">Everything starts with Jenkins</h2>
+<p>Jenkins plays an important role in automation and deployment. The Jenkins’ jobs or pipelines are represented in the code form, which makes it easier to maintain. The streamlined monorepo setup makes it possible to have a single deployment pipeline with a predefined list of application names. It reduces a lot of work to maintain the consistency of all Jenkins pipelines as if there are separate deployment jobs for each service. On another hand, Jenkins can be used to run operational tasks such as refreshing AWS credentials, installing software into a server, or even provisioning the infrastructure.</p>
+<p>In general, to deploy an application, a number of steps are performed, which involve compiling the code, uploading the output to the artifact store, updating the code into the server, and restarting the app inside the server. Each of the steps above may includes a few different tasks, for example, before compiling the code, some code evaluation tasks are executed involving checking the dependencies’ vulnerabilities, code smells detection, verify the truthiness by running various kinds of automation testing. If all the steps are passed, the code is compiled and tagged with a new version, and then stored in the artifact store. It is ready to move on to the deploy stage.</p>
+<p>There are usually multiple deployment environments. A deployment pipeline should define the order of each environment based on its criticalness. The most common setup has 2 environments: staging and production. The staging environment is used for internal testing, while the production is for the real user to use the service. Since the production is more critical, the deployment pipeline should be able to block failed deployment to staging from being able to trigger into the production environment. It’s quite often that after completing the deployment into each environment, the pipeline performs some readiness checks. The check could be simple as checking if the healthcheck endpoint returns a 200 status code or more complicated like running the smoke test, load test, and canary deployment.</p>
+<p><img src="jenkins-deployment.png" alt="Sample jenkins deployment pipeline"></p>
+<p>On the other hand, most of the automated tasks could be handled by Jenkins. To illustrate what type of jobs could be run in Jenkins, this job handles some operational tasks related to issuing, revoking, and rotating IAM credential keys. The job takes a few parameters including the action name, the iam user, and the key id (for the delete action). Internally, it performs one of these actions with the given iam user and key, using a pre-configured AWS key with sufficient permissions. Typically, these permissions aren’t granted to developers’ AWS accounts.</p>
+<p><img src="jenkins-aws-iam-credentials.png" alt="Jenkins AWS IAM credentials task"></p>
+<p>As mentioned in the previous section, the Terraform pipeline could be implemented in 3 stages including planning, confirming, and applying. This Jenkins job implements the Terraform flow as planning, confirmation, and applying the plan. The job allows to run the plan with different modes like refresh only, normal, and destroy mode. These operations are well fit to the current DevOps workload.</p>
+<h2 id="ansible">Ansible</h2>
+<p>If Jenkins is a computer then Ansible is the operating system that runs on the computer. It doesn’t only implements the deployment script but also powers the build steps. This section discusses some of Ansible’s strengths in building these operation codes.</p>
+<p>Firstly, we use Ansible to instruct the application deployment. The deployment script doesn’t limit to the code deployment but also includes the checklist to ensure the server is fully set up and operated. It includes tasks to check and install the missing packages, create configuration files and start supporting services, and clean up the server after a successful deployment.</p>
+<p>Secondly, instead of writing the build script in a pure Bash script, we use Ansible for consistency and efficiency. Ansible is designed with strong declarative syntax, which provides unlimited extendability. For example, when defining the test running step, the command we think of is the npm run test. This is good enough to run the test without dependencies, however, in the real project, it requires running against dependencies, and more than that there are different kinds of tests for each application in the monorepo. Taking all of these requirements into account, the Ansible script to run the tests looks like the below:</p>
+
+
+
+
+
+<pre tabindex="0"><code># build.yml
+- include_tasks:
+    file: &#34;{{ item }}&#34;
+  with_items: &#34;{{ test_running_files }}&#34;
+
+# vars file
+test_running_files:
+  - &#34;tests/run_unit_test.yml&#34;
+  - &#34;tests/integration_test.yml&#34;
+  - &#34;tests/e2e_test.yml&#34;
+
+# integration_test.yml
+- name: &#34;Run the integration test suite&#34;
+  shell: &#34;docker-compose -f apps/{{ app_name }}/docker-compose.yml --project-directory ./ --project-name {{ app_name }} run integration-test {{ app_name }}&#34;
+  args:
+    chdir: &#34;{{ workspace_path }}&#34;
+  register: test_output
+  no_log: true
+  ignore_errors: true
+- name: &#34;Display test result&#34;
+  include_tasks: &#34;../pretty_output.yml&#34;
+  vars:
+    output: &#34;{{ test_output }}&#34;</code></pre><p>As the code shows how complicated the test running could be, Ansible is clearly a better choice to build the script due to its extendability. Each application config could override the test_running_files list if necessary.</p>
+<h2 id="all-the-logs-go">All the logs go</h2>
+<p>To manage several applications with the minimum resources, we need a logging tool where we can locate the problem. Finding the right log entry across multiple apps could be a challenge, however, the first step is to set it up. Amazon offers the OpenSearch service, which was surprisingly easy to bootstrap and integrate. It is clear that we would go with an external logging service as we don’t have to maintain the infrastructure to run the logging stack because the effort to maintain the server is a big concern for a small team.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>The post covers a few technologies together, and it couldn’t deep dive into each technology in detail, instead, the post makes its attempt to demonstrate the possibility of designing and building the infrastructure using these basic tools with the minimum resource and effort. More details about the implementation of each technology will be discussed in future posts. Thanks for reading!</p>]]></content:encoded></item></channel></rss>
