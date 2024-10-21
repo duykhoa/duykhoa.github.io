@@ -129,8 +129,6 @@ To provide a clear picture, here is a pattern I am using when defind the command
 ```golang
 baseHandler := createArticleHandler{}
 
-createArticleHandler := DecorateCommand(baseHandler, zerolog.New(os.StdErr))
-
 func DecorateCommand[H any](handler CommandHandler[H], logger: logger) {
 	return commandLogging {
 		base:   handler,
@@ -164,6 +162,27 @@ func (d commandLogging[C]) Handle(ctx context.Context, cmd C) (err error) {
 }
 
 ```
+
+The `commandLogging` produces the logs when running the command handler. It adds a log entry before calling the handler `Handle` function, and depending on the Handle function's result, it will produce success or failure log entry. The `commandLogging` also implements the `CommandHandler` interface, the consumer doesn't require to change.
+
+Let's assume the application expects the `GetArticleHandler` as a dependency, the application could be initialized as follow
+
+```golang
+	func NewApplication(cmdHandler GetArticleHandler) Application {...}
+	cmdHandler := createArticleHandler{}
+
+	app := NewApplication(cmdHandler)
+```
+
+Using the `DecorateCommand` function to add the logging functionality, the code is changed to
+
+```golang
+	wrappedHandler := DecorateCommand(baseHandler, zerolog.New(os.StdErr))
+
+	app := NewApplication(cmdHandler)
+```
+
+The application layer remains unaffected by the wrapped GetArticleHandler. The app's behavior remains unchanged, requiring no modifications to implement this setup.
 
 This setup adheres to the **open for extension, closed for modification** principle, enabling the addition of logging functionality without altering the `createArticleHandler` function directly.
 
