@@ -34,7 +34,7 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">// TODO
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}</span></span></code></pre></div><p>Given the command handler is following this structure, we need to test the command handler and the higher component, e.g the controller.</p>
 <p>We need to deal with the command handler&rsquo;s dependency first, which is the <code>ArticleRepository</code>. It would be easier if the <code>ArticleRepository</code> is an interface. If there is no interface for the repository, please consider to have define the interface and use the interface for the repo dependency.</p>
-<p>With the interface setup, we can create a dummy implementation to test the <code>ArticleRepository</code>. [mockery<code>](https://github.com/vektra/mockery) or [gomock](https://github.com/uber-go/mock) could do the boring works by creating a mock implementation for the interface. By specify the </code>go:generate<code>comment,</code>go generate` will generate the mock for us.</p>
+<p>With the interface setup, we can create a dummy implementation to test the <code>ArticleRepository</code>. <a href="https://github.com/vektra/mockery">mockery</a> or <a href="https://github.com/uber-go/mock">gomock</a> can generate mock implementations for interfaces, saving manual effort. We can automate the creation of mock implementations by adding a <code>go:generate</code> comment to the interface.</p>
 
 
 
