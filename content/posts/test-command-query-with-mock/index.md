@@ -1,5 +1,5 @@
 ---
-title: "Test Command Query With Mock"
+title: "Test Command Handler With Mock"
 date: 2024-10-23T21:26:22-04:00
 tags:
   - architecture
@@ -7,16 +7,15 @@ tags:
   - domain driven development
 ---
 
-This post explains how to test the command and query handler, given the project applies [Command Query Separation](/content/posts/command-query-in-go-project/index.md) pattern.
+This post demonstrates how to test command and query handlers in a [Command Query Separation based](/content/posts/command-query-in-go-project/index.md) project.
 
 <!--more-->
 
 ## CQS Structure
 
-Since both Query and Command handlers follow the same approach, the blog post only mentions how to build the test for the command handler.
+Testing Query and Command handlers involves similar techniques, this post will demonstrate testing Command handlers. The principles can be easily applied to Query handlers.
 
 The CQS structure defines a command handler interface, which receives a `C` generic command object and return nothing but an error in non-happy path. 
-
 
 The `CreateArticleHandler` is a specific interface which handle the `CreateArticle` command.
 
@@ -93,7 +92,7 @@ It("failed to create article", func() {
 
 After complete both successful and failed scenarios for the command handlers, we can move on to test the higher component (e.g the `ArticlesController`), which uses the command handler as a dependency.
 
-The same mocking strategy can be used, a single line of `go:generate` command can be added into the command handler interface:
+The same mocking strategy can be applied, add a single line of `go:generate` command to the command handler interface:
 
 ```golang
 
@@ -125,8 +124,9 @@ It("returns 500 response when creating article command returning an error", func
 })
 ```
 
-The happy scenario is similar, by altering the `Return` parameter to nil in the mock expection setup.
+To test the happy scenario, modify the mock expectation setup by setting the `Return` parameter to nil.
+
 
 # Conclusion
 
-CQS can help streamline testing efforts by promoting a clear separation of concerns, making it easier to write comprehensive and maintainable tests.
+By enforcing a clean separation of concerns, CQS makes it easier to write targeted tests for individual components. This increased testability leads to higher quality software, as bugs can be identified and fixed more efficiently.
