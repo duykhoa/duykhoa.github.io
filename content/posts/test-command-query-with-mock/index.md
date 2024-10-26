@@ -39,7 +39,7 @@ Given the command handler is following this structure, we need to test the comma
 
 We need to deal with the command handler's dependency first, which is the `ArticleRepository`. It would be easier if the `ArticleRepository` is an interface. If there is no interface for the repository, please consider to have define the interface and use the interface for the repo dependency.
 
-With the interface setup, we can create a dummy implementation to test the `ArticleRepository`. [mockery`](https://github.com/vektra/mockery) or [gomock](https://github.com/uber-go/mock) could do the boring works by creating a mock implementation for the interface. By specify the `go:generate` comment, `go generate` will generate the mock for us.
+With the interface setup, we can create a dummy implementation to test the `ArticleRepository`. [mockery](https://github.com/vektra/mockery) or [gomock](https://github.com/uber-go/mock) can generate mock implementations for interfaces, saving manual effort. We can automate the creation of mock implementations by adding a `go:generate` comment to the interface.
 
 ```golang
 // file location: internal/domain/article/repository.go
