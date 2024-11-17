@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Kevin's Blog</title><link>https://duykhoa.github.io/</link><description>Recent content on Kevin's Blog</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>duykhoa12t[at]gmail[dot]com (Kevin Tran)</managingEditor><webMaster>duykhoa12t[at]gmail[dot]com (Kevin Tran)</webMaster><copyright>Kevin Tran</copyright><lastBuildDate>Wed, 23 Oct 2024 21:26:22 -0400</lastBuildDate><atom:link href="https://duykhoa.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>About</title><link>https://duykhoa.github.io/about/</link><pubDate>Sun, 16 Apr 2023 15:00:15 -0400</pubDate><author>duykhoa12t[at]gmail[dot]com (Kevin Tran)</author><guid>https://duykhoa.github.io/about/</guid><description>&lt;p>&lt;strong>Hey there, software enthusiasts!&lt;/strong>&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Kevin's Blog</title><link>https://duykhoa.github.io/</link><description>Recent content on Kevin's Blog</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>duykhoa12t[at]gmail[dot]com (Kevin Tran)</managingEditor><webMaster>duykhoa12t[at]gmail[dot]com (Kevin Tran)</webMaster><copyright>Kevin Tran</copyright><lastBuildDate>Sat, 16 Nov 2024 14:56:56 -0500</lastBuildDate><atom:link href="https://duykhoa.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>About</title><link>https://duykhoa.github.io/about/</link><pubDate>Sun, 16 Apr 2023 15:00:15 -0400</pubDate><author>duykhoa12t[at]gmail[dot]com (Kevin Tran)</author><guid>https://duykhoa.github.io/about/</guid><description>&lt;p>&lt;strong>Hey there, software enthusiasts!&lt;/strong>&lt;/p>
 &lt;p>My name is Kevin Tran, and I&amp;rsquo;m a Software Engineer with a burning passion for all things DevOps. Over the years, I&amp;rsquo;ve had the privilege of contributing to successful projects across diverse industries, from private banking to ride-hailing and even the automotive world.&lt;/p>
 &lt;p>For the past five years, I&amp;rsquo;ve been invested my time in building microservices. To ensure top-notch code delivered, I rely on Test-Driven Development and Continuous Integration/Continuous Delivery (CI/CD). While I spent a good chunk of time developing applications with Ruby on Rails and Hanami, I&amp;rsquo;ve recently transitioned to more flexible, high-performance technologies like Go, Java, and NodeJS. I&amp;rsquo;m a big fan of monorepos and trunk-based development. Plus, I love creating internal tools to make life easier for fellow engineers.&lt;/p></description><content:encoded><![CDATA[<p><strong>Hey there, software enthusiasts!</strong></p>
 <p>My name is Kevin Tran, and I&rsquo;m a Software Engineer with a burning passion for all things DevOps. Over the years, I&rsquo;ve had the privilege of contributing to successful projects across diverse industries, from private banking to ride-hailing and even the automotive world.</p>
@@ -10,7 +10,206 @@
 <p>If you wonder if I&rsquo;m a real person. Yes and here is my latest photo cycling around the <a href="https://www.kitchener.ca/en/parks-and-trails/iron-horse-trail.aspx">Iron Horse Trail</a></p>
 <p><img src="/images/avatar.png" alt="my photo"></p>
 <p><strong>Also</strong> Checkout my <a href="/resources">resources</a> for my curated list of readings</p>
-]]></content:encoded></item><item><title>Test Command Handler With Mock</title><link>https://duykhoa.github.io/posts/test-command-query-with-mock/</link><pubDate>Wed, 23 Oct 2024 21:26:22 -0400</pubDate><author>duykhoa12t[at]gmail[dot]com (Kevin Tran)</author><guid>https://duykhoa.github.io/posts/test-command-query-with-mock/</guid><description>&lt;p>This post demonstrates how to test command and query handlers in a &lt;a href="https://duykhoa.github.io/content/posts/command-query-in-go-project/index.md">Command Query Separation based&lt;/a> project.&lt;/p></description><content:encoded><![CDATA[<p>This post demonstrates how to test command and query handlers in a <a href="/content/posts/command-query-in-go-project/index.md">Command Query Separation based</a> project.</p>
+]]></content:encoded></item><item><title>Go Refactor Behavioral Responsibility</title><link>https://duykhoa.github.io/posts/go-refactor-behavioral-responsibility/</link><pubDate>Sat, 16 Nov 2024 14:56:56 -0500</pubDate><author>duykhoa12t[at]gmail[dot]com (Kevin Tran)</author><guid>https://duykhoa.github.io/posts/go-refactor-behavioral-responsibility/</guid><description>&lt;p>Go promotes simplicity, it makes Go more attractive to the community.
+A recent app I released only consume around 12MB Memory and 0.02m CPU to serve 90k emails per day, the app includes most of features of a MVC web app.
+It is really impressive how lightweight a Golang application can be.&lt;/p>
+&lt;p>Simplicity could be an advantage, but also a disadvantage. As developer has to write everything from scratch (or most of), it is easy to create technical debt
+or introduce bug when dealing with low level configuration, such as serializing and deserializing, io related, handling error, handling shutting down,
+generating metrics and so on.&lt;/p>
+&lt;p>In this post, I&amp;rsquo;d like to share some tips to create less future problematic code by using some common pattern to hide or reuse these responsibilities from the application logic.&lt;/p></description><content:encoded><![CDATA[<p>Go promotes simplicity, it makes Go more attractive to the community.
+A recent app I released only consume around 12MB Memory and 0.02m CPU to serve 90k emails per day, the app includes most of features of a MVC web app.
+It is really impressive how lightweight a Golang application can be.</p>
+<p>Simplicity could be an advantage, but also a disadvantage. As developer has to write everything from scratch (or most of), it is easy to create technical debt
+or introduce bug when dealing with low level configuration, such as serializing and deserializing, io related, handling error, handling shutting down,
+generating metrics and so on.</p>
+<p>In this post, I&rsquo;d like to share some tips to create less future problematic code by using some common pattern to hide or reuse these responsibilities from the application logic.</p>
+<h2 id="serialize-and-deserialize-json-object">Serialize and Deserialize JSON object</h2>
+<p>The most common deserialization is <code>json.Unmarshall</code>. I am sure that this piece of code are very familiar</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">CreateJob</span>(<span style="color:#a6e22e">w</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ResponseWriter</span>, <span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Request</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">job</span> <span style="color:#a6e22e">Job</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">json</span>.<span style="color:#a6e22e">NewDecoder</span>(<span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">Body</span>).<span style="color:#a6e22e">Decode</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">job</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Error</span>(<span style="color:#a6e22e">w</span>, <span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>(), <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusBadRequest</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Store job to the Database
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">json</span>.<span style="color:#a6e22e">NewEncoder</span>(<span style="color:#a6e22e">w</span>).<span style="color:#a6e22e">Encode</span>(<span style="color:#a6e22e">job</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Error</span>(<span style="color:#a6e22e">w</span>, <span style="color:#e6db74">&#34;Internal error&#34;</span>, <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusInternalServerError</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>The actual code that generates value is in the comment &ldquo;Store job to the Database&rdquo;.
+The rest is just low level setup to retrieve and response to the user.</p>
+<p>Unless there are complicated logic to handle exeception, these lines of code are going to be the same in every request handler across the project.</p>
+<p>To reduce the amount of duplication, a http wrapper function could be added. This function extract the decode/encode part away, and replace the signature of the
+original <code>CreateJob</code> function to receive the <code>Job</code> and return an <code>CreateJobResponse</code> (if needed).</p>
+<p>The wrapper function may look like</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">CreateJobRequest</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Body</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">CreateJobJSONBody</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">WrapCreateJob</span>(<span style="color:#a6e22e">w</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ResponseWriter</span>, <span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Request</span>) {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">request</span> <span style="color:#a6e22e">CreateJobRequest</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">body</span> <span style="color:#a6e22e">CreateJobJSONBody</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">json</span>.<span style="color:#a6e22e">NewDecoder</span>(<span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">Body</span>).<span style="color:#a6e22e">Decode</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">body</span>); <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">requestErrorHandle</span>(<span style="color:#a6e22e">w</span>, <span style="color:#a6e22e">r</span>, <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;can&#39;t decode JSON body: %w&#34;</span>, <span style="color:#a6e22e">err</span>))
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">request</span>.<span style="color:#a6e22e">Body</span> = <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">body</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">response</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">CreateJobHandle</span>(<span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">Context</span>(), <span style="color:#a6e22e">request</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">responseErrorHandle</span>(<span style="color:#a6e22e">w</span>, <span style="color:#a6e22e">r</span>, <span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>	} <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">validResponse</span>, <span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">response</span>.(<span style="color:#a6e22e">CreateJobResponse</span>); <span style="color:#a6e22e">ok</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">validResponse</span>.<span style="color:#a6e22e">Write</span>(<span style="color:#a6e22e">w</span>); <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#a6e22e">responseErrorHandle</span>(<span style="color:#a6e22e">w</span>, <span style="color:#a6e22e">r</span>, <span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	} <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">response</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>	    <span style="color:#a6e22e">responseErrorHandle</span>(<span style="color:#a6e22e">w</span>, <span style="color:#a6e22e">r</span>, <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;unexpected response type: %T&#34;</span>, <span style="color:#a6e22e">response</span>))
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>And the <code>CreateJobHanle</code> is as simple as</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">CreateJobHandle</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">request</span> <span style="color:#a6e22e">CreateJobRequest</span>) (<span style="color:#a6e22e">CreateJobResponse</span>, <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">StoreJobIntoDB</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">request</span>.<span style="color:#a6e22e">Body</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">err</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">response</span> = <span style="color:#a6e22e">CreateJobResponse</span>{}<span style="color:#75715e">// fill up the data
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">response</span>, <span style="color:#66d9ef">nil</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>With this improvement, we can move the decoding/encoding logic outside of the action handler, leave the business logic in the handle function. This approach
+enhances readability, makes the testing more straightforward, and allow further reuseability.</p>
+<h2 id="produce-logs-before-and-after-executing-a-commandquery">Produce logs before and after executing a command/query</h2>
+<p>When using <a href="/posts/command-query-in-go-project/">Command and Query Object</a>, several logs can be structurize consistently amongs all query and command handlers.
+Certain logs include a log before the command runs and a log after command completes, with any errors for the developer to investigate further.</p>
+<p>It is easy to forget adding a log when writing a new command because it doesn&rsquo;t fail any testcase, and it isn&rsquo;t part of the business logic.
+Unlike the wrapper function described above, a command and query should follow a predefined interface</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">QueryHandler</span>[<span style="color:#a6e22e">Q</span> <span style="color:#a6e22e">any</span>, <span style="color:#a6e22e">R</span> <span style="color:#a6e22e">any</span>] <span style="color:#66d9ef">interface</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Handle</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">q</span> <span style="color:#a6e22e">Q</span>) (<span style="color:#a6e22e">R</span>, <span style="color:#66d9ef">error</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">CommandHandler</span>[<span style="color:#a6e22e">C</span> <span style="color:#a6e22e">any</span>] <span style="color:#66d9ef">interface</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Handle</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">cmd</span> <span style="color:#a6e22e">C</span>) <span style="color:#66d9ef">error</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>By following these interfaces, the command and query are easy to implemented and tested.
+In this setup, it is possible to add the decorator that extend the functionality of the command.</p>
+<p>At brief, decorator object has exact same interface with the target object, for instance, the log decorator for
+the command may look like below</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">queryLoggingDecorator</span>[<span style="color:#a6e22e">Q</span> <span style="color:#a6e22e">any</span>, <span style="color:#a6e22e">R</span> <span style="color:#a6e22e">any</span>] <span style="color:#66d9ef">struct</span> { <span style="color:#75715e">// implements QueryHandler interface
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#a6e22e">query</span> <span style="color:#a6e22e">QueryHandler</span>[<span style="color:#a6e22e">Q</span>, <span style="color:#a6e22e">R</span>]
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">logger</span> <span style="color:#a6e22e">Logger</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">d</span> <span style="color:#a6e22e">queryLoggingDecorator</span>[<span style="color:#a6e22e">Q</span>, <span style="color:#a6e22e">R</span>]) <span style="color:#a6e22e">Handle</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">query</span> <span style="color:#a6e22e">Q</span>) (<span style="color:#a6e22e">result</span> <span style="color:#a6e22e">R</span>, <span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">logger</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">logger</span>.
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">With</span>().
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">Str</span>(<span style="color:#e6db74">&#34;query&#34;</span>, <span style="color:#a6e22e">generateActionName</span>(<span style="color:#a6e22e">query</span>)).
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">Str</span>(<span style="color:#e6db74">&#34;query_body&#34;</span>, <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;%#v&#34;</span>, <span style="color:#a6e22e">query</span>)).
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">Logger</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">logger</span>.<span style="color:#a6e22e">Debug</span>().<span style="color:#a6e22e">Msg</span>(<span style="color:#e6db74">&#34;Executing Query&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">defer</span> <span style="color:#66d9ef">func</span>() {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#a6e22e">logger</span>.<span style="color:#a6e22e">Info</span>().<span style="color:#a6e22e">Msg</span>(<span style="color:#e6db74">&#34;Query executed successfully&#34;</span>)
+</span></span><span style="display:flex;"><span>		} <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#a6e22e">logger</span>.<span style="color:#a6e22e">Error</span>().<span style="color:#a6e22e">Err</span>(<span style="color:#a6e22e">err</span>).<span style="color:#a6e22e">Msg</span>(<span style="color:#e6db74">&#34;Query executed failed&#34;</span>)
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">base</span>.<span style="color:#a6e22e">Handle</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">query</span>)
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>There could be more decorators as needed by the project.
+We need to replace the query object with the decorator, and decorator can stack up
+A static factory function could simplify the query constructor step</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">DecorateQuery</span>[<span style="color:#a6e22e">H</span> <span style="color:#a6e22e">any</span>, <span style="color:#a6e22e">R</span> <span style="color:#a6e22e">any</span>](
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">handler</span> <span style="color:#a6e22e">QueryHandler</span>[<span style="color:#a6e22e">H</span>, <span style="color:#a6e22e">R</span>],
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">logger</span> <span style="color:#a6e22e">zerolog</span>.<span style="color:#a6e22e">Logger</span>
+</span></span><span style="display:flex;"><span>) <span style="color:#a6e22e">QueryHandler</span>[<span style="color:#a6e22e">H</span>, <span style="color:#a6e22e">R</span>] {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">queryLoggingDecorator</span>[<span style="color:#a6e22e">H</span>, <span style="color:#a6e22e">R</span>]{
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">base</span>: <span style="color:#a6e22e">handler</span>,
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">logger</span>: <span style="color:#a6e22e">logger</span>,
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>Example for using this static factory function</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewGetJobHandler</span>(<span style="color:#a6e22e">jobRepository</span> <span style="color:#a6e22e">Repository</span>, <span style="color:#a6e22e">logger</span> <span style="color:#a6e22e">Logger</span>) {}
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">DecorateQuery</span>[<span style="color:#a6e22e">GetJobQuery</span>, <span style="color:#a6e22e">Job</span>] {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">GetJobHandler</span>{ <span style="color:#a6e22e">repo</span>: <span style="color:#a6e22e">jobRepository</span> },
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">logger</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">getJobCmd</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">NewGetJobHandler</span>(<span style="color:#a6e22e">jobRepo</span>, <span style="color:#a6e22e">logger</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">getJobCmd</span>.<span style="color:#a6e22e">Handle</span>(<span style="color:#f92672">...</span>)</span></span></code></pre></div><p>This setup allows hiding the logging responsibility away from the actual query by using decorator pattern.
+By calling the <code>getJobCmd.Handle(ctx,...)</code>, the consumer expects the same output without knowing the decorators are added by another developer.</p>
+<p>In real life scenario, the <code>DecorateQuery</code> could get more complicated with multiple decorators stacking. This example below may not be the most complicated
+setup, hopefully it still gives you an idea how much extra functionalities can be added into the project</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">DecorateQuery</span>[<span style="color:#a6e22e">H</span> <span style="color:#a6e22e">any</span>, <span style="color:#a6e22e">R</span> <span style="color:#a6e22e">any</span>](
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">handler</span> <span style="color:#a6e22e">QueryHandler</span>[<span style="color:#a6e22e">H</span>, <span style="color:#a6e22e">R</span>],
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// more parameters
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// we can consider to have several decorate query helper functions
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>) <span style="color:#a6e22e">QueryHandler</span>[<span style="color:#a6e22e">H</span>, <span style="color:#a6e22e">R</span>] {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">queryLoggingDecorator</span>[<span style="color:#a6e22e">H</span>, <span style="color:#a6e22e">R</span>]{
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">base</span>: <span style="color:#a6e22e">queryMetricsDecorator</span>[<span style="color:#a6e22e">H</span>, <span style="color:#a6e22e">R</span>]{
+</span></span><span style="display:flex;"><span>			<span style="color:#a6e22e">base</span>:         <span style="color:#a6e22e">queryAnalyticDecorator</span>[<span style="color:#a6e22e">H</span>, <span style="color:#a6e22e">R</span>] {
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">base</span>:     <span style="color:#a6e22e">queryAsyncHistoryPublishDecorator</span>[<span style="color:#a6e22e">H</span>, <span style="color:#a6e22e">R</span>] {
+</span></span><span style="display:flex;"><span>                    <span style="color:#a6e22e">base</span>: <span style="color:#a6e22e">handler</span>,
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>			<span style="color:#a6e22e">metricClient</span>: <span style="color:#a6e22e">metricClient</span>,
+</span></span><span style="display:flex;"><span>		},
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">logger</span>: <span style="color:#a6e22e">logger</span>,
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><h2 id="conclusion">Conclusion</h2>
+<p>Decorator and function wrapper are very useful to extend the service functionalities. It hides the extra logic that doesn&rsquo;t contribute directly to the business domain
+away for the core functionalities, keeps the project easy to maintain. I highly recommend applying these pattern to your project if possible. Please let me know if you find
+them useful. See you all in the next post.</p>]]></content:encoded></item><item><title>Test Command Handler With Mock</title><link>https://duykhoa.github.io/posts/test-command-query-with-mock/</link><pubDate>Wed, 23 Oct 2024 21:26:22 -0400</pubDate><author>duykhoa12t[at]gmail[dot]com (Kevin Tran)</author><guid>https://duykhoa.github.io/posts/test-command-query-with-mock/</guid><description>&lt;p>This post demonstrates how to test command and query handlers in a &lt;a href="https://duykhoa.github.io/content/posts/command-query-in-go-project/index.md">Command Query Separation based&lt;/a> project.&lt;/p></description><content:encoded><![CDATA[<p>This post demonstrates how to test command and query handlers in a <a href="/content/posts/command-query-in-go-project/index.md">Command Query Separation based</a> project.</p>
 <h2 id="cqs-structure">CQS Structure</h2>
 <p>Testing Query and Command handlers involves similar techniques, this post will demonstrate testing Command handlers. The principles can be easily applied to Query handlers.</p>
 <p>The CQS structure defines a command handler interface, which receives a <code>C</code> generic command object and return nothing but an error in non-happy path.</p>
