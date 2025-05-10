@@ -1,0 +1,17 @@
+#!/bin/bash
+
+slug=${1}
+
+cmd=hugo
+
+if [[ -z "$slug" ]]; then
+  echo "slug must be specified as a parameter"
+  exit 1
+fi
+
+if ! command -v $cmd 2>&1 > /dev/null; then
+  echo "<$cmd> couldn't been found"
+  exit 1
+fi
+
+$cmd new content/posts/$slug/index.md
