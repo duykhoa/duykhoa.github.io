@@ -8,7 +8,7 @@
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">CommandHandler</span>[<span style="color:#a6e22e">C</span> <span style="color:#a6e22e">any</span>] <span style="color:#66d9ef">interface</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">CommandHandler</span>[<span style="color:#a6e22e">C</span> <span style="color:#66d9ef">any</span>] <span style="color:#66d9ef">interface</span> {
 </span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Handle</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">cmd</span> <span style="color:#a6e22e">C</span>) <span style="color:#66d9ef">error</span>
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
@@ -19,8 +19,8 @@
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">createArticleHandler</span>) <span style="color:#a6e22e">Handle</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">cmd</span> <span style="color:#a6e22e">CreateArticle</span>) <span style="color:#66d9ef">error</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// TODO
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}</span></span></code></pre></div><p>Given the command handler is following this structure, we need to test the command handler and the higher component, e.g the controller.</p>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// TODO</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>Given the command handler is following this structure, we need to test the command handler and the higher component, e.g the controller.</p>
 <p>We need to deal with the command handler&rsquo;s dependency first, which is the <code>ArticleRepository</code>. It would be easier if the <code>ArticleRepository</code> is an interface. If there is no interface for the repository, please consider to have define the interface and use the interface for the repo dependency.</p>
 <p>With the interface setup, we can create a dummy implementation to test the <code>ArticleRepository</code>. <a href="https://github.com/vektra/mockery">mockery</a> or <a href="https://github.com/uber-go/mock">gomock</a> can generate mock implementations for interfaces, saving manual effort. We can automate the creation of mock implementations by adding a <code>go:generate</code> comment to the interface.</p>
 
@@ -28,10 +28,10 @@
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#75715e">// file location: internal/domain/article/repository.go
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">//go:generate mockgen -destination mocks/mock_article_repository.go -package mocks . ArticleRepository
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">ArticleRepository</span> <span style="color:#66d9ef">interface</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#75715e">// file location: internal/domain/article/repository.go</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//go:generate mockgen -destination mocks/mock_article_repository.go -package mocks . ArticleRepository</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">ArticleRepository</span> <span style="color:#66d9ef">interface</span> {
 </span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">CreateArticle</span>(
 </span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>,
 </span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">article</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Article</span>,
@@ -81,8 +81,8 @@
 
 
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">//go:generate mockgen -destination mocks/mock_create_article.go -package mocks . CreateArticleHandler
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">CreateArticleHandler</span> = <span style="color:#a6e22e">common</span>.<span style="color:#a6e22e">CommandHandler</span>[<span style="color:#a6e22e">CreateArticle</span>]</span></span></code></pre></div><p>By adding this comment, the <code>go generate</code> command will generates the mock implementation for the command handler, which allows to setup different scenarios to test the higher component.</p>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//go:generate mockgen -destination mocks/mock_create_article.go -package mocks . CreateArticleHandler</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">CreateArticleHandler</span> = <span style="color:#a6e22e">common</span>.<span style="color:#a6e22e">CommandHandler</span>[<span style="color:#a6e22e">CreateArticle</span>]</span></span></code></pre></div><p>By adding this comment, the <code>go generate</code> command will generates the mock implementation for the command handler, which allows to setup different scenarios to test the higher component.</p>
 
 
 
@@ -127,7 +127,7 @@
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">CommandHandler</span>[<span style="color:#a6e22e">C</span> <span style="color:#a6e22e">any</span>] <span style="color:#66d9ef">interface</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">CommandHandler</span>[<span style="color:#a6e22e">C</span> <span style="color:#66d9ef">any</span>] <span style="color:#66d9ef">interface</span> {
 </span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Handle</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">cmd</span> <span style="color:#a6e22e">C</span>) <span style="color:#66d9ef">error</span>
 </span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>The command handler receives a <code>C</code> generic command object, which is just a Go struct.
 Each specific command handler could specifies its <code>C</code> parameter type, performs some actions and returns an error represents if the actions was completed.</p>
@@ -149,8 +149,8 @@ This setup looks like below:</p>
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">createArticleHandler</span>) <span style="color:#a6e22e">Handle</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">cmd</span> <span style="color:#a6e22e">CreateArticle</span>) <span style="color:#66d9ef">error</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// TODO
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}</span></span></code></pre></div><p><code>CreateArticleHandler</code> is an interface that implements the generic <code>CommandHandler</code> interface, tailored in handling <code>CreateArticle</code> command.
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// TODO</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p><code>CreateArticleHandler</code> is an interface that implements the generic <code>CommandHandler</code> interface, tailored in handling <code>CreateArticle</code> command.
 The code defines the <code>CreateArticleHandler</code> as a type follows the  <code>CommandHandler</code>, where the generic type is replaced by <code>CreateArticle</code>.
 Later on, it creates a struct <code>createArticleHandler</code> in lowercase that implement the <code>CreateArticleHandler</code>, it means the <code>createArticleHandler</code> must
 have the <code>Handle</code> function that accepts a <code>CreateArticle</code> object as an input.</p>
@@ -160,7 +160,7 @@ have the <code>Handle</code> function that accepts a <code>CreateArticle</code> 
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">QueryHandler</span>[<span style="color:#a6e22e">Q</span> <span style="color:#a6e22e">any</span>, <span style="color:#a6e22e">R</span> <span style="color:#a6e22e">any</span>] <span style="color:#66d9ef">interface</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">QueryHandler</span>[<span style="color:#a6e22e">Q</span> <span style="color:#66d9ef">any</span>, <span style="color:#a6e22e">R</span> <span style="color:#66d9ef">any</span>] <span style="color:#66d9ef">interface</span> {
 </span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Handle</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">q</span> <span style="color:#a6e22e">Q</span>) (<span style="color:#a6e22e">R</span>, <span style="color:#66d9ef">error</span>)
 </span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>The query handler receives a <code>Q</code> generic query object and a <code>R</code> generic result object, which are go struct.
 Similar to the command handler, each query handler despecifiesfines its Q and R types, performs some actions and returns the result with type R and an error represents if the process was successful.</p>
@@ -211,15 +211,15 @@ To provide a clear picture, here is a pattern I am using when defind the command
 
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#a6e22e">baseHandler</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">createArticleHandler</span>{}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">DecorateCommand</span>[<span style="color:#a6e22e">H</span> <span style="color:#a6e22e">any</span>](<span style="color:#a6e22e">handler</span> <span style="color:#a6e22e">CommandHandler</span>[<span style="color:#a6e22e">H</span>], <span style="color:#a6e22e">logger</span>: <span style="color:#a6e22e">logger</span>) {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">DecorateCommand</span>[<span style="color:#a6e22e">H</span> <span style="color:#66d9ef">any</span>](<span style="color:#a6e22e">handler</span> <span style="color:#a6e22e">CommandHandler</span>[<span style="color:#a6e22e">H</span>], <span style="color:#a6e22e">logger</span>: <span style="color:#a6e22e">logger</span>) {
 </span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">commandLogging</span> {
 </span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">base</span>:   <span style="color:#a6e22e">handler</span>,
 </span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">logger</span>: <span style="color:#a6e22e">logger</span>
 </span></span><span style="display:flex;"><span>	}
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">commandLogging</span>[<span style="color:#a6e22e">C</span> <span style="color:#a6e22e">any</span>] <span style="color:#66d9ef">struct</span> { <span style="color:#75715e">// implement CommandHandler
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#a6e22e">base</span>: <span style="color:#a6e22e">CommandHandler</span>[<span style="color:#a6e22e">C</span>]
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">commandLogging</span>[<span style="color:#a6e22e">C</span> <span style="color:#66d9ef">any</span>] <span style="color:#66d9ef">struct</span> { <span style="color:#75715e">// implement CommandHandler</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">base</span>: <span style="color:#a6e22e">CommandHandler</span>[<span style="color:#a6e22e">C</span>]
 </span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">logger</span>: <span style="color:#a6e22e">zerolog</span>.<span style="color:#a6e22e">Logger</span>
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
