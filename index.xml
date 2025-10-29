@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Kevin's Blog</title><link>https://duykhoa.github.io/</link><description>Recent content on Kevin's Blog</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>duykhoa12t[at]gmail[dot]com (Kevin Tran)</managingEditor><webMaster>duykhoa12t[at]gmail[dot]com (Kevin Tran)</webMaster><copyright>Kevin Tran</copyright><lastBuildDate>Sat, 16 Nov 2024 14:56:56 -0500</lastBuildDate><atom:link href="https://duykhoa.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>About</title><link>https://duykhoa.github.io/about/</link><pubDate>Sun, 16 Apr 2023 15:00:15 -0400</pubDate><author>duykhoa12t[at]gmail[dot]com (Kevin Tran)</author><guid>https://duykhoa.github.io/about/</guid><description>&lt;p>&lt;strong>Hey there, software enthusiasts!&lt;/strong>&lt;/p>
-&lt;p>My name is Kevin Tran, and I&amp;rsquo;m a Software Engineer with a burning passion for all things DevOps. Over the years, I&amp;rsquo;ve had the privilege of contributing to successful projects across diverse industries, from private banking to ride-hailing and even the automotive world.&lt;/p>
-&lt;p>For the past five years, I&amp;rsquo;ve been invested my time in building microservices. To ensure top-notch code delivered, I rely on Test-Driven Development and Continuous Integration/Continuous Delivery (CI/CD). While I spent a good chunk of time developing applications with Ruby on Rails and Hanami, I&amp;rsquo;ve recently transitioned to more flexible, high-performance technologies like Go, Java, and NodeJS. I&amp;rsquo;m a big fan of monorepos and trunk-based development. Plus, I love creating internal tools to make life easier for fellow engineers.&lt;/p></description><content:encoded><![CDATA[<p><strong>Hey there, software enthusiasts!</strong></p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Kevin's Blog</title><link>https://duykhoa.github.io/</link><description>Recent content on Kevin's Blog</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>duykhoa12t[at]gmail[dot]com (Kevin Tran)</managingEditor><webMaster>duykhoa12t[at]gmail[dot]com (Kevin Tran)</webMaster><copyright>Kevin Tran</copyright><lastBuildDate>Tue, 28 Oct 2025 14:03:03 -0400</lastBuildDate><atom:link href="https://duykhoa.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>About</title><link>https://duykhoa.github.io/about/</link><pubDate>Sun, 16 Apr 2023 15:00:15 -0400</pubDate><author>duykhoa12t[at]gmail[dot]com (Kevin Tran)</author><guid>https://duykhoa.github.io/about/</guid><description>&lt;p&gt;&lt;strong&gt;Hey there, software enthusiasts!&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;My name is Kevin Tran, and I&amp;rsquo;m a Software Engineer with a burning passion for all things DevOps. Over the years, I&amp;rsquo;ve had the privilege of contributing to successful projects across diverse industries, from private banking to ride-hailing and even the automotive world.&lt;/p&gt;
+&lt;p&gt;For the past five years, I&amp;rsquo;ve been invested my time in building microservices. To ensure top-notch code delivered, I rely on Test-Driven Development and Continuous Integration/Continuous Delivery (CI/CD). While I spent a good chunk of time developing applications with Ruby on Rails and Hanami, I&amp;rsquo;ve recently transitioned to more flexible, high-performance technologies like Go, Java, and NodeJS. I&amp;rsquo;m a big fan of monorepos and trunk-based development. Plus, I love creating internal tools to make life easier for fellow engineers.&lt;/p&gt;</description><content:encoded><![CDATA[<p><strong>Hey there, software enthusiasts!</strong></p>
 <p>My name is Kevin Tran, and I&rsquo;m a Software Engineer with a burning passion for all things DevOps. Over the years, I&rsquo;ve had the privilege of contributing to successful projects across diverse industries, from private banking to ride-hailing and even the automotive world.</p>
 <p>For the past five years, I&rsquo;ve been invested my time in building microservices. To ensure top-notch code delivered, I rely on Test-Driven Development and Continuous Integration/Continuous Delivery (CI/CD). While I spent a good chunk of time developing applications with Ruby on Rails and Hanami, I&rsquo;ve recently transitioned to more flexible, high-performance technologies like Go, Java, and NodeJS. I&rsquo;m a big fan of monorepos and trunk-based development. Plus, I love creating internal tools to make life easier for fellow engineers.</p>
 <p>But it&rsquo;s not just code! I also design and manage the infrastructure behind these apps using Infrastructure as Code (IaC). Think of it as an automated blueprint for building everything. Terraform, Ansible, and Kubernetes are my weapons of choice. If containers are your thing, you&rsquo;ll be happy (or not) to know I&rsquo;ve got experience working with Kubernetes and Openshift as well. Make sure you checkout my posts in the future about these topics.</p>
@@ -10,13 +10,193 @@
 <p>If you wonder if I&rsquo;m a real person. Yes and here is my latest photo cycling around the <a href="https://www.kitchener.ca/en/parks-and-trails/iron-horse-trail.aspx">Iron Horse Trail</a></p>
 <p><img src="/images/avatar.png" alt="my photo"></p>
 <p><strong>Also</strong> Checkout my <a href="/resources">resources</a> for my curated list of readings</p>
-]]></content:encoded></item><item><title>Go Refactor Behavioral Responsibility</title><link>https://duykhoa.github.io/posts/go-refactor-behavioral-responsibility/</link><pubDate>Sat, 16 Nov 2024 14:56:56 -0500</pubDate><author>duykhoa12t[at]gmail[dot]com (Kevin Tran)</author><guid>https://duykhoa.github.io/posts/go-refactor-behavioral-responsibility/</guid><description>&lt;p>Go promotes simplicity, it makes Go more attractive to the community.
+]]></content:encoded></item><item><title>A Modern Approach to Microservices with Monorepos, Devbox, and Skaffold</title><link>https://duykhoa.github.io/posts/microservices-monorepo-template/</link><pubDate>Tue, 28 Oct 2025 14:03:03 -0400</pubDate><author>duykhoa12t[at]gmail[dot]com (Kevin Tran)</author><guid>https://duykhoa.github.io/posts/microservices-monorepo-template/</guid><description>&lt;p&gt;As software systems grow, many teams adopt the microservice architecture to break down a large monolith into smaller, manageable services. This approach offers benefits in scalability and separation of concerns, it introduces new challenges, especially around code sharing and development environment consistency.&lt;/p&gt;
+&lt;p&gt;This post explores a modern workflow for developing microservices within a monorepo, using a powerful combination of Devbox, Skaffold, and Make to create a seamless and production-like development experience. We&amp;rsquo;ll be referencing the setup from this sample project: &lt;a href="https://github.com/duykhoa/microservice_playground"&gt;https://github.com/duykhoa/microservice_playground&lt;/a&gt;.&lt;/p&gt;</description><content:encoded><![CDATA[<p>As software systems grow, many teams adopt the microservice architecture to break down a large monolith into smaller, manageable services. This approach offers benefits in scalability and separation of concerns, it introduces new challenges, especially around code sharing and development environment consistency.</p>
+<p>This post explores a modern workflow for developing microservices within a monorepo, using a powerful combination of Devbox, Skaffold, and Make to create a seamless and production-like development experience. We&rsquo;ll be referencing the setup from this sample project: <a href="https://github.com/duykhoa/microservice_playground">https://github.com/duykhoa/microservice_playground</a>.</p>
+<h3 id="why-a-monorepo-for-microservices">Why a Monorepo for Microservices?</h3>
+<p>Traditionally, microservices are often managed in separate repositories (a &ldquo;poly-repo&rdquo; approach). However, a monorepo is a single repository containing multiple services—offers compelling advantages:</p>
+<ul>
+<li>
+<p><strong>Simplified Code Sharing:</strong> In a poly-repo world, sharing code (e.g., common libraries, data models) requires a formal versioning and packaging process. You have to compile, tag, and publish the shared library to an artifact repository (like GitHub Packages or a private Maven repository). Then, each service that depends on it must update its dependencies. In a monorepo, you can simply import the code directly. This eliminates versioning overhead and ensures all services are always using the latest shared logic.</p>
+</li>
+<li>
+<p><strong>Atomic Commits and Reviews:</strong> A single feature or bug fix might require changes across multiple services. In a monorepo, you can commit all these changes in a single commit. This makes the git history easier to understand. Furthermore, a single pull request can contain both the change to a shared library and the necessary adjustments in the services that consume it. This makes code reviews more holistic and efficient.</p>
+</li>
+<li>
+<p><strong>Simpler Git Workflow:</strong> Managing dependencies and versions across dozens of repositories can become a nightmare. A monorepo simplifies the workflow by having a single source of truth. There&rsquo;s no need to coordinate commits across different repos to keep them in sync.</p>
+</li>
+</ul>
+<h3 id="the-development-environment-challenge">The Development Environment Challenge</h3>
+<p>Developing a single microservice requires more than just the service&rsquo;s code. You need a complete environment, which often includes:</p>
+<ul>
+<li><strong>Compilation Tools:</strong> The Go compiler, <code>protoc</code> for gRPC, a JDK for Java services, etc.</li>
+<li><strong>Databases:</strong> PostgreSQL, MongoDB, Redis, etc.</li>
+<li><strong>Message Queues:</strong> RabbitMQ, Kafka.</li>
+<li><strong>Mock Services:</strong> Stubs for external dependencies.</li>
+<li><strong>Orchestration:</strong> A way to run all these components together.</li>
+</ul>
+<p>Docker and <code>docker-compose</code> have made this much easier by allowing you to define your environment in code. However, to get one step closer to a production Kubernetes environment, we can use a combination of Minikube, Skaffold, and Devbox. This stack ensures that all developers have the exact same tools and that their environments are consistent and compatible.</p>
+<p><strong>Devbox</strong> ensures you have the right versions of all your command-line tools (like <code>kubectl</code>, <code>skaffold</code>, <code>minikube</code>). <strong>Skaffold</strong> automates the process of building container images and deploying them to Kubernetes. <strong>Minikube</strong> provides a local Kubernetes cluster.</p>
+<p>Here’s how a <code>skaffold.yaml</code> file might look, defining the build and deployment process for multiple services:</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">skaffold/v4beta1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Config</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">microservice-playground</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">build</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">artifacts</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">image</span>: <span style="color:#ae81ff">products-service</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">context</span>: <span style="color:#ae81ff">services/products</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">docker</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">dockerfile</span>: <span style="color:#ae81ff">Dockerfile</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">image</span>: <span style="color:#ae81ff">order-service</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">context</span>: <span style="color:#ae81ff">services/order</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">docker</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">dockerfile</span>: <span style="color:#ae81ff">Dockerfile</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">image</span>: <span style="color:#ae81ff">web-service</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">context</span>: <span style="color:#ae81ff">web</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">docker</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">dockerfile</span>: <span style="color:#ae81ff">Dockerfile</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">manifests</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">kustomize</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">paths</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">./infra/k8s/</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">profiles</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">dev</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">build</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">artifacts</span>:
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">image</span>: <span style="color:#ae81ff">products-service</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">context</span>: <span style="color:#ae81ff">services/products</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">docker</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">dockerfile</span>: <span style="color:#ae81ff">Dockerfile</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">sync</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">manual</span>:
+</span></span><span style="display:flex;"><span>              - <span style="color:#f92672">src</span>: <span style="color:#e6db74">&#39;**/*.go&#39;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">dest</span>: <span style="color:#ae81ff">.</span>
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">image</span>: <span style="color:#ae81ff">order-service</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">context</span>: <span style="color:#ae81ff">services/order</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">docker</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">dockerfile</span>: <span style="color:#ae81ff">Dockerfile</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">sync</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">manual</span>:
+</span></span><span style="display:flex;"><span>              - <span style="color:#f92672">src</span>: <span style="color:#e6db74">&#39;**/*.go&#39;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">dest</span>: <span style="color:#ae81ff">.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">manifests</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">kustomize</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">paths</span>:
+</span></span><span style="display:flex;"><span>          - <span style="color:#ae81ff">./infra/k8s/</span></span></span></code></pre></div><p>This configuration tells Skaffold how to build the Docker image for each service and where to find the Kubernetes manifests (in this case, managed by Kustomize). The <code>sync</code> block enables hot-reloading for Go files, so changes are automatically synced to the running container without a full rebuild.</p>
+<h3 id="how-to-set-it-up">How to Set It Up</h3>
+<p>The <a href="https://github.com/duykhoa/microservice_playground">microservice_playground</a> repository provides a working example.</p>
+<ol>
+<li>
+<p><strong>Tooling with <code>devbox.json</code></strong>: This file defines all the necessary developer tools.</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;packages&#34;</span>: [
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;go@1.21&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;minikube@1.31&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;skaffold@2.9&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;kubectl@1.28&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;make@4.4&#34;</span>
+</span></span><span style="display:flex;"><span>  ],
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;shell&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;init_hook&#34;</span>: [
+</span></span><span style="display:flex;"><span>      <span style="color:#e6db74">&#34;echo &#39;Welcome to the dev environment!&#39;&#34;</span>
+</span></span><span style="display:flex;"><span>    ]
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>By running <code>devbox shell</code>, a developer instantly gets access to all the required tools at the correct versions.</p>
+</li>
+<li>
+<p><strong>Service Code</strong>: Inside the <code>services</code> directory, each service is a standard Go application. For example, the <code>order-service</code> might look like this:</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// services/order/main.go</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;net/http&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Direct import from another module in the monorepo</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;github.com/duykhoa/microservice_playground/services/products/client&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">productClient</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">New</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">HandleFunc</span>(<span style="color:#e6db74">&#34;/orders&#34;</span>, <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">w</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ResponseWriter</span>, <span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Request</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Logic to create an order, potentially calling the product service</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Fprintf</span>(<span style="color:#a6e22e">w</span>, <span style="color:#e6db74">&#34;Order created!&#34;</span>)
+</span></span><span style="display:flex;"><span>    })
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ListenAndServe</span>(<span style="color:#e6db74">&#34;:8080&#34;</span>, <span style="color:#66d9ef">nil</span>)
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div></li>
+<li>
+<p><strong>Optimizing with <code>go.work</code></strong>: A key tool for Go monorepos is the <code>go.work</code> file. It tells the Go toolchain that you&rsquo;re working in a multi-module workspace. This allows you to have separate <code>go.mod</code> files for each service while still enabling cross-service code navigation and dependency resolution in your IDE as if it were a single module.</p>
+<p>A <code>go.work</code> file at the root of the repository would look like this:</p>
+
+
+
+
+
+<pre tabindex="0"><code>go 1.21
+
+use (
+    ./services/products
+    ./services/order
+    ./web
+)</code></pre></li>
+</ol>
+<h3 id="focusing-on-specific-services-with-skaffold">Focusing on Specific Services with Skaffold</h3>
+<p>Running all services at once is great for integration testing, but it consumes a lot of resources. Often, you only want to work on one or two services at a time. Skaffold supports this through <strong>modules</strong>.</p>
+<p>You can target specific services (or groups of services) by using the <code>--module</code> (or <code>-m</code>) flag in your commands. The module names are derived from the <code>image</code> names defined in the <code>build.artifacts</code> section of your <code>skaffold.yaml</code>.</p>
+<p>For example, if you only want to run the <code>order-service</code> and the <code>web</code> frontend, you would run:</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>skaffold dev -m order-service -m web-service</span></span></code></pre></div><p>This command tells Skaffold to only build, deploy, and watch those two specific modules, ignoring the <code>products-service</code>. This significantly speeds up your development loop and reduces resource consumption.</p>
+<h3 id="a-deeper-dive-into-the-go-work-workflow">A Deeper Dive into the <code>go work</code> Workflow</h3>
+<p>The <code>go.work</code> file is a game-changer for Go development in a monorepo. Let&rsquo;s clarify the workflow.</p>
+<p><strong>The Problem Before <code>go.work</code>:</strong></p>
+<p>Without a workspace, if <code>order-service</code> depended on a library in <code>products-service</code>, its <code>go.mod</code> file would point to a specific version of the <code>products-service</code> repository. To work on them together locally, you would have to add a <code>replace</code> directive in <code>order-service/go.mod</code>:</p>
+
+
+
+
+
+<pre tabindex="0"><code>// TEMPORARY and easily committed by mistake!
+replace github.com/duykhoa/microservice_playground/services/products =&gt; ../products</code></pre><p>This is clumsy and highly error-prone, as these temporary <code>replace</code> directives can easily be committed to version control, breaking builds for other developers.</p>
+<p><strong>The <code>go work</code> Solution:</strong></p>
+<p>The <code>go.work</code> file at the root of the project tells the Go toolchain that this is a multi-module workspace. This file is meant to be checked into source control.</p>
+<p>Here’s how you work on a specific service:</p>
+<ol>
+<li>Navigate to the service&rsquo;s directory: <code>cd services/order</code>.</li>
+<li>Open the code in your editor. The Go language server (<code>gopls</code>) will automatically detect the <code>go.work</code> file in the parent directory and understand the entire workspace.</li>
+<li>Now, if you make a change in a dependency that is also in the workspace (e.g., you edit a function in <code>services/products/client</code>), the change is instantly available to <code>order-service</code>. There is no need to modify any <code>go.mod</code> files.</li>
+<li>You can run standard Go commands from within the <code>services/order</code> directory, and they will just work. For example, <code>go test</code> will use the local <code>services/products</code> code instead of a version from the internet.</li>
+</ol>
+<p>This creates a seamless development experience where you can treat your monorepo as a single, cohesive unit while still maintaining separation between your service modules.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>Combining a monorepo with tools like Devbox, Skaffold, and <code>go.work</code> creates a powerful and efficient development workflow for microservices. It solves the key challenges of code sharing and environment consistency, allowing developers to focus on building features rather than fighting their tools. This setup not only improves the developer experience but also brings your local environment one step closer to the production reality of Kubernetes.</p>
+]]></content:encoded></item><item><title>Go Refactor Behavioral Responsibility</title><link>https://duykhoa.github.io/posts/go-refactor-behavioral-responsibility/</link><pubDate>Sat, 16 Nov 2024 14:56:56 -0500</pubDate><author>duykhoa12t[at]gmail[dot]com (Kevin Tran)</author><guid>https://duykhoa.github.io/posts/go-refactor-behavioral-responsibility/</guid><description>&lt;p&gt;Go promotes simplicity, it makes Go more attractive to the community.
 A recent app I released only consume around 12MB Memory and 0.02m CPU to serve 90k emails per day, the app includes most of features of a MVC web app.
-It is really impressive how lightweight a Golang application can be.&lt;/p>
-&lt;p>Simplicity could be an advantage, but also a disadvantage. As developer has to write everything from scratch (or most of), it is easy to create technical debt
+It is really impressive how lightweight a Golang application can be.&lt;/p&gt;
+&lt;p&gt;Simplicity could be an advantage, but also a disadvantage. As developer has to write everything from scratch (or most of), it is easy to create technical debt
 or introduce bug when dealing with low level configuration, such as serializing and deserializing, io related, handling error, handling shutting down,
-generating metrics and so on.&lt;/p>
-&lt;p>In this post, I&amp;rsquo;d like to share some tips to create less future problematic code by using some common pattern to hide or reuse these responsibilities from the application logic.&lt;/p></description><content:encoded><![CDATA[<p>Go promotes simplicity, it makes Go more attractive to the community.
+generating metrics and so on.&lt;/p&gt;
+&lt;p&gt;In this post, I&amp;rsquo;d like to share some tips to create less future problematic code by using some common pattern to hide or reuse these responsibilities from the application logic.&lt;/p&gt;</description><content:encoded><![CDATA[<p>Go promotes simplicity, it makes Go more attractive to the community.
 A recent app I released only consume around 12MB Memory and 0.02m CPU to serve 90k emails per day, the app includes most of features of a MVC web app.
 It is really impressive how lightweight a Golang application can be.</p>
 <p>Simplicity could be an advantage, but also a disadvantage. As developer has to write everything from scratch (or most of), it is easy to create technical debt
@@ -209,7 +389,7 @@ setup, hopefully it still gives you an idea how much extra functionalities can b
 </span></span><span style="display:flex;"><span>}</span></span></code></pre></div><h2 id="conclusion">Conclusion</h2>
 <p>Decorator and function wrapper are very useful to extend the service functionalities. It hides the extra logic that doesn&rsquo;t contribute directly to the business domain
 away for the core functionalities, keeps the project easy to maintain. I highly recommend applying these pattern to your project if possible. Please let me know if you find
-them useful. See you all in the next post.</p>]]></content:encoded></item><item><title>Test Command Handler With Mock</title><link>https://duykhoa.github.io/posts/test-command-query-with-mock/</link><pubDate>Wed, 23 Oct 2024 21:26:22 -0400</pubDate><author>duykhoa12t[at]gmail[dot]com (Kevin Tran)</author><guid>https://duykhoa.github.io/posts/test-command-query-with-mock/</guid><description>&lt;p>This post demonstrates how to test command and query handlers in a &lt;a href="https://duykhoa.github.io/content/posts/command-query-in-go-project/index.md">Command Query Separation based&lt;/a> project.&lt;/p></description><content:encoded><![CDATA[<p>This post demonstrates how to test command and query handlers in a <a href="/content/posts/command-query-in-go-project/index.md">Command Query Separation based</a> project.</p>
+them useful. See you all in the next post.</p>]]></content:encoded></item><item><title>Test Command Handler With Mock</title><link>https://duykhoa.github.io/posts/test-command-query-with-mock/</link><pubDate>Wed, 23 Oct 2024 21:26:22 -0400</pubDate><author>duykhoa12t[at]gmail[dot]com (Kevin Tran)</author><guid>https://duykhoa.github.io/posts/test-command-query-with-mock/</guid><description>&lt;p&gt;This post demonstrates how to test command and query handlers in a &lt;a href="https://duykhoa.github.io/content/posts/command-query-in-go-project/index.md"&gt;Command Query Separation based&lt;/a&gt; project.&lt;/p&gt;</description><content:encoded><![CDATA[<p>This post demonstrates how to test command and query handlers in a <a href="/content/posts/command-query-in-go-project/index.md">Command Query Separation based</a> project.</p>
 <h2 id="cqs-structure">CQS Structure</h2>
 <p>Testing Query and Command handlers involves similar techniques, this post will demonstrate testing Command handlers. The principles can be easily applied to Query handlers.</p>
 <p>The CQS structure defines a command handler interface, which receives a <code>C</code> generic command object and return nothing but an error in non-happy path.</p>
@@ -319,8 +499,8 @@ them useful. See you all in the next post.</p>]]></content:encoded></item><item>
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Expect</span>(<span style="color:#a6e22e">resp</span>).<span style="color:#a6e22e">To</span>(<span style="color:#a6e22e">BeAssignableToTypeOf</span>(<span style="color:#a6e22e">ports</span>.<span style="color:#a6e22e">CreateArticle500Response</span>{}))
 </span></span><span style="display:flex;"><span>})</span></span></code></pre></div><p>To test the happy scenario, modify the mock expectation setup by setting the <code>Return</code> parameter to nil.</p>
 <h1 id="conclusion">Conclusion</h1>
-<p>By enforcing a clean separation of concerns, CQS makes it easier to write targeted tests for individual components. This increased testability leads to higher quality software, as bugs can be identified and fixed more efficiently.</p>]]></content:encoded></item><item><title>Command Query in Go Project</title><link>https://duykhoa.github.io/posts/command-query-in-go-project/</link><pubDate>Mon, 14 Oct 2024 15:59:15 -0400</pubDate><author>duykhoa12t[at]gmail[dot]com (Kevin Tran)</author><guid>https://duykhoa.github.io/posts/command-query-in-go-project/</guid><description>&lt;p>In Model-View-Controller applications, a common practice is to introduce service objects to encapsulate business logic and manage the interaction to external systems. While service objects are useful abstraction, further structuring them could improve the code organization and maintainability.&lt;/p>
-&lt;p>Command Query Separation (CQS) is a design pattern principle that defines the incoming request handler type, which is either modify the application state - commands, or retrieving data without any side effect - queries. By applying CQS to service objects, we can create clean interface. This blog post will explore further the benefits of CQS and how to create command and query objects in existing application.&lt;/p></description><content:encoded><![CDATA[<p>In Model-View-Controller applications, a common practice is to introduce service objects to encapsulate business logic and manage the interaction to external systems. While service objects are useful abstraction, further structuring them could improve the code organization and maintainability.</p>
+<p>By enforcing a clean separation of concerns, CQS makes it easier to write targeted tests for individual components. This increased testability leads to higher quality software, as bugs can be identified and fixed more efficiently.</p>]]></content:encoded></item><item><title>Command Query in Go Project</title><link>https://duykhoa.github.io/posts/command-query-in-go-project/</link><pubDate>Mon, 14 Oct 2024 15:59:15 -0400</pubDate><author>duykhoa12t[at]gmail[dot]com (Kevin Tran)</author><guid>https://duykhoa.github.io/posts/command-query-in-go-project/</guid><description>&lt;p&gt;In Model-View-Controller applications, a common practice is to introduce service objects to encapsulate business logic and manage the interaction to external systems. While service objects are useful abstraction, further structuring them could improve the code organization and maintainability.&lt;/p&gt;
+&lt;p&gt;Command Query Separation (CQS) is a design pattern principle that defines the incoming request handler type, which is either modify the application state - commands, or retrieving data without any side effect - queries. By applying CQS to service objects, we can create clean interface. This blog post will explore further the benefits of CQS and how to create command and query objects in existing application.&lt;/p&gt;</description><content:encoded><![CDATA[<p>In Model-View-Controller applications, a common practice is to introduce service objects to encapsulate business logic and manage the interaction to external systems. While service objects are useful abstraction, further structuring them could improve the code organization and maintainability.</p>
 <p>Command Query Separation (CQS) is a design pattern principle that defines the incoming request handler type, which is either modify the application state - commands, or retrieving data without any side effect - queries. By applying CQS to service objects, we can create clean interface. This blog post will explore further the benefits of CQS and how to create command and query objects in existing application.</p>
 <h2 id="service-objects-challenges">Service Object&rsquo;s challenges</h2>
 <p>When using service objects, the application architecture is structured as follows</p>
@@ -476,7 +656,7 @@ To provide a clear picture, here is a pattern I am using when defind the command
 This allows for the application of multiple decorators to the original handler, each providing additional functionalities while keeping the original handler agnostic to these modifications.</p>
 <h2 id="recap">Recap</h2>
 <p>CQS enhances the modularity and maintainability of the application by separating commands (which modify the system state) from queries (which retrieve information).
-This alignment with the Domain-Driven Design (DDD) paradigm, which favors the Command-Query Separation (CQS) pattern, makes the transition to a DDD-based architecture more seamless.</p>]]></content:encoded></item><item><title>Application Validation and Error Handling</title><link>https://duykhoa.github.io/posts/application-error/</link><pubDate>Sun, 30 Jun 2024 16:59:15 -0400</pubDate><author>duykhoa12t[at]gmail[dot]com (Kevin Tran)</author><guid>https://duykhoa.github.io/posts/application-error/</guid><description>&lt;p>Some practices and patterns for handling exceptions in Java application.&lt;/p></description><content:encoded><![CDATA[<p>Some practices and patterns for handling exceptions in Java application.</p>
+This alignment with the Domain-Driven Design (DDD) paradigm, which favors the Command-Query Separation (CQS) pattern, makes the transition to a DDD-based architecture more seamless.</p>]]></content:encoded></item><item><title>Application Validation and Error Handling</title><link>https://duykhoa.github.io/posts/application-error/</link><pubDate>Sun, 30 Jun 2024 16:59:15 -0400</pubDate><author>duykhoa12t[at]gmail[dot]com (Kevin Tran)</author><guid>https://duykhoa.github.io/posts/application-error/</guid><description>&lt;p&gt;Some practices and patterns for handling exceptions in Java application.&lt;/p&gt;</description><content:encoded><![CDATA[<p>Some practices and patterns for handling exceptions in Java application.</p>
 <p>I&rsquo;m building online payment software that caters to both businesses and consumers.
 This software seamlessly integrates with various third-party services to facilitate secure money transfers between bank accounts.
 However, such transfers involve a complex multi-step process, with potential failure points at each stage due to various factors.</p>
@@ -565,32 +745,32 @@ Another example is uploading photos attached in a new post, the upload could be 
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">case</span> RequestPayloadDto.<span style="color:#a6e22e">Fields</span>.<span style="color:#a6e22e">transactionStatus</span> <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> InvalidTransactionStatusException(exception.<span style="color:#a6e22e">getMessage</span>());
 </span></span><span style="display:flex;"><span>        <span style="color:#75715e">// other cases</span>
 </span></span><span style="display:flex;"><span>    }</span></span></code></pre></div></li>
-</ul>]]></content:encoded></item><item><title>Resources</title><link>https://duykhoa.github.io/resources/</link><pubDate>Sun, 09 Jun 2024 15:00:00 -0400</pubDate><author>duykhoa12t[at]gmail[dot]com (Kevin Tran)</author><guid>https://duykhoa.github.io/resources/</guid><description>&lt;h1 id="intro">Intro&lt;/h1>
-&lt;p>This page is for my humble list of resources.&lt;/p>
-&lt;p>There are many online resources, but not of them are worth my time.
-The tricky part is saving them so I can find next time.&lt;/p>
-&lt;p>The format I am using is&lt;/p>
+</ul>]]></content:encoded></item><item><title>Resources</title><link>https://duykhoa.github.io/resources/</link><pubDate>Sun, 09 Jun 2024 15:00:00 -0400</pubDate><author>duykhoa12t[at]gmail[dot]com (Kevin Tran)</author><guid>https://duykhoa.github.io/resources/</guid><description>&lt;h1 id="intro"&gt;Intro&lt;/h1&gt;
+&lt;p&gt;This page is for my humble list of resources.&lt;/p&gt;
+&lt;p&gt;There are many online resources, but not of them are worth my time.
+The tricky part is saving them so I can find next time.&lt;/p&gt;
+&lt;p&gt;The format I am using is&lt;/p&gt;
 
 
 
 
 
-&lt;pre tabindex="0">&lt;code>[Title][Category|Category][URL|URL...]
+&lt;pre tabindex="0"&gt;&lt;code&gt;[Title][Category|Category][URL|URL...]
 
-[DESCRIPTION - optional]&lt;/code>&lt;/pre>&lt;h1 id="programing">PROGRAMING&lt;/h1>
-&lt;ol>
-&lt;li>
-&lt;p>[Sparse Table][cp][&lt;a href="https://en.wikipedia.org/wiki/Sparse_matrix?useskin=vector">wikipedia&lt;/a>|&lt;a href="https://cp-algorithms.com/data_structures/sparse-table.html">cp-algo&lt;/a>]&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>[Algomonster][algo][&lt;a href="https://algo.monster/liteproblems/31">url&lt;/a>]&lt;/p>
-&lt;p>A memoir technique to answer a range of queries without recalculating the result per query, using 2d array matrix.&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>[Disjoint set][cp][&lt;a href="https://cp-algorithms.com/data_structures/disjoint_set_union.html">cp-algo&lt;/a>]&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>[Disjoint sparse table][cp][&lt;a href="https://discuss.codechef.com/t/tutorial-disjoint-sparse-table/17404">cp-algo&lt;/a>]&lt;/p></description><content:encoded><![CDATA[<h1 id="intro">Intro</h1>
+[DESCRIPTION - optional]&lt;/code&gt;&lt;/pre&gt;&lt;h1 id="programing"&gt;PROGRAMING&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;[Sparse Table][cp][&lt;a href="https://en.wikipedia.org/wiki/Sparse_matrix?useskin=vector"&gt;wikipedia&lt;/a&gt;|&lt;a href="https://cp-algorithms.com/data_structures/sparse-table.html"&gt;cp-algo&lt;/a&gt;]&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;[Algomonster][algo][&lt;a href="https://algo.monster/liteproblems/31"&gt;url&lt;/a&gt;]&lt;/p&gt;
+&lt;p&gt;A memoir technique to answer a range of queries without recalculating the result per query, using 2d array matrix.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;[Disjoint set][cp][&lt;a href="https://cp-algorithms.com/data_structures/disjoint_set_union.html"&gt;cp-algo&lt;/a&gt;]&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;[Disjoint sparse table][cp][&lt;a href="https://discuss.codechef.com/t/tutorial-disjoint-sparse-table/17404"&gt;cp-algo&lt;/a&gt;]&lt;/p&gt;</description><content:encoded><![CDATA[<h1 id="intro">Intro</h1>
 <p>This page is for my humble list of resources.</p>
 <p>There are many online resources, but not of them are worth my time.
 The tricky part is saving them so I can find next time.</p>
@@ -647,7 +827,7 @@ The tricky part is saving them so I can find next time.</p>
 <li><a href="https://www.mermaidchart.com/blog/posts/sequence-diagrams-the-good-thing-uml-brought-to-software-development">Sequence diagrams, the only good thing UML brought to software development</a> This works for me, not sure if it works for everyone, but lately I have used sequence diagram intensively</li>
 <li></li>
 </ul>
-]]></content:encoded></item><item><title>User Authentication With Springboot using local database</title><link>https://duykhoa.github.io/posts/user-authentication-with-springboot/</link><pubDate>Mon, 05 Feb 2024 08:07:22 -0500</pubDate><author>duykhoa12t[at]gmail[dot]com (Kevin Tran)</author><guid>https://duykhoa.github.io/posts/user-authentication-with-springboot/</guid><description>&lt;p>This post explains how to configure the spring security for your app to support user authentication using local database.&lt;/p></description><content:encoded><![CDATA[<p>This post explains how to configure the spring security for your app to support user authentication using local database.</p>
+]]></content:encoded></item><item><title>User Authentication With Springboot using local database</title><link>https://duykhoa.github.io/posts/user-authentication-with-springboot/</link><pubDate>Mon, 05 Feb 2024 08:07:22 -0500</pubDate><author>duykhoa12t[at]gmail[dot]com (Kevin Tran)</author><guid>https://duykhoa.github.io/posts/user-authentication-with-springboot/</guid><description>&lt;p&gt;This post explains how to configure the spring security for your app to support user authentication using local database.&lt;/p&gt;</description><content:encoded><![CDATA[<p>This post explains how to configure the spring security for your app to support user authentication using local database.</p>
 <h1 id="introduction">Introduction</h1>
 <p>In Spring Boot, there is no plug-and-play like other frameworks. To get the user authentication working, you need to write some code to glue the required components working together. Spring Security was designed to be flexible with multiple authentication/authorization strategies.</p>
 <h1 id="overview-design">Overview design</h1>
@@ -973,7 +1153,7 @@ Since the <code>UserDetailsService</code> is a dependency of <code>DaoAuthentica
 <h1 id="conclusion">Conclusion</h1>
 <p>This post is a short tutorial of how to connect the SpringSecurity with the local database credentials provider to authenticate and authorize the request. Through this post, my aim is to guide you how to navigate the SpringSecurity source code using debugger tool, which I believe is an invaluable method for gaining a deeper understanding of its design. By grasping the intricacies of its structure, not only does development become more streamlined, but troubleshooting also becomes significantly more efficient.
 The example repository can be found in <a href="https://github.com/duykhoa/sec">Github</a>.</p>
-<p>Thanks for reading!</p>]]></content:encoded></item><item><title>Tracking Email Activity Ses</title><link>https://duykhoa.github.io/posts/tracking-email-activity-ses/</link><pubDate>Wed, 28 Jun 2023 16:41:25 -0400</pubDate><author>duykhoa12t[at]gmail[dot]com (Kevin Tran)</author><guid>https://duykhoa.github.io/posts/tracking-email-activity-ses/</guid><description>&lt;p>This post explains in detailed how to track email sending activities using SNS HTTPs endpoint.&lt;/p></description><content:encoded><![CDATA[<p>This post explains in detailed how to track email sending activities using SNS HTTPs endpoint.</p>
+<p>Thanks for reading!</p>]]></content:encoded></item><item><title>Tracking Email Activity Ses</title><link>https://duykhoa.github.io/posts/tracking-email-activity-ses/</link><pubDate>Wed, 28 Jun 2023 16:41:25 -0400</pubDate><author>duykhoa12t[at]gmail[dot]com (Kevin Tran)</author><guid>https://duykhoa.github.io/posts/tracking-email-activity-ses/</guid><description>&lt;p&gt;This post explains in detailed how to track email sending activities using SNS HTTPs endpoint.&lt;/p&gt;</description><content:encoded><![CDATA[<p>This post explains in detailed how to track email sending activities using SNS HTTPs endpoint.</p>
 <h1 id="introduction">Introduction</h1>
 <p>The email sending function is a common feature found in almost every website. For developers, <a href="https://docs.aws.amazon.com/ses/index.html">AWS SES (AWS Simple Email Service)</a> is a popular choice, particularly when the website is hosted on the AWS cloud. Although AWS SES doesn&rsquo;t directly support email activity tracking, it does offer the possibility to create custom tracking features by integrating with other AWS services. In this post, I will explain how to build an application that tracks email sending activities using SNS HTTPs endpoint.</p>
 <h1 id="ses-setup">SES Setup</h1>
@@ -1251,7 +1431,7 @@ Let&rsquo;s assume each activity takes around 30bytes, the size of the activitie
 <p>In conclusion, I hope you found this blog post insightful and informative.
 We&rsquo;ve discussed some of the key aspects of the centralized Email service, though it&rsquo;s important to acknowledge that there are many other considerations, such as integrating it with different app clients, data tracking, and storage usage, among others.
 As someone who has been involved in this project from its inception, I feel fortunate to have had the opportunity to design the application, define its features, and develop a comprehensive plan. Implementing a robust and efficient Email system can greatly enhance communication and efficiency. However, it&rsquo;s important to acknowledge the challenges that arise with the complexity of email configuration.</p>
-<p>I&rsquo;m thrilled to share this approach with you, and I hope it inspires you to enhance your organization&rsquo;s platform. Thank you for taking the time to read this!</p>]]></content:encoded></item><item><title>Setup local domain with self-signed SSL certificate</title><link>https://duykhoa.github.io/posts/local-domain/</link><pubDate>Tue, 18 Apr 2023 22:51:16 -0400</pubDate><author>duykhoa12t[at]gmail[dot]com (Kevin Tran)</author><guid>https://duykhoa.github.io/posts/local-domain/</guid><description>&lt;p>This is a post about setting up the local domain and SSL certs for testing purpose.&lt;/p></description><content:encoded><![CDATA[<p>This is a post about setting up the local domain and SSL certs for testing purpose.</p>
+<p>I&rsquo;m thrilled to share this approach with you, and I hope it inspires you to enhance your organization&rsquo;s platform. Thank you for taking the time to read this!</p>]]></content:encoded></item><item><title>Setup local domain with self-signed SSL certificate</title><link>https://duykhoa.github.io/posts/local-domain/</link><pubDate>Tue, 18 Apr 2023 22:51:16 -0400</pubDate><author>duykhoa12t[at]gmail[dot]com (Kevin Tran)</author><guid>https://duykhoa.github.io/posts/local-domain/</guid><description>&lt;p&gt;This is a post about setting up the local domain and SSL certs for testing purpose.&lt;/p&gt;</description><content:encoded><![CDATA[<p>This is a post about setting up the local domain and SSL certs for testing purpose.</p>
 <h1 id="objective">Objective</h1>
 <p>The local domain are helpful to setup the connection between the frontend and backend on the development machine.
 It is also a common solution when the actual address and port is difficult to remember.
@@ -1439,7 +1619,7 @@ server {
 <p>A pro tips: If nginx is installed through <strong>brew</strong>, we can use the <strong>brew services</strong> to make it starting automatically when the laptop is boot.</p>
 <h1 id="recap">Recap</h1>
 <p>This short post is a summary for the steps to setup the local domain on the local machine.
-I hope you find it useful for your works.</p>]]></content:encoded></item><item><title>A project specific command-line</title><link>https://duykhoa.github.io/posts/a-cli-showcase/</link><pubDate>Tue, 28 Feb 2023 22:59:40 -0500</pubDate><author>duykhoa12t[at]gmail[dot]com (Kevin Tran)</author><guid>https://duykhoa.github.io/posts/a-cli-showcase/</guid><description>&lt;p>Build a commandline tool that helps bootstrap the project&lt;/p></description><content:encoded><![CDATA[<p>Build a commandline tool that helps bootstrap the project</p>
+I hope you find it useful for your works.</p>]]></content:encoded></item><item><title>A project specific command-line</title><link>https://duykhoa.github.io/posts/a-cli-showcase/</link><pubDate>Tue, 28 Feb 2023 22:59:40 -0500</pubDate><author>duykhoa12t[at]gmail[dot]com (Kevin Tran)</author><guid>https://duykhoa.github.io/posts/a-cli-showcase/</guid><description>&lt;p&gt;Build a commandline tool that helps bootstrap the project&lt;/p&gt;</description><content:encoded><![CDATA[<p>Build a commandline tool that helps bootstrap the project</p>
 <p>We have a Nodejs monorepo project that is the place where we develop the code of all applications.
 The inspiration behind using monorepo is focusing on improving developer productivity.
 Having our own commandline is an idea to further enhance the productivity by providing a simpler way to develop the code.</p>
@@ -1512,7 +1692,7 @@ To minimize the learning curve, the command line tools wrap all of these command
 
   iae migration run -a &lt;app_name&gt;
   iae migration revert -a &lt;app_name&gt;</code></pre><h1 id="conclusion">Conclusion</h1>
-<p>This post describes some usages of a project specific in supporting development flow. It helps to remove the needs of learning and remembering each commands, as well as knowing what functionalities the project requires during the development stage. I hope this could inspire you to build own tool, please let me know if this post helps.</p>]]></content:encoded></item><item><title>A Simple Infrastructure</title><link>https://duykhoa.github.io/posts/a-simple-infras/</link><pubDate>Tue, 07 Jun 2022 09:55:09 -0400</pubDate><author>duykhoa12t[at]gmail[dot]com (Kevin Tran)</author><guid>https://duykhoa.github.io/posts/a-simple-infras/</guid><description>&lt;p>Idea of building the infrastructure with Amazon Web Service using Terraform, Ansible and Jenkins.&lt;/p></description><content:encoded><![CDATA[<p>Idea of building the infrastructure with Amazon Web Service using Terraform, Ansible and Jenkins.</p>
+<p>This post describes some usages of a project specific in supporting development flow. It helps to remove the needs of learning and remembering each commands, as well as knowing what functionalities the project requires during the development stage. I hope this could inspire you to build own tool, please let me know if this post helps.</p>]]></content:encoded></item><item><title>A Simple Infrastructure</title><link>https://duykhoa.github.io/posts/a-simple-infras/</link><pubDate>Tue, 07 Jun 2022 09:55:09 -0400</pubDate><author>duykhoa12t[at]gmail[dot]com (Kevin Tran)</author><guid>https://duykhoa.github.io/posts/a-simple-infras/</guid><description>&lt;p&gt;Idea of building the infrastructure with Amazon Web Service using Terraform, Ansible and Jenkins.&lt;/p&gt;</description><content:encoded><![CDATA[<p>Idea of building the infrastructure with Amazon Web Service using Terraform, Ansible and Jenkins.</p>
 <p>Nowadays, there are a variety of choices to deploy a website. Developers could choose a container service like Heroku, go with the most trendy infrastructure of choice with Kubernetes, or use the Serverless strategy to run the website without the need of setting up the server on their own. However, configuring a web server is no longer rocket surgery with the modern DevOps technologies and the revolution of the Cloud providers. This post explores in detail a simple infrastructure setup with Amazon infrastructure using Terraform, Ansible, and Jenkins. This is a real use case that fits a certain software project, therefore it requires some consideration before implementing this setup in another organization.</p>
 <h2 id="projects-setup">Projects setup</h2>
 <p>To embrace the culture of Agile development, the platform is split into multiple small applications which are only taken a couple of sprints from the planning phase until going live. With that setup, the monorepo is used in order to keep the consistency between these applications in terms of development best practices, linting rules, scripting commands, and version control. There are a bunch of shared libraries extracted from the apps for common usage.</p>
