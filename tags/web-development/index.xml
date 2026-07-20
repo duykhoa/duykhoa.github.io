@@ -10,9 +10,9 @@ To send an email using SES, we can directly call the AWS SDK. Here&rsquo;s an ex
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">client</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">SESClient</span>(<span style="color:#a6e22e">config</span>);
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">client</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">SESClient</span>(<span style="color:#a6e22e">config</span>);
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">AWS</span>.<span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">loadFromPath</span>(<span style="color:#e6db74">&#39;./credentials.json&#39;</span>); <span style="color:#75715e">// for testing purpose
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">command</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">SendEmailCommand</span>({
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Destination</span><span style="color:#f92672">:</span> {
 </span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">ToAddresses</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">&#39;testemail@gmail.com&#39;</span>],
@@ -35,7 +35,7 @@ To send an email using SES, we can directly call the AWS SDK. Here&rsquo;s an ex
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ses</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">aws</span>.<span style="color:#a6e22e">SES</span>({});
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ses</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">aws</span>.<span style="color:#a6e22e">SES</span>({});
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">message</span> <span style="color:#f92672">=</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">from</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;noreply@mydomain.com&#39;</span>,
@@ -85,7 +85,7 @@ The application needs to store the request payload, which contains the Subscribe
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">input</span> <span style="color:#f92672">=</span> { 
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">input</span> <span style="color:#f92672">=</span> { 
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">TopicArn</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;STRING_VALUE&#34;</span>,
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Token</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;STRING_VALUE&#34;</span>,
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">AuthenticateOnUnsubscribe</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;STRING_VALUE&#34;</span>,
@@ -100,7 +100,7 @@ The application needs to store the request payload, which contains the Subscribe
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>   <span style="color:#f92672">&#34;notificationType&#34;</span>: <span style="color:#e6db74">&#34;Complaint&#34;</span>,
 </span></span><span style="display:flex;"><span>   <span style="color:#f92672">&#34;complaint&#34;</span>: {
 </span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;complainedRecipients&#34;</span>: [
@@ -114,7 +114,7 @@ The application needs to store the request payload, which contains the Subscribe
 </span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;feedbackId&#34;</span>: <span style="color:#e6db74">&#34;000001378603177f-18c07c78-fa81-4a58-9dd1-fedc3cb8f49a-000000&#34;</span>
 </span></span><span style="display:flex;"><span>   },
 </span></span><span style="display:flex;"><span>   <span style="color:#f92672">&#34;mail&#34;</span>: { <span style="color:#75715e">// Content is trimmed }
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}</span></span></code></pre></div><p>In this example, the notificationType is &ldquo;Complaint&rdquo; which indicates that the email reached the recipient&rsquo;s mailbox but was marked as spam.</p>
+</span></span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>In this example, the notificationType is &ldquo;Complaint&rdquo; which indicates that the email reached the recipient&rsquo;s mailbox but was marked as spam.</p>
 <h1 id="core-components-implementation">Core components&rsquo; implementation</h1>
 <p>I hope that I have covered the main concepts and functionalities of the Email System which integrates with AWS SES.
 In this section, we will explore the implementation of the core components in this email system.</p>
@@ -126,28 +126,28 @@ gRPC is used as a default choice for microservice protocol, the gRPC proto file 
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-proto" data-lang="proto"><span style="display:flex;"><span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">TriggerEmailAttribute</span> {<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">string</span> fieldName <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">string</span> value <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">EmailAttachment</span> {<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">string</span> name <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">string</span> remoteUrl <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">optional</span> <span style="color:#66d9ef">string</span> cid <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">TriggerEmailRequest</span> {<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">string</span> subject <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">repeated</span> <span style="color:#66d9ef">string</span> toEmails <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">string</span> mailBody <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">repeated</span> EmailAttachment attachments <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>;<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">repeated</span> TriggerEmailAttribute attributes <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>;<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">service</span> EmailsServiceController {<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">rpc</span> triggerEmail(TriggerEmailRequest) <span style="color:#66d9ef">returns</span> (TriggerEmailResponse) {};<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>}</span></span></code></pre></div><p>The <code>triggerEmail</code> call receives an input of type <code>TriggerEmailRequest</code> and returns a response with type <code>TriggerEmailResponse</code>. The <code>TriggerEmailRequest</code> definition includes 5 fields used to make the call to the AWS SES API. In the implementation, the controller interacts with two services: the <code>EmailsService</code>, responsible for handling the email submission to AWS SES, and the <code>RecipientsService</code>, which manages the creation of recipients based on the provided information. The notifications received from the SNS Subscription are later mapped to these recipients.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-proto" data-lang="proto"><span style="display:flex;"><span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">TriggerEmailAttribute</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">string</span> fieldName <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">string</span> value <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">EmailAttachment</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">string</span> name <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">string</span> remoteUrl <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">optional</span> <span style="color:#66d9ef">string</span> cid <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">TriggerEmailRequest</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">string</span> subject <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">repeated</span> <span style="color:#66d9ef">string</span> toEmails <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">string</span> mailBody <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">repeated</span> EmailAttachment attachments <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">repeated</span> TriggerEmailAttribute attributes <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">service</span> EmailsServiceController {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">rpc</span> triggerEmail(TriggerEmailRequest) <span style="color:#66d9ef">returns</span> (TriggerEmailResponse) {};
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>The <code>triggerEmail</code> call receives an input of type <code>TriggerEmailRequest</code> and returns a response with type <code>TriggerEmailResponse</code>. The <code>TriggerEmailRequest</code> definition includes 5 fields used to make the call to the AWS SES API. In the implementation, the controller interacts with two services: the <code>EmailsService</code>, responsible for handling the email submission to AWS SES, and the <code>RecipientsService</code>, which manages the creation of recipients based on the provided information. The notifications received from the SNS Subscription are later mapped to these recipients.</p>
 <p>By providing the <code>toEmails</code> parameter in the request object, the service allows for specifying multiple email addresses to receive the same email in a single request.</p>
 <h3 id="notification-endpoints-management">Notification endpoints management</h3>
 <p>As the Email sending service is used by multiple applications, each application has a distinct notification endpoint for AWS SNS to publish the email notifications.</p>
@@ -181,12 +181,12 @@ Here, the processor is a consumer class with methods that process jobs in the qu
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Docker" data-lang="Docker"><span style="display:flex;"><span>  maildev:<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>    image: maildev/maildev<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>    expose:<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>      - <span style="color:#e6db74">&#34;1025&#34;</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>    ports:<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>      - <span style="color:#e6db74">&#34;51080:1080&#34;</span></span></span></code></pre></div><p>Nothing is fancy here. The <code>maildev</code> service exposes the port 1025 for the Email App to connect, and allows the traffic to port <strong>1080</strong> (<strong>51080</strong> from host) to access the dashboard.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-Docker" data-lang="Docker"><span style="display:flex;"><span>  maildev:<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span>    image: maildev/maildev<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span>    expose:<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span>      - <span style="color:#e6db74">&#34;1025&#34;</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span>    ports:<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span>      - <span style="color:#e6db74">&#34;51080:1080&#34;</span></span></span></code></pre></div><p>Nothing is fancy here. The <code>maildev</code> service exposes the port 1025 for the Email App to connect, and allows the traffic to port <strong>1080</strong> (<strong>51080</strong> from host) to access the dashboard.</p>
 <p>Since we use <strong>NodeMailer</strong> package, it creates a <strong>Transport</strong> object to connect to AWS SES API.
 To make the app send emails to <strong>MailDev</strong> in Dev environment, we need to create another transport object and hook it during the initialization.</p>
 <p>The <code>CreateTransportService</code> takes in a <code>driver</code> parameter, which indicates the type of transport, the code looks like below:</p>
@@ -195,7 +195,7 @@ To make the app send emails to <strong>MailDev</strong> in Dev environment, we n
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">enum</span> <span style="color:#a6e22e">MailDriver</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">enum</span> <span style="color:#a6e22e">MailDriver</span> {
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">ses</span>,
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">maildev</span>,
 </span></span><span style="display:flex;"><span>}
@@ -232,7 +232,7 @@ To make the app send emails to <strong>MailDev</strong> in Dev environment, we n
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yml" data-lang="yml"><span style="display:flex;"><span>  <span style="color:#f92672">maildev</span>:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yml" data-lang="yml"><span style="display:flex;"><span>  <span style="color:#f92672">maildev</span>:
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">port</span>: <span style="color:#ae81ff">1025</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">host</span>: <span style="color:#ae81ff">maildev</span></span></span></code></pre></div><p>To speed up the test running time, we can defined the <code>DummyTransportation</code> to create mock Transportation when running test.</p>
 <h1 id="capacity-calculation">Capacity calculation</h1>
@@ -251,8 +251,8 @@ The recipient data could be like this</p>
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>  <span style="color:#75715e">// TypeORM syntax
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">PrimaryGeneratedColumn</span>(<span style="color:#e6db74">&#39;increment&#39;</span>)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>  <span style="color:#75715e">// TypeORM syntax
+</span></span></span><span style="display:flex;"><span>  <span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">PrimaryGeneratedColumn</span>(<span style="color:#e6db74">&#39;increment&#39;</span>)
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">readonly</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">number</span>;
 </span></span><span style="display:flex;"><span>  <span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">Column</span>({ <span style="color:#a6e22e">unique</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span> })
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">email</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">string</span>;

@@ -11,7 +11,7 @@
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Configuration</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Configuration</span>
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">@EnableWebSecurity</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SecurityConfig</span> {
 </span></span><span style="display:flex;"><span>
@@ -39,7 +39,7 @@
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Service</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Service</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CustomUserDetailsService</span> <span style="color:#66d9ef">implements</span> UserDetailsService {
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> AccountRepository accountRepository;
@@ -82,7 +82,7 @@ After the account is found, the service builds the authorities list by looking a
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@SuperBuilder</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@SuperBuilder</span>
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">@AllArgsConstructor</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserDetailsImpl</span> <span style="color:#66d9ef">extends</span> Account <span style="color:#66d9ef">implements</span> UserDetails {
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> List<span style="color:#f92672">&lt;</span>GrantedAuthority<span style="color:#f92672">&gt;</span> authorityList;
@@ -124,7 +124,7 @@ After the account is found, the service builds the authorities list by looking a
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    PasswordEncoder encoder <span style="color:#f92672">=</span> PasswordEncoderFactories.<span style="color:#a6e22e">createDelegatingPasswordEncoder</span>();
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    PasswordEncoder encoder <span style="color:#f92672">=</span> PasswordEncoderFactories.<span style="color:#a6e22e">createDelegatingPasswordEncoder</span>();
 </span></span><span style="display:flex;"><span>    String encodedPassword <span style="color:#f92672">=</span> encoder.<span style="color:#a6e22e">encode</span>(<span style="color:#e6db74">&#34;password&#34;</span>); <span style="color:#75715e">// the value of encodedPassword is &#34;{bcrypt}$2a$10$tBC.TeiMDcNt8rBHeqB6.eFg5Yb6HxlRy7RapEyxLM9ZEhV4fDZAq&#34;;</span>
 </span></span><span style="display:flex;"><span>    String rawPassword <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;password&#34;</span>;
 </span></span><span style="display:flex;"><span>    
@@ -135,7 +135,7 @@ After the account is found, the service builds the authorities list by looking a
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Configuration</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Configuration</span>
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">@EnableMethodSecurity</span>()
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SecConfiguration</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Bean</span>
@@ -162,7 +162,7 @@ After the account is found, the service builds the authorities list by looking a
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Conditional</span>(IsDevEnvCondition.<span style="color:#a6e22e">class</span>)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Conditional</span>(IsDevEnvCondition.<span style="color:#a6e22e">class</span>)
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">@RestController</span>
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">@RequestMapping</span>(<span style="color:#e6db74">&#34;/demo&#34;</span>)
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DevAuthenticationController</span> {
@@ -209,7 +209,7 @@ After the account is found, the service builds the authorities list by looking a
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    Account adminAccount <span style="color:#f92672">=</span> Account
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    Account adminAccount <span style="color:#f92672">=</span> Account
 </span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">builder</span>()
 </span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">email</span>(<span style="color:#e6db74">&#34;admin@email.com&#34;</span>)
 </span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">password</span>(<span style="color:#e6db74">&#34;password&#34;</span>)
@@ -240,7 +240,7 @@ After the account is found, the service builds the authorities list by looking a
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>### Run this request first to setup testing data
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>### Run this request first to setup testing data
 </span></span><span style="display:flex;"><span>POST {{ apiUrl }}/demo/superadmin/run-me-first
 </span></span><span style="display:flex;"><span>Authorization: {{ authorization_token }}
 </span></span><span style="display:flex;"><span>Accept: application/json
@@ -299,7 +299,7 @@ Since the <code>UserDetailsService</code> is a dependency of <code>DaoAuthentica
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Override</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Override</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">hasRole</span>(String role) {
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> hasAnyRole(role);
 </span></span><span style="display:flex;"><span>}

@@ -31,7 +31,7 @@
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">skaffold/v4beta1</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">skaffold/v4beta1</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Config</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">microservice-playground</span>
@@ -87,7 +87,7 @@
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;packages&#34;</span>: [
 </span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;go@1.21&#34;</span>,
 </span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;minikube@1.31&#34;</span>,
@@ -109,7 +109,7 @@
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// services/order/main.go</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// services/order/main.go</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> (
@@ -154,7 +154,7 @@ use (
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>skaffold dev -m order-service -m web-service</span></span></code></pre></div><p>This command tells Skaffold to only build, deploy, and watch those two specific modules, ignoring the <code>products-service</code>. This significantly speeds up your development loop and reduces resource consumption.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>skaffold dev -m order-service -m web-service</span></span></code></pre></div><p>This command tells Skaffold to only build, deploy, and watch those two specific modules, ignoring the <code>products-service</code>. This significantly speeds up your development loop and reduces resource consumption.</p>
 <h3 id="a-deeper-dive-into-the-go-work-workflow">A Deeper Dive into the <code>go work</code> Workflow</h3>
 <p>The <code>go.work</code> file is a game-changer for Go development in a monorepo. Let&rsquo;s clarify the workflow.</p>
 <p><strong>The Problem Before <code>go.work</code>:</strong></p>
@@ -198,7 +198,7 @@ generating metrics and so on.</p>
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">CreateJob</span>(<span style="color:#a6e22e">w</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ResponseWriter</span>, <span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Request</span>) {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">CreateJob</span>(<span style="color:#a6e22e">w</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ResponseWriter</span>, <span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Request</span>) {
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">job</span> <span style="color:#a6e22e">Job</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">json</span>.<span style="color:#a6e22e">NewDecoder</span>(<span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">Body</span>).<span style="color:#a6e22e">Decode</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">job</span>)
@@ -226,7 +226,7 @@ original <code>CreateJob</code> function to receive the <code>Job</code> and ret
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">CreateJobRequest</span> <span style="color:#66d9ef">struct</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">CreateJobRequest</span> <span style="color:#66d9ef">struct</span> {
 </span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Body</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">CreateJobJSONBody</span>
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
@@ -258,7 +258,7 @@ original <code>CreateJob</code> function to receive the <code>Job</code> and ret
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">CreateJobHandle</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">request</span> <span style="color:#a6e22e">CreateJobRequest</span>) (<span style="color:#a6e22e">CreateJobResponse</span>, <span style="color:#66d9ef">error</span>) {
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">StoreJobIntoDB</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">request</span>.<span style="color:#a6e22e">Body</span>)
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
@@ -280,7 +280,7 @@ Unlike the wrapper function described above, a command and query should follow a
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">QueryHandler</span>[<span style="color:#a6e22e">Q</span> <span style="color:#66d9ef">any</span>, <span style="color:#a6e22e">R</span> <span style="color:#66d9ef">any</span>] <span style="color:#66d9ef">interface</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">QueryHandler</span>[<span style="color:#a6e22e">Q</span> <span style="color:#66d9ef">any</span>, <span style="color:#a6e22e">R</span> <span style="color:#66d9ef">any</span>] <span style="color:#66d9ef">interface</span> {
 </span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Handle</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">q</span> <span style="color:#a6e22e">Q</span>) (<span style="color:#a6e22e">R</span>, <span style="color:#66d9ef">error</span>)
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
@@ -295,7 +295,7 @@ the command may look like below</p>
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">queryLoggingDecorator</span>[<span style="color:#a6e22e">Q</span> <span style="color:#66d9ef">any</span>, <span style="color:#a6e22e">R</span> <span style="color:#66d9ef">any</span>] <span style="color:#66d9ef">struct</span> { <span style="color:#75715e">// implements QueryHandler interface</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">queryLoggingDecorator</span>[<span style="color:#a6e22e">Q</span> <span style="color:#66d9ef">any</span>, <span style="color:#a6e22e">R</span> <span style="color:#66d9ef">any</span>] <span style="color:#66d9ef">struct</span> { <span style="color:#75715e">// implements QueryHandler interface</span>
 </span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">query</span> <span style="color:#a6e22e">QueryHandler</span>[<span style="color:#a6e22e">Q</span>, <span style="color:#a6e22e">R</span>]
 </span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">logger</span> <span style="color:#a6e22e">Logger</span>
 </span></span><span style="display:flex;"><span>}
@@ -326,7 +326,7 @@ A static factory function could simplify the query constructor step</p>
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">DecorateQuery</span>[<span style="color:#a6e22e">H</span> <span style="color:#66d9ef">any</span>, <span style="color:#a6e22e">R</span> <span style="color:#66d9ef">any</span>](
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">DecorateQuery</span>[<span style="color:#a6e22e">H</span> <span style="color:#66d9ef">any</span>, <span style="color:#a6e22e">R</span> <span style="color:#66d9ef">any</span>](
 </span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">handler</span> <span style="color:#a6e22e">QueryHandler</span>[<span style="color:#a6e22e">H</span>, <span style="color:#a6e22e">R</span>],
 </span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">logger</span> <span style="color:#a6e22e">zerolog</span>.<span style="color:#a6e22e">Logger</span>
 </span></span><span style="display:flex;"><span>) <span style="color:#a6e22e">QueryHandler</span>[<span style="color:#a6e22e">H</span>, <span style="color:#a6e22e">R</span>] {
@@ -340,7 +340,7 @@ A static factory function could simplify the query constructor step</p>
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewGetJobHandler</span>(<span style="color:#a6e22e">jobRepository</span> <span style="color:#a6e22e">Repository</span>, <span style="color:#a6e22e">logger</span> <span style="color:#a6e22e">Logger</span>) {}
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">DecorateQuery</span>[<span style="color:#a6e22e">GetJobQuery</span>, <span style="color:#a6e22e">Job</span>] {
 </span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">GetJobHandler</span>{ <span style="color:#a6e22e">repo</span>: <span style="color:#a6e22e">jobRepository</span> },
@@ -358,7 +358,7 @@ setup, hopefully it still gives you an idea how much extra functionalities can b
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">DecorateQuery</span>[<span style="color:#a6e22e">H</span> <span style="color:#66d9ef">any</span>, <span style="color:#a6e22e">R</span> <span style="color:#66d9ef">any</span>](
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">DecorateQuery</span>[<span style="color:#a6e22e">H</span> <span style="color:#66d9ef">any</span>, <span style="color:#a6e22e">R</span> <span style="color:#66d9ef">any</span>](
 </span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">handler</span> <span style="color:#a6e22e">QueryHandler</span>[<span style="color:#a6e22e">H</span>, <span style="color:#a6e22e">R</span>],
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">// more parameters</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">// we can consider to have several decorate query helper functions</span>
@@ -387,7 +387,7 @@ them useful. See you all in the next post.</p>]]></content:encoded></item><item>
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">CommandHandler</span>[<span style="color:#a6e22e">C</span> <span style="color:#66d9ef">any</span>] <span style="color:#66d9ef">interface</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">CommandHandler</span>[<span style="color:#a6e22e">C</span> <span style="color:#66d9ef">any</span>] <span style="color:#66d9ef">interface</span> {
 </span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Handle</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">cmd</span> <span style="color:#a6e22e">C</span>) <span style="color:#66d9ef">error</span>
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
@@ -407,7 +407,7 @@ them useful. See you all in the next post.</p>]]></content:encoded></item><item>
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#75715e">// file location: internal/domain/article/repository.go</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#75715e">// file location: internal/domain/article/repository.go</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">//go:generate mockgen -destination mocks/mock_article_repository.go -package mocks . ArticleRepository</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">ArticleRepository</span> <span style="color:#66d9ef">interface</span> {
@@ -421,7 +421,7 @@ them useful. See you all in the next post.</p>]]></content:encoded></item><item>
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#a6e22e">ctrl</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">gomock</span>.<span style="color:#a6e22e">NewController</span>(<span style="color:#a6e22e">t</span>)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#a6e22e">ctrl</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">gomock</span>.<span style="color:#a6e22e">NewController</span>(<span style="color:#a6e22e">t</span>)
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">repo</span>.<span style="color:#a6e22e">EXPECT</span>().<span style="color:#a6e22e">CreateArticle</span>(
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">gomock</span>.<span style="color:#a6e22e">Any</span>(),
@@ -432,7 +432,7 @@ them useful. See you all in the next post.</p>]]></content:encoded></item><item>
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#a6e22e">It</span>(<span style="color:#e6db74">&#34;failed to create article&#34;</span>, <span style="color:#66d9ef">func</span>() {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#a6e22e">It</span>(<span style="color:#e6db74">&#34;failed to create article&#34;</span>, <span style="color:#66d9ef">func</span>() {
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">id</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">uuid</span>.<span style="color:#a6e22e">New</span>()
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">repo</span>.<span style="color:#a6e22e">EXPECT</span>().<span style="color:#a6e22e">CreateArticle</span>(
@@ -459,7 +459,7 @@ them useful. See you all in the next post.</p>]]></content:encoded></item><item>
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">//go:generate mockgen -destination mocks/mock_create_article.go -package mocks . CreateArticleHandler</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">CreateArticleHandler</span> = <span style="color:#a6e22e">common</span>.<span style="color:#a6e22e">CommandHandler</span>[<span style="color:#a6e22e">CreateArticle</span>]</span></span></code></pre></div><p>By adding this comment, the <code>go generate</code> command will generates the mock implementation for the command handler, which allows to setup different scenarios to test the higher component.</p>
 
@@ -467,7 +467,7 @@ them useful. See you all in the next post.</p>]]></content:encoded></item><item>
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#a6e22e">It</span>(<span style="color:#e6db74">&#34;returns 500 response when creating article command returning an error&#34;</span>, <span style="color:#66d9ef">func</span>() {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#a6e22e">It</span>(<span style="color:#e6db74">&#34;returns 500 response when creating article command returning an error&#34;</span>, <span style="color:#66d9ef">func</span>() {
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">cmdError</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">New</span>(<span style="color:#e6db74">&#34;create article error&#34;</span>)
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">cmd</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">mocks</span>.<span style="color:#a6e22e">NewMockCreateArticleHandler</span>(<span style="color:#a6e22e">mockCtrl</span>)
 </span></span><span style="display:flex;"><span>
@@ -506,7 +506,7 @@ them useful. See you all in the next post.</p>]]></content:encoded></item><item>
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">CommandHandler</span>[<span style="color:#a6e22e">C</span> <span style="color:#66d9ef">any</span>] <span style="color:#66d9ef">interface</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">CommandHandler</span>[<span style="color:#a6e22e">C</span> <span style="color:#66d9ef">any</span>] <span style="color:#66d9ef">interface</span> {
 </span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Handle</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">cmd</span> <span style="color:#a6e22e">C</span>) <span style="color:#66d9ef">error</span>
 </span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>The command handler receives a <code>C</code> generic command object, which is just a Go struct.
 Each specific command handler could specifies its <code>C</code> parameter type, performs some actions and returns an error represents if the actions was completed.</p>
@@ -517,7 +517,7 @@ This setup looks like below:</p>
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">CreateArticle</span> <span style="color:#66d9ef">struct</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">CreateArticle</span> <span style="color:#66d9ef">struct</span> {
 </span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Title</span> <span style="color:#66d9ef">string</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Body</span>  <span style="color:#66d9ef">string</span>
 </span></span><span style="display:flex;"><span>}
@@ -539,7 +539,7 @@ have the <code>Handle</code> function that accepts a <code>CreateArticle</code> 
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">QueryHandler</span>[<span style="color:#a6e22e">Q</span> <span style="color:#66d9ef">any</span>, <span style="color:#a6e22e">R</span> <span style="color:#66d9ef">any</span>] <span style="color:#66d9ef">interface</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">QueryHandler</span>[<span style="color:#a6e22e">Q</span> <span style="color:#66d9ef">any</span>, <span style="color:#a6e22e">R</span> <span style="color:#66d9ef">any</span>] <span style="color:#66d9ef">interface</span> {
 </span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Handle</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">q</span> <span style="color:#a6e22e">Q</span>) (<span style="color:#a6e22e">R</span>, <span style="color:#66d9ef">error</span>)
 </span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>The query handler receives a <code>Q</code> generic query object and a <code>R</code> generic result object, which are go struct.
 Similar to the command handler, each query handler despecifiesfines its Q and R types, performs some actions and returns the result with type R and an error represents if the process was successful.</p>
@@ -548,7 +548,7 @@ Similar to the command handler, each query handler despecifiesfines its Q and R 
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">GetArticle</span> <span style="color:#66d9ef">struct</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">GetArticle</span> <span style="color:#66d9ef">struct</span> {
 </span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">ID</span> <span style="color:#a6e22e">uuid</span>.<span style="color:#a6e22e">UUID</span>
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
@@ -588,7 +588,7 @@ To provide a clear picture, here is a pattern I am using when defind the command
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#a6e22e">baseHandler</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">createArticleHandler</span>{}
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#a6e22e">baseHandler</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">createArticleHandler</span>{}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">DecorateCommand</span>[<span style="color:#a6e22e">H</span> <span style="color:#66d9ef">any</span>](<span style="color:#a6e22e">handler</span> <span style="color:#a6e22e">CommandHandler</span>[<span style="color:#a6e22e">H</span>], <span style="color:#a6e22e">logger</span>: <span style="color:#a6e22e">logger</span>) {
 </span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">commandLogging</span> {
@@ -627,7 +627,7 @@ To provide a clear picture, here is a pattern I am using when defind the command
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span>	<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewApplication</span>(<span style="color:#a6e22e">cmdHandler</span> <span style="color:#a6e22e">GetArticleHandler</span>) <span style="color:#a6e22e">Application</span> {<span style="color:#f92672">...</span>}
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span>	<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewApplication</span>(<span style="color:#a6e22e">cmdHandler</span> <span style="color:#a6e22e">GetArticleHandler</span>) <span style="color:#a6e22e">Application</span> {<span style="color:#f92672">...</span>}
 </span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">cmdHandler</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">createArticleHandler</span>{}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">app</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">NewApplication</span>(<span style="color:#a6e22e">cmdHandler</span>)</span></span></code></pre></div><p>Using the <code>DecorateCommand</code> function to add the logging functionality, the code is changed to</p>
@@ -636,7 +636,7 @@ To provide a clear picture, here is a pattern I am using when defind the command
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span>	<span style="color:#a6e22e">wrappedHandler</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">DecorateCommand</span>(<span style="color:#a6e22e">baseHandler</span>, <span style="color:#a6e22e">zerolog</span>.<span style="color:#a6e22e">New</span>(<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">StdErr</span>))
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span>	<span style="color:#a6e22e">wrappedHandler</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">DecorateCommand</span>(<span style="color:#a6e22e">baseHandler</span>, <span style="color:#a6e22e">zerolog</span>.<span style="color:#a6e22e">New</span>(<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">StdErr</span>))
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">app</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">NewApplication</span>(<span style="color:#a6e22e">cmdHandler</span>)</span></span></code></pre></div><p>The application layer remains unaffected by the wrapped GetArticleHandler. The app&rsquo;s behavior remains unchanged, requiring no modifications to implement this setup.</p>
 <p>This setup adheres to the <strong>open for extension, closed for modification</strong> principle, enabling the addition of logging functionality without altering the <code>createArticleHandler</code> function directly.</p>
@@ -713,7 +713,7 @@ Another example is uploading photos attached in a new post, the upload could be 
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#75715e">// In the actual code, the merchantErrorCode is defined as enum, for simplicity, it is passed as a string</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#75715e">// In the actual code, the merchantErrorCode is defined as enum, for simplicity, it is passed as a string</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">switch</span> (exception) {
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">case</span> InvalidPayloadException e <span style="color:#f92672">-&gt;</span> MerchantErrorCode.<span style="color:#a6e22e">builder</span>().<span style="color:#a6e22e">httpErrorCode</span>(400).<span style="color:#a6e22e">merchantErrorCode</span>(<span style="color:#e6db74">&#34;ME400&#34;</span>).<span style="color:#a6e22e">build</span>;
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">case</span> GetBalanceException e <span style="color:#f92672">-&gt;</span> MerchantErrorCode.<span style="color:#a6e22e">builder</span>().<span style="color:#a6e22e">httpErrorCode</span>(422).<span style="color:#a6e22e">merchantErrorCode</span>(<span style="color:#e6db74">&#34;ME402&#34;</span>).<span style="color:#a6e22e">build</span>;
@@ -727,7 +727,7 @@ Another example is uploading photos attached in a new post, the upload could be 
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#75715e">//  @ExceptionHandler(value = {ConstraintViolationException.class})</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#75715e">//  @ExceptionHandler(value = {ConstraintViolationException.class})</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">switch</span> (exception.<span style="color:#a6e22e">getPropertyPath</span>()) {
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">case</span> RequestPayloadDto.<span style="color:#a6e22e">Fields</span>.<span style="color:#a6e22e">transactionStatus</span> <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> InvalidTransactionStatusException(exception.<span style="color:#a6e22e">getMessage</span>());
@@ -746,7 +746,7 @@ Another example is uploading photos attached in a new post, the upload could be 
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Configuration</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Configuration</span>
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">@EnableWebSecurity</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SecurityConfig</span> {
 </span></span><span style="display:flex;"><span>
@@ -774,7 +774,7 @@ Another example is uploading photos attached in a new post, the upload could be 
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Service</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Service</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CustomUserDetailsService</span> <span style="color:#66d9ef">implements</span> UserDetailsService {
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> AccountRepository accountRepository;
@@ -817,7 +817,7 @@ After the account is found, the service builds the authorities list by looking a
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@SuperBuilder</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@SuperBuilder</span>
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">@AllArgsConstructor</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserDetailsImpl</span> <span style="color:#66d9ef">extends</span> Account <span style="color:#66d9ef">implements</span> UserDetails {
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> List<span style="color:#f92672">&lt;</span>GrantedAuthority<span style="color:#f92672">&gt;</span> authorityList;
@@ -859,7 +859,7 @@ After the account is found, the service builds the authorities list by looking a
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    PasswordEncoder encoder <span style="color:#f92672">=</span> PasswordEncoderFactories.<span style="color:#a6e22e">createDelegatingPasswordEncoder</span>();
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    PasswordEncoder encoder <span style="color:#f92672">=</span> PasswordEncoderFactories.<span style="color:#a6e22e">createDelegatingPasswordEncoder</span>();
 </span></span><span style="display:flex;"><span>    String encodedPassword <span style="color:#f92672">=</span> encoder.<span style="color:#a6e22e">encode</span>(<span style="color:#e6db74">&#34;password&#34;</span>); <span style="color:#75715e">// the value of encodedPassword is &#34;{bcrypt}$2a$10$tBC.TeiMDcNt8rBHeqB6.eFg5Yb6HxlRy7RapEyxLM9ZEhV4fDZAq&#34;;</span>
 </span></span><span style="display:flex;"><span>    String rawPassword <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;password&#34;</span>;
 </span></span><span style="display:flex;"><span>    
@@ -870,7 +870,7 @@ After the account is found, the service builds the authorities list by looking a
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Configuration</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Configuration</span>
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">@EnableMethodSecurity</span>()
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SecConfiguration</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Bean</span>
@@ -897,7 +897,7 @@ After the account is found, the service builds the authorities list by looking a
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Conditional</span>(IsDevEnvCondition.<span style="color:#a6e22e">class</span>)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Conditional</span>(IsDevEnvCondition.<span style="color:#a6e22e">class</span>)
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">@RestController</span>
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">@RequestMapping</span>(<span style="color:#e6db74">&#34;/demo&#34;</span>)
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DevAuthenticationController</span> {
@@ -944,7 +944,7 @@ After the account is found, the service builds the authorities list by looking a
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    Account adminAccount <span style="color:#f92672">=</span> Account
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    Account adminAccount <span style="color:#f92672">=</span> Account
 </span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">builder</span>()
 </span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">email</span>(<span style="color:#e6db74">&#34;admin@email.com&#34;</span>)
 </span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">password</span>(<span style="color:#e6db74">&#34;password&#34;</span>)
@@ -975,7 +975,7 @@ After the account is found, the service builds the authorities list by looking a
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>### Run this request first to setup testing data
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>### Run this request first to setup testing data
 </span></span><span style="display:flex;"><span>POST {{ apiUrl }}/demo/superadmin/run-me-first
 </span></span><span style="display:flex;"><span>Authorization: {{ authorization_token }}
 </span></span><span style="display:flex;"><span>Accept: application/json
@@ -1034,7 +1034,7 @@ Since the <code>UserDetailsService</code> is a dependency of <code>DaoAuthentica
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Override</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Override</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">hasRole</span>(String role) {
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> hasAnyRole(role);
 </span></span><span style="display:flex;"><span>}
@@ -1071,9 +1071,9 @@ To send an email using SES, we can directly call the AWS SDK. Here&rsquo;s an ex
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">client</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">SESClient</span>(<span style="color:#a6e22e">config</span>);
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">client</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">SESClient</span>(<span style="color:#a6e22e">config</span>);
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">AWS</span>.<span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">loadFromPath</span>(<span style="color:#e6db74">&#39;./credentials.json&#39;</span>); <span style="color:#75715e">// for testing purpose
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">command</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">SendEmailCommand</span>({
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Destination</span><span style="color:#f92672">:</span> {
 </span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">ToAddresses</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">&#39;testemail@gmail.com&#39;</span>],
@@ -1096,7 +1096,7 @@ To send an email using SES, we can directly call the AWS SDK. Here&rsquo;s an ex
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ses</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">aws</span>.<span style="color:#a6e22e">SES</span>({});
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ses</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">aws</span>.<span style="color:#a6e22e">SES</span>({});
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">message</span> <span style="color:#f92672">=</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">from</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;noreply@mydomain.com&#39;</span>,
@@ -1146,7 +1146,7 @@ The application needs to store the request payload, which contains the Subscribe
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">input</span> <span style="color:#f92672">=</span> { 
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">input</span> <span style="color:#f92672">=</span> { 
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">TopicArn</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;STRING_VALUE&#34;</span>,
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Token</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;STRING_VALUE&#34;</span>,
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">AuthenticateOnUnsubscribe</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;STRING_VALUE&#34;</span>,
@@ -1161,7 +1161,7 @@ The application needs to store the request payload, which contains the Subscribe
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>   <span style="color:#f92672">&#34;notificationType&#34;</span>: <span style="color:#e6db74">&#34;Complaint&#34;</span>,
 </span></span><span style="display:flex;"><span>   <span style="color:#f92672">&#34;complaint&#34;</span>: {
 </span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;complainedRecipients&#34;</span>: [
@@ -1175,7 +1175,7 @@ The application needs to store the request payload, which contains the Subscribe
 </span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;feedbackId&#34;</span>: <span style="color:#e6db74">&#34;000001378603177f-18c07c78-fa81-4a58-9dd1-fedc3cb8f49a-000000&#34;</span>
 </span></span><span style="display:flex;"><span>   },
 </span></span><span style="display:flex;"><span>   <span style="color:#f92672">&#34;mail&#34;</span>: { <span style="color:#75715e">// Content is trimmed }
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}</span></span></code></pre></div><p>In this example, the notificationType is &ldquo;Complaint&rdquo; which indicates that the email reached the recipient&rsquo;s mailbox but was marked as spam.</p>
+</span></span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>In this example, the notificationType is &ldquo;Complaint&rdquo; which indicates that the email reached the recipient&rsquo;s mailbox but was marked as spam.</p>
 <h1 id="core-components-implementation">Core components&rsquo; implementation</h1>
 <p>I hope that I have covered the main concepts and functionalities of the Email System which integrates with AWS SES.
 In this section, we will explore the implementation of the core components in this email system.</p>
@@ -1187,28 +1187,28 @@ gRPC is used as a default choice for microservice protocol, the gRPC proto file 
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-proto" data-lang="proto"><span style="display:flex;"><span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">TriggerEmailAttribute</span> {<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">string</span> fieldName <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">string</span> value <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">EmailAttachment</span> {<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">string</span> name <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">string</span> remoteUrl <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">optional</span> <span style="color:#66d9ef">string</span> cid <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">TriggerEmailRequest</span> {<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">string</span> subject <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">repeated</span> <span style="color:#66d9ef">string</span> toEmails <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">string</span> mailBody <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">repeated</span> EmailAttachment attachments <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>;<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">repeated</span> TriggerEmailAttribute attributes <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>;<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">service</span> EmailsServiceController {<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">rpc</span> triggerEmail(TriggerEmailRequest) <span style="color:#66d9ef">returns</span> (TriggerEmailResponse) {};<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>}</span></span></code></pre></div><p>The <code>triggerEmail</code> call receives an input of type <code>TriggerEmailRequest</code> and returns a response with type <code>TriggerEmailResponse</code>. The <code>TriggerEmailRequest</code> definition includes 5 fields used to make the call to the AWS SES API. In the implementation, the controller interacts with two services: the <code>EmailsService</code>, responsible for handling the email submission to AWS SES, and the <code>RecipientsService</code>, which manages the creation of recipients based on the provided information. The notifications received from the SNS Subscription are later mapped to these recipients.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-proto" data-lang="proto"><span style="display:flex;"><span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">TriggerEmailAttribute</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">string</span> fieldName <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">string</span> value <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">EmailAttachment</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">string</span> name <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">string</span> remoteUrl <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">optional</span> <span style="color:#66d9ef">string</span> cid <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">TriggerEmailRequest</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">string</span> subject <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">repeated</span> <span style="color:#66d9ef">string</span> toEmails <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">string</span> mailBody <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">repeated</span> EmailAttachment attachments <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">repeated</span> TriggerEmailAttribute attributes <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">service</span> EmailsServiceController {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">rpc</span> triggerEmail(TriggerEmailRequest) <span style="color:#66d9ef">returns</span> (TriggerEmailResponse) {};
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>The <code>triggerEmail</code> call receives an input of type <code>TriggerEmailRequest</code> and returns a response with type <code>TriggerEmailResponse</code>. The <code>TriggerEmailRequest</code> definition includes 5 fields used to make the call to the AWS SES API. In the implementation, the controller interacts with two services: the <code>EmailsService</code>, responsible for handling the email submission to AWS SES, and the <code>RecipientsService</code>, which manages the creation of recipients based on the provided information. The notifications received from the SNS Subscription are later mapped to these recipients.</p>
 <p>By providing the <code>toEmails</code> parameter in the request object, the service allows for specifying multiple email addresses to receive the same email in a single request.</p>
 <h3 id="notification-endpoints-management">Notification endpoints management</h3>
 <p>As the Email sending service is used by multiple applications, each application has a distinct notification endpoint for AWS SNS to publish the email notifications.</p>
@@ -1242,12 +1242,12 @@ Here, the processor is a consumer class with methods that process jobs in the qu
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Docker" data-lang="Docker"><span style="display:flex;"><span>  maildev:<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>    image: maildev/maildev<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>    expose:<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>      - <span style="color:#e6db74">&#34;1025&#34;</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>    ports:<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>      - <span style="color:#e6db74">&#34;51080:1080&#34;</span></span></span></code></pre></div><p>Nothing is fancy here. The <code>maildev</code> service exposes the port 1025 for the Email App to connect, and allows the traffic to port <strong>1080</strong> (<strong>51080</strong> from host) to access the dashboard.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-Docker" data-lang="Docker"><span style="display:flex;"><span>  maildev:<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span>    image: maildev/maildev<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span>    expose:<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span>      - <span style="color:#e6db74">&#34;1025&#34;</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span>    ports:<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span>      - <span style="color:#e6db74">&#34;51080:1080&#34;</span></span></span></code></pre></div><p>Nothing is fancy here. The <code>maildev</code> service exposes the port 1025 for the Email App to connect, and allows the traffic to port <strong>1080</strong> (<strong>51080</strong> from host) to access the dashboard.</p>
 <p>Since we use <strong>NodeMailer</strong> package, it creates a <strong>Transport</strong> object to connect to AWS SES API.
 To make the app send emails to <strong>MailDev</strong> in Dev environment, we need to create another transport object and hook it during the initialization.</p>
 <p>The <code>CreateTransportService</code> takes in a <code>driver</code> parameter, which indicates the type of transport, the code looks like below:</p>
@@ -1256,7 +1256,7 @@ To make the app send emails to <strong>MailDev</strong> in Dev environment, we n
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">enum</span> <span style="color:#a6e22e">MailDriver</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">enum</span> <span style="color:#a6e22e">MailDriver</span> {
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">ses</span>,
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">maildev</span>,
 </span></span><span style="display:flex;"><span>}
@@ -1293,7 +1293,7 @@ To make the app send emails to <strong>MailDev</strong> in Dev environment, we n
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yml" data-lang="yml"><span style="display:flex;"><span>  <span style="color:#f92672">maildev</span>:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yml" data-lang="yml"><span style="display:flex;"><span>  <span style="color:#f92672">maildev</span>:
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">port</span>: <span style="color:#ae81ff">1025</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">host</span>: <span style="color:#ae81ff">maildev</span></span></span></code></pre></div><p>To speed up the test running time, we can defined the <code>DummyTransportation</code> to create mock Transportation when running test.</p>
 <h1 id="capacity-calculation">Capacity calculation</h1>
@@ -1312,8 +1312,8 @@ The recipient data could be like this</p>
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>  <span style="color:#75715e">// TypeORM syntax
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">PrimaryGeneratedColumn</span>(<span style="color:#e6db74">&#39;increment&#39;</span>)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>  <span style="color:#75715e">// TypeORM syntax
+</span></span></span><span style="display:flex;"><span>  <span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">PrimaryGeneratedColumn</span>(<span style="color:#e6db74">&#39;increment&#39;</span>)
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">readonly</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">number</span>;
 </span></span><span style="display:flex;"><span>  <span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">Column</span>({ <span style="color:#a6e22e">unique</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span> })
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">email</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">string</span>;
@@ -1359,7 +1359,7 @@ In this post, I will explain how to set up the local domain and config the SSL c
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  sudo vi /etc/hosts</span></span></code></pre></div><p>Add a line for the new domain and map it to <strong>127.0.0.1</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  sudo vi /etc/hosts</span></span></code></pre></div><p>Add a line for the new domain and map it to <strong>127.0.0.1</strong></p>
 
 
 
